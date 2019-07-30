@@ -1,12 +1,14 @@
 import React from 'react';
 
-// import '../styles/index.css';
+import { Button } from './components';
 
 class App extends React.PureComponent {
 	render() {
 		return (
 			<div>
-				<h1>Hello World!</h1>
+				<Button onClick={() => { }}>
+					Text Button
+					</Button>
 			</div>
 		);
 	}

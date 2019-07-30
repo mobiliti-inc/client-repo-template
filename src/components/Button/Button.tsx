@@ -1,4 +1,8 @@
-import classNames from 'classnames';
+import React from 'react';
+import PropTypes from 'prop-types';
+import CSSModules from 'react-css-modules';
+
+import cx from 'classnames';
 
 import styles from './Button.scss';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
@@ -24,7 +28,7 @@ class Button extends React.PureComponent {
 		ripple: PropTypes.bool,
 		bordered: PropTypes.bool,
 		inverted: PropTypes.bool,
-	}
+	};
 
 	static defaultProps = {
 		buttonType: BUTTON_TYPES.STANDARD,
@@ -47,7 +51,7 @@ class Button extends React.PureComponent {
 		const { className, showLoader, ripple, bordered, disabled, inverted, } = this.props;
 		const buttonTypeName = this.getButtonTypeName();
 		const classes = [buttonTypeName, className];
-		return classNames({ 'button--disabled': showLoader || disabled, ripple, bordered, inverted, }, classes);
+		return cx({ 'button--disabled': showLoader || disabled, ripple, bordered, inverted, }, classes);
 	}
 
 	renderButtonText = () => (
@@ -71,7 +75,7 @@ class Button extends React.PureComponent {
 		return (
 			<button
 				styleName={classes}
-				className={classNames(customStyles, className)}
+				className={cx(customStyles, className)}
 				onClick={onClick}
 				disabled={disabled}
 			>
