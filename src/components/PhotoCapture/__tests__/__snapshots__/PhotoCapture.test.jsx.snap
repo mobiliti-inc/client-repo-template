@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PhotoCapture should render 1`] = `
+<PhotoCapture
+  handleCapturedPhoto={[MockFunction]}
+  handleModalVisibility={[MockFunction]}
+  holderId=""
+  modalIsVisible={false}
+  onCameraAccessFail={[MockFunction]}
+/>
+`;

@@ -1,0 +1,5 @@
+@import "~variables";
+
+.input-validation-message-label{
+   @include input-validation-text;
+}

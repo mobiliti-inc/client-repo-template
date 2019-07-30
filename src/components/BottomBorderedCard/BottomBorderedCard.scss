@@ -1,0 +1,29 @@
+@import '~variables';
+
+.content {
+    display: grid;
+    justify-content: start;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    height: 100px;
+    @media (max-width: $mobile-width) {
+        align-items: center;
+	}
+    & > div {
+        display: -webkit-box;
+        opacity: 0.9;	
+        color: $darker-blue;	
+        font-family: $hanken-sans;
+        font-size: 19px;	
+        font-weight: 300;	
+        letter-spacing: -0.42px;	
+        line-height: 21px;
+        display: -webkit-box;
+    }
+
+    &-right {
+        justify-self: end;
+        text-align: right;
+    }
+}

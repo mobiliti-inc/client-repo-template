@@ -1,0 +1,825 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReturnVehicleModal renders 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <ReturnVehicleModal
+    closeModal={[MockFunction]}
+    dealerOpenDays={
+      Array [
+        Object {
+          "hours": Array [
+            "10:00 AM - 12:00 PM",
+            "12:00 PM - 2:00 PM",
+            "2:00 PM - 4:00 PM",
+            "4:00 PM - 6:00 PM",
+            "6:00 PM - 7:00 PM",
+          ],
+          "open_day": "2/23/2019",
+        },
+      ]
+    }
+    isReturnScheduleLoading={false}
+    modalVisible={true}
+    onScheduleVehicleReturn={[MockFunction]}
+    onSelectDropOffDay={[MockFunction]}
+    onSelectDropOffTime={[MockFunction]}
+    scrolling={false}
+    selectedDropOffDay="03/03/2019"
+    selectedDropOffTime="11:00AM - 1:00PM"
+    subscriptionEndDate="02/28/2019"
+    subscriptionID="45"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "bodyClassName": "",
+      "buttonClassName": null,
+      "buttonText": "",
+      "children": Array [
+        <p
+          className="title"
+        >
+          Schedule Vehicle Return
+        </p>,
+        <p
+          className="sub-title"
+        >
+          If you are returning your vehicle after one month of use you could receive a credit based on your vehicle usage for the current month.
+        </p>,
+        <div
+          className="subscription-end-date"
+        >
+          <p>
+            Thursday, February 28th
+          </p>
+          <p>
+            Subscription End Date
+          </p>
+        </div>,
+        <p
+          className="drop-off-date-title"
+        >
+          Drop off Date/Time
+        </p>,
+        <div
+          className="date-selection-ctn"
+        >
+          <div
+            className="date-picker-ctn"
+          >
+            <img
+              alt="calendar-icon"
+              src="test-file-stub"
+            />
+            <CustomDatePicker
+              errorMessage={null}
+              id=""
+              isDayBlocked={[Function]}
+              isOutsideRange={[Function]}
+              isValid={true}
+              label=""
+              license={false}
+              negative={false}
+              numberOfYears={2}
+              onDatePicked={[Function]}
+              openToDate={null}
+              placeholder="Date"
+              selectedDate={null}
+            />
+          </div>
+        </div>,
+        <div
+          className="modal-footer"
+        >
+          <Button
+            bordered={true}
+            buttonType="standard"
+            className=""
+            customStyles=""
+            disabled={true}
+            icon={null}
+            inverted={false}
+            onClick={[Function]}
+            ripple={false}
+            showLoader={false}
+          >
+            Schedule Return
+          </Button>
+          <Button
+            bordered={false}
+            buttonType="plain"
+            className=""
+            customStyles=""
+            disabled={false}
+            icon={null}
+            inverted={true}
+            onClick={[MockFunction]}
+            ripple={false}
+            showLoader={false}
+          >
+            Cancel
+          </Button>
+        </div>,
+      ],
+      "footerClassName": "",
+      "freezeOverlay": false,
+      "headerClassName": "",
+      "icon": <div />,
+      "modalParentClass": "modal",
+      "noIcon": false,
+      "noPointer": false,
+      "onButtonClick": [Function],
+      "onIconClose": [MockFunction],
+      "overlay": "dark-gray",
+      "plain": true,
+      "plainHeader": false,
+      "scrolling": false,
+      "showButtonLoader": false,
+      "showCloseIcon": false,
+      "subTitle": "",
+      "title": "",
+      "visible": true,
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Schedule Vehicle Return",
+          "className": "title",
+        },
+        "ref": null,
+        "rendered": "Schedule Vehicle Return",
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "If you are returning your vehicle after one month of use you could receive a credit based on your vehicle usage for the current month.",
+          "className": "sub-title",
+        },
+        "ref": null,
+        "rendered": "If you are returning your vehicle after one month of use you could receive a credit based on your vehicle usage for the current month.",
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <p>
+              Thursday, February 28th
+            </p>,
+            <p>
+              Subscription End Date
+            </p>,
+          ],
+          "className": "subscription-end-date",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Thursday, February 28th",
+            },
+            "ref": null,
+            "rendered": "Thursday, February 28th",
+            "type": "p",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Subscription End Date",
+            },
+            "ref": null,
+            "rendered": "Subscription End Date",
+            "type": "p",
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "Drop off Date/Time",
+          "className": "drop-off-date-title",
+        },
+        "ref": null,
+        "rendered": "Drop off Date/Time",
+        "type": "p",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="date-picker-ctn"
+            >
+              <img
+                alt="calendar-icon"
+                src="test-file-stub"
+              />
+              <CustomDatePicker
+                errorMessage={null}
+                id=""
+                isDayBlocked={[Function]}
+                isOutsideRange={[Function]}
+                isValid={true}
+                label=""
+                license={false}
+                negative={false}
+                numberOfYears={2}
+                onDatePicked={[Function]}
+                openToDate={null}
+                placeholder="Date"
+                selectedDate={null}
+              />
+            </div>,
+            false,
+          ],
+          "className": "date-selection-ctn",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <img
+                  alt="calendar-icon"
+                  src="test-file-stub"
+                />,
+                <CustomDatePicker
+                  errorMessage={null}
+                  id=""
+                  isDayBlocked={[Function]}
+                  isOutsideRange={[Function]}
+                  isValid={true}
+                  label=""
+                  license={false}
+                  negative={false}
+                  numberOfYears={2}
+                  onDatePicked={[Function]}
+                  openToDate={null}
+                  placeholder="Date"
+                  selectedDate={null}
+                />,
+              ],
+              "className": "date-picker-ctn",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "alt": "calendar-icon",
+                  "src": "test-file-stub",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "img",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "errorMessage": null,
+                  "id": "",
+                  "isDayBlocked": [Function],
+                  "isOutsideRange": [Function],
+                  "isValid": true,
+                  "label": "",
+                  "license": false,
+                  "negative": false,
+                  "numberOfYears": 2,
+                  "onDatePicked": [Function],
+                  "openToDate": null,
+                  "placeholder": "Date",
+                  "selectedDate": null,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          false,
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <Button
+              bordered={true}
+              buttonType="standard"
+              className=""
+              customStyles=""
+              disabled={true}
+              icon={null}
+              inverted={false}
+              onClick={[Function]}
+              ripple={false}
+              showLoader={false}
+            >
+              Schedule Return
+            </Button>,
+            <Button
+              bordered={false}
+              buttonType="plain"
+              className=""
+              customStyles=""
+              disabled={false}
+              icon={null}
+              inverted={true}
+              onClick={[MockFunction]}
+              ripple={false}
+              showLoader={false}
+            >
+              Cancel
+            </Button>,
+          ],
+          "className": "modal-footer",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "bordered": true,
+              "buttonType": "standard",
+              "children": "Schedule Return",
+              "className": "",
+              "customStyles": "",
+              "disabled": true,
+              "icon": null,
+              "inverted": false,
+              "onClick": [Function],
+              "ripple": false,
+              "showLoader": false,
+            },
+            "ref": null,
+            "rendered": "Schedule Return",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "bordered": false,
+              "buttonType": "plain",
+              "children": "Cancel",
+              "className": "",
+              "customStyles": "",
+              "disabled": false,
+              "icon": null,
+              "inverted": true,
+              "onClick": [MockFunction],
+              "ripple": false,
+              "showLoader": false,
+            },
+            "ref": null,
+            "rendered": "Cancel",
+            "type": [Function],
+          },
+        ],
+        "type": "div",
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "bodyClassName": "",
+        "buttonClassName": null,
+        "buttonText": "",
+        "children": Array [
+          <p
+            className="title"
+          >
+            Schedule Vehicle Return
+          </p>,
+          <p
+            className="sub-title"
+          >
+            If you are returning your vehicle after one month of use you could receive a credit based on your vehicle usage for the current month.
+          </p>,
+          <div
+            className="subscription-end-date"
+          >
+            <p>
+              Thursday, February 28th
+            </p>
+            <p>
+              Subscription End Date
+            </p>
+          </div>,
+          <p
+            className="drop-off-date-title"
+          >
+            Drop off Date/Time
+          </p>,
+          <div
+            className="date-selection-ctn"
+          >
+            <div
+              className="date-picker-ctn"
+            >
+              <img
+                alt="calendar-icon"
+                src="test-file-stub"
+              />
+              <CustomDatePicker
+                errorMessage={null}
+                id=""
+                isDayBlocked={[Function]}
+                isOutsideRange={[Function]}
+                isValid={true}
+                label=""
+                license={false}
+                negative={false}
+                numberOfYears={2}
+                onDatePicked={[Function]}
+                openToDate={null}
+                placeholder="Date"
+                selectedDate={null}
+              />
+            </div>
+          </div>,
+          <div
+            className="modal-footer"
+          >
+            <Button
+              bordered={true}
+              buttonType="standard"
+              className=""
+              customStyles=""
+              disabled={true}
+              icon={null}
+              inverted={false}
+              onClick={[Function]}
+              ripple={false}
+              showLoader={false}
+            >
+              Schedule Return
+            </Button>
+            <Button
+              bordered={false}
+              buttonType="plain"
+              className=""
+              customStyles=""
+              disabled={false}
+              icon={null}
+              inverted={true}
+              onClick={[MockFunction]}
+              ripple={false}
+              showLoader={false}
+            >
+              Cancel
+            </Button>
+          </div>,
+        ],
+        "footerClassName": "",
+        "freezeOverlay": false,
+        "headerClassName": "",
+        "icon": <div />,
+        "modalParentClass": "modal",
+        "noIcon": false,
+        "noPointer": false,
+        "onButtonClick": [Function],
+        "onIconClose": [MockFunction],
+        "overlay": "dark-gray",
+        "plain": true,
+        "plainHeader": false,
+        "scrolling": false,
+        "showButtonLoader": false,
+        "showCloseIcon": false,
+        "subTitle": "",
+        "title": "",
+        "visible": true,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Schedule Vehicle Return",
+            "className": "title",
+          },
+          "ref": null,
+          "rendered": "Schedule Vehicle Return",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "If you are returning your vehicle after one month of use you could receive a credit based on your vehicle usage for the current month.",
+            "className": "sub-title",
+          },
+          "ref": null,
+          "rendered": "If you are returning your vehicle after one month of use you could receive a credit based on your vehicle usage for the current month.",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <p>
+                Thursday, February 28th
+              </p>,
+              <p>
+                Subscription End Date
+              </p>,
+            ],
+            "className": "subscription-end-date",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Thursday, February 28th",
+              },
+              "ref": null,
+              "rendered": "Thursday, February 28th",
+              "type": "p",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Subscription End Date",
+              },
+              "ref": null,
+              "rendered": "Subscription End Date",
+              "type": "p",
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "Drop off Date/Time",
+            "className": "drop-off-date-title",
+          },
+          "ref": null,
+          "rendered": "Drop off Date/Time",
+          "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="date-picker-ctn"
+              >
+                <img
+                  alt="calendar-icon"
+                  src="test-file-stub"
+                />
+                <CustomDatePicker
+                  errorMessage={null}
+                  id=""
+                  isDayBlocked={[Function]}
+                  isOutsideRange={[Function]}
+                  isValid={true}
+                  label=""
+                  license={false}
+                  negative={false}
+                  numberOfYears={2}
+                  onDatePicked={[Function]}
+                  openToDate={null}
+                  placeholder="Date"
+                  selectedDate={null}
+                />
+              </div>,
+              false,
+            ],
+            "className": "date-selection-ctn",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <img
+                    alt="calendar-icon"
+                    src="test-file-stub"
+                  />,
+                  <CustomDatePicker
+                    errorMessage={null}
+                    id=""
+                    isDayBlocked={[Function]}
+                    isOutsideRange={[Function]}
+                    isValid={true}
+                    label=""
+                    license={false}
+                    negative={false}
+                    numberOfYears={2}
+                    onDatePicked={[Function]}
+                    openToDate={null}
+                    placeholder="Date"
+                    selectedDate={null}
+                  />,
+                ],
+                "className": "date-picker-ctn",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "alt": "calendar-icon",
+                    "src": "test-file-stub",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "img",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "errorMessage": null,
+                    "id": "",
+                    "isDayBlocked": [Function],
+                    "isOutsideRange": [Function],
+                    "isValid": true,
+                    "label": "",
+                    "license": false,
+                    "negative": false,
+                    "numberOfYears": 2,
+                    "onDatePicked": [Function],
+                    "openToDate": null,
+                    "placeholder": "Date",
+                    "selectedDate": null,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+            false,
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <Button
+                bordered={true}
+                buttonType="standard"
+                className=""
+                customStyles=""
+                disabled={true}
+                icon={null}
+                inverted={false}
+                onClick={[Function]}
+                ripple={false}
+                showLoader={false}
+              >
+                Schedule Return
+              </Button>,
+              <Button
+                bordered={false}
+                buttonType="plain"
+                className=""
+                customStyles=""
+                disabled={false}
+                icon={null}
+                inverted={true}
+                onClick={[MockFunction]}
+                ripple={false}
+                showLoader={false}
+              >
+                Cancel
+              </Button>,
+            ],
+            "className": "modal-footer",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "bordered": true,
+                "buttonType": "standard",
+                "children": "Schedule Return",
+                "className": "",
+                "customStyles": "",
+                "disabled": true,
+                "icon": null,
+                "inverted": false,
+                "onClick": [Function],
+                "ripple": false,
+                "showLoader": false,
+              },
+              "ref": null,
+              "rendered": "Schedule Return",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "bordered": false,
+                "buttonType": "plain",
+                "children": "Cancel",
+                "className": "",
+                "customStyles": "",
+                "disabled": false,
+                "icon": null,
+                "inverted": true,
+                "onClick": [MockFunction],
+                "ripple": false,
+                "showLoader": false,
+              },
+              "ref": null,
+              "rendered": "Cancel",
+              "type": [Function],
+            },
+          ],
+          "type": "div",
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

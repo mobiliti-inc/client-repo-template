@@ -1,0 +1,19 @@
+import Dropdown from '../Dropdown';
+
+
+describe('Dropdown', () => {
+	it('renders', () => {
+		const locations = [
+			{ value: 'Austin, TX', current: true },
+			{ value: 'Philadelphia, PA', current: false }
+		];
+		const subject = shallow(<Dropdown
+			scrolling
+			data={locations}
+			onChange={() => { }}
+			header="Select a Location"
+		/>);
+		expect(subject.text()).toContain('Select a LocationAustin, TXPhiladelphia, PA');
+		expect(subject.text()).toContain('Austin, TX');
+	});
+});

@@ -1,0 +1,24 @@
+
+@import "~variables";
+
+.form-container {
+    display: grid;
+    grid-row-gap: 5px;
+}
+
+.column-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 10%;
+}
+
+.btn-container {
+    padding-top: 5px;
+}
+
+.btn-disabled {
+    opacity: 0.5;
+}
+.input-validation-message-label{
+    @include input-validation-text;
+ }

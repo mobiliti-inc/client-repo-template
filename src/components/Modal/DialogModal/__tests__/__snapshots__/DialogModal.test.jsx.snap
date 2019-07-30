@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DialogModal renders 1`] = `
+<t
+  className=""
+  footer={
+    <div
+      className="button-group"
+    >
+      <div
+        className="save-button-container save-button-container--disabled"
+      >
+        <Button
+          bordered={false}
+          buttonType="standard"
+          className=""
+          customStyles=""
+          disabled={true}
+          icon={null}
+          inverted={false}
+          onClick={[Function]}
+          ripple={false}
+          showLoader={false}
+        >
+          message test
+        </Button>
+      </div>
+      <div
+        className="cancel-button-container"
+      >
+        <button
+          onClick={[Function]}
+        >
+          test
+        </button>
+      </div>
+    </div>
+  }
+  header={
+    <t
+      onClose={[Function]}
+    />
+  }
+  onClose={[Function]}
+  open={true}
+>
+  <div
+    className="title"
+  >
+    test headline
+  </div>
+</t>
+`;
+
+exports[`DialogModal renders with children 1`] = `
+<t
+  className=""
+  footer={
+    <div
+      className="button-group"
+    >
+      <div
+        className="save-button-container"
+      >
+        <Button
+          bordered={false}
+          buttonType="standard"
+          className=""
+          customStyles=""
+          disabled={false}
+          icon={null}
+          inverted={false}
+          onClick={[Function]}
+          ripple={false}
+          showLoader={false}
+        >
+          message test
+        </Button>
+      </div>
+      <div
+        className="cancel-button-container"
+      >
+        <button
+          onClick={[Function]}
+        >
+          test
+        </button>
+      </div>
+    </div>
+  }
+  header={
+    <t
+      onClose={[Function]}
+    />
+  }
+  onClose={[Function]}
+  open={true}
+>
+  <div
+    className="title"
+  >
+    test headline
+  </div>
+  <PhotoRecBox
+    boxDescription=""
+    boxIcon="test icon"
+    boxImage=""
+    boxTitle=""
+    isVertical={true}
+    onBoxClick={[Function]}
+    onUploadImageInputChange={[Function]}
+  />
+</t>
+`;

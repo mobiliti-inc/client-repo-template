@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthFrame renders 1`] = `
+<div
+  className="auth-frame"
+>
+  <div
+    className="section-auth-content"
+  >
+    <div
+      className="navigation-container"
+    >
+      <div
+        className="back-arrow-container"
+        onClick={[MockFunction]}
+        role="presentation"
+      >
+        <img
+          alt="back arrow"
+          className="back-arrow-image"
+          src="test-file-stub"
+        />
+      </div>
+    </div>
+    <div
+      className="brand-logo-container"
+    >
+      <img
+        alt="brand-logo"
+        className="brand-logo"
+        src="test-file-stub"
+      />
+    </div>
+    <div
+      className="main-content"
+    >
+      Hello world!
+    </div>
+    <div
+      className="mobile-store-container"
+    >
+      <StyledLink
+        alternate={false}
+        buttonStyle={false}
+        external={true}
+        to="https://itunes.apple.com/us/app/mobiliti/id1326755398?ls=1&mt=8"
+      >
+        <img
+          alt="app-store"
+          className="img-app-store"
+          src="test-file-stub"
+        />
+      </StyledLink>
+      <StyledLink
+        alternate={false}
+        buttonStyle={false}
+        external={true}
+        to="https://play.google.com/store/apps/details?id=com.mobiliti"
+      >
+        <img
+          alt="play-store"
+          className="img-play-store"
+          src="test-file-stub"
+        />
+      </StyledLink>
+    </div>
+  </div>
+  <div
+    className="section-cover-image"
+  >
+    <img
+      alt="signup background"
+      src="test-file-stub"
+    />
+  </div>
+</div>
+`;

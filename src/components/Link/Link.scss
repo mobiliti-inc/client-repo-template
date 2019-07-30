@@ -1,0 +1,53 @@
+@import "~variables";
+.link--button {
+  padding: 21px 30px;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-weight: 300;
+  text-transform: uppercase;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid #f3f4f4;
+  padding: 15px 29px;
+  transition: all 0.3s linear;
+  &:hover {
+    color: #000;
+    background: #fff;
+  }
+}
+
+.link--standard {
+  cursor: pointer;
+  color: $blue;
+  text-decoration: none;
+}
+
+.alternate {
+  font-family: $headline-font;
+  font-weight: bold;
+  height: 50px;
+  font-weight: bold;
+  background: $blue;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.12);
+  font-size: 14px;
+  letter-spacing: 0;
+  text-align: center;
+  &:focus,
+  &:active {
+    outline: none;
+  }
+  &:hover {
+    background: lighten($blue, 3);
+    color: #fff;
+    box-shadow: 0 9px 14px 0 rgba(0, 0, 0, 0.12);
+  }
+  &:active {
+    box-shadow: 0 9px 14px 0 rgba(0, 0, 0, 0.12);
+  }
+}

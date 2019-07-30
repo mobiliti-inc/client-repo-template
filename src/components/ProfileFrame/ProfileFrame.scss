@@ -1,0 +1,47 @@
+@import "~variables";
+
+.profile-frame {
+	background: rgba(0,0,0,0);
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-container {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+.profile-header {
+	background: $black;
+	position: relative;
+	&--scrolled {
+		background: rgba(0,0,0,0.5);
+	}
+}
+
+.content {
+	display: flex;
+	flex: 1;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+	max-width: 100%;
+	background-size: 450px;
+}
+
+.loader-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	height: 100vh;
+}
+
+.loader, .loader div {
+	width: 60px;
+	height: 60px
+}

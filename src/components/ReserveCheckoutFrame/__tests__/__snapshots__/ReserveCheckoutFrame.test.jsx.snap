@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReserveFrame renders 1`] = `
+<div
+  styleName="container"
+>
+  <div
+    styleName="left"
+  >
+    <div
+      styleName="reserve-nav"
+    >
+      <button
+        onClick={[MockFunction]}
+        styleName="back-arrow"
+      >
+        <img
+          alt="Back"
+          src="test-file-stub"
+        />
+      </button>
+      <p>
+        Reserve
+      </p>
+    </div>
+    <Tile
+      className="lighter-tile"
+    >
+      <img
+        alt="2018 Chevy Tahoe SUV"
+        styleName="vehicle-image"
+      />
+      <div
+        styleName="vehicle-details-container"
+      >
+        <div>
+          <div
+            styleName="vehicle-tile-container"
+          >
+            <VehicleTitle
+              vehicleMake="Chevy"
+              vehicleModel="Tahoe"
+              vehicleStatus={1}
+              yearOfMake="2018"
+            />
+          </div>
+          <VehicleCostBreakdown
+            data={
+              Array [
+                Object {
+                  "name": "",
+                  "price": undefined,
+                },
+              ]
+            }
+            removeBorderBottom={true}
+          />
+        </div>
+      </div>
+    </Tile>
+    <VehicleDealer
+      getUserLocation={[MockFunction]}
+      location={
+        Object {
+          "data": Object {
+            "latitude": 2344,
+            "longitude": -3455,
+          },
+        }
+      }
+      vehicle={
+        Object {
+          "availability_term": "2018-07-11T16:50:34+00:00",
+          "comments": "Trailhawk Edition Diamond Black Crystal Pearlcoat Exterior 3.6L V6 Engine 8 Speed Automatic Transmission Leather & Suede Heated Cooled Seating Contrast Stitching Leather Wrapped Steering Wheel Gunmetal Interior Accents Navigation/Backup camera Bluetooth HID Headlights Power Liftgate Power Folding Mirrors",
+          "current_miles": 7475,
+          "current_subscription": Object {
+            "subscriber_id": "a4b5",
+            "subscription_period_in_days": 31,
+            "total_price": 500,
+          },
+          "dealer_city": "Austin",
+          "dealer_id": 20,
+          "dealer_latitude": 30.26715,
+          "dealer_longitude": -97.74306,
+          "dealer_name": "Divvy Motors",
+          "dealer_state": "TX",
+          "dealer_street_address": "P Sherman 42, Wallaby Way",
+          "dealer_zip": "78701",
+          "excess_mile_charge": 0.2,
+          "is_available": true,
+          "is_favorite": 1,
+          "max_pickup_date": "2018-04-18T12:50:34+00:00",
+          "mileage_options": Array [
+            Object {
+              "miles": 2000,
+              "mobiliti_fee": null,
+              "price": 1633,
+              "rights": 0,
+              "status": 1,
+            },
+            Object {
+              "miles": 200,
+              "mobiliti_fee": null,
+              "price": 633,
+              "rights": 0,
+              "status": 1,
+            },
+          ],
+          "miles_up_to": 40000,
+          "min_pickup_date": "2018-04-11T12:50:34+00:00",
+          "objImages": Array [
+            "https://s3-us-west-2.amazonaws.com/subscriber-ui-assets/images/jeep_large.png",
+            "https://s3-us-west-2.amazonaws.com/subscriber-ui-assets/images/jeep_large.png",
+            "https://s3-us-west-2.amazonaws.com/subscriber-ui-assets/images/jeep_large.png",
+          ],
+          "pickup_days": Array [
+            "2018-07-26 00:00:00.000",
+            "2018-07-27 00:00:00.000",
+            "2018-07-28 00:00:00.000",
+          ],
+          "secondary_attributes": Object {
+            "doors": 4,
+            "drive_type": "4x4",
+            "exterior_color": "maroon",
+            "interior_color": "beige",
+            "transmission": "auto",
+          },
+          "vehicle_id": 4,
+          "vehicle_image": "jeep_large.png",
+          "vehicle_make": "Chevy",
+          "vehicle_model": "Tahoe",
+          "vehicle_status": 1,
+          "vehicle_title": "2018 Chevy Tahoe SUV",
+          "vehicle_type": "SUV",
+          "vin": "9JHAIH13JIAS",
+          "year_of_make": "2018",
+        }
+      }
+    />
+  </div>
+  <div
+    styleName="right"
+  >
+    <div>
+      Yes
+    </div>
+  </div>
+</div>
+`;

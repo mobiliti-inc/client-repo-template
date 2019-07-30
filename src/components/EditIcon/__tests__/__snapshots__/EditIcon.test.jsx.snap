@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditIcon test renders 1`] = `
+<div
+  className="edit-icon"
+>
+  <img
+    alt="edit icon"
+    src="test-file-stub"
+  />
+</div>
+`;

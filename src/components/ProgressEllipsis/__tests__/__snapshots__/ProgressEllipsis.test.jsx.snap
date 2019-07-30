@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressEllipsis renders email step correctly 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="dot"
+  />
+  <div
+    className="dot--dark"
+  />
+  <div
+    className="dot"
+  />
+</div>
+`;
+
+exports[`ProgressEllipsis renders name step correctly 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="dot--dark"
+  />
+  <div
+    className="dot"
+  />
+  <div
+    className="dot"
+  />
+</div>
+`;
+
+exports[`ProgressEllipsis renders password step correctly 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="dot"
+  />
+  <div
+    className="dot"
+  />
+  <div
+    className="dot--dark"
+  />
+</div>
+`;

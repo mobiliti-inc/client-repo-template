@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AgeSelectModal renders 1`] = `
+<React.Fragment>
+  <Modal
+    bodyClassName=""
+    buttonClassName={null}
+    buttonText=""
+    footerClassName=""
+    freezeOverlay={true}
+    headerClassName=""
+    icon={<div />}
+    modalParentClass=""
+    noIcon={false}
+    noPointer={false}
+    onButtonClick={[Function]}
+    onIconClose={[Function]}
+    overlay=""
+    plain={true}
+    plainHeader={false}
+    scrolling={true}
+    showButtonLoader={false}
+    showCloseIcon={false}
+    subTitle=""
+    title=""
+    visible={true}
+  >
+    <div
+      className="content-container"
+    >
+      <div
+        className="icon-circle-wrapper"
+      >
+        <img
+          alt="lock"
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        className="heading"
+      >
+        Insurance is included in each car's monthly subscription price.
+      </div>
+      <p
+        className="description"
+      >
+        Enter your age so we can give you an accurate price.
+      </p>
+      <Dropdown
+        className="modal-option"
+        customOptionsList={null}
+        customSelected={null}
+        data={
+          Array [
+            Object {
+              "current": false,
+              "value": "21",
+            },
+            Object {
+              "current": false,
+              "value": "22",
+            },
+            Object {
+              "current": false,
+              "value": "23",
+            },
+            Object {
+              "current": false,
+              "value": "24",
+            },
+            Object {
+              "current": true,
+              "value": "25+",
+            },
+          ]
+        }
+        dropDownMenuTitleClass=""
+        dropdownParentClass=""
+        dropdownSelectedClass=""
+        header={null}
+        modal={true}
+        onChange={[Function]}
+        scrolling={false}
+      />
+      <div
+        className="continue-button-container"
+      >
+        <Button
+          bordered={false}
+          buttonType="standard"
+          className=""
+          customStyles=""
+          disabled={false}
+          icon={null}
+          inverted={false}
+          onClick={[Function]}
+          ripple={false}
+          showLoader={false}
+        >
+           Continue
+        </Button>
+      </div>
+    </div>
+  </Modal>
+</React.Fragment>
+`;

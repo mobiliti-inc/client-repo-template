@@ -1,0 +1,22 @@
+@import '~variables';
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.dot {
+	height: 8px;
+	width: 8px;
+	margin-right: 12px;
+	border-radius: 50%;
+	background-color: $darker-blue;
+	opacity: 0.1;
+}
+
+.dot--dark {
+	composes: dot;
+	opacity: 1;
+}

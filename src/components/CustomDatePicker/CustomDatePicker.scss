@@ -1,0 +1,123 @@
+@import "~variables";
+
+.container {
+  font-family: $body-font;
+  display: flex;
+  flex-direction: column;
+}
+
+.container input {
+  height: 50px;
+  width: 100%;
+  font-size: 1.25rem;
+  color: $black;
+  padding: 0;
+  border: none;
+  transition: all .5s;
+  border-bottom: 1px solid rgba(29, 49, 85, 0.2);
+  text-transform: capitalize;
+  font-family: $body-font;
+
+  &:focus {
+    outline: none;
+    border-bottom: 3px solid $blue;
+  }
+
+  &::-webkit-input-placeholder {
+    color: $darker-blue;
+    opacity: 0.6;
+  }
+}
+
+.error-border input {
+  border-bottom: 3px solid $fast-car-red;
+}
+
+.error {
+  color: $fast-car-red;
+  height: 14px;
+  font-family: $hanken-sans;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.icon {
+  position: absolute;
+  background-color: $white;
+  top: 20px;
+  width: 35px;
+  border: 1px solid #d0d6de;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.icon:hover {
+  background-color: rgba(204, 209, 218, .4);
+}
+
+.icon:active {
+  background-color: $white;
+}
+
+.prev {
+  left: 5px;
+}
+
+.next {
+  right: 5px;
+  -webkit-transform: rotate(180deg);
+  /* Safari and Chrome */
+  -moz-transform: rotate(180deg);
+  /* Firefox */
+  -ms-transform: rotate(180deg);
+  /* IE 9 */
+  -o-transform: rotate(180deg);
+  /* Opera */
+  transform: rotate(180deg);
+}
+
+.select {
+  border: none;
+  background: #2a98b1;
+  color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 20px 0 5px;
+  height: 40px;
+  line-height: 30px;
+  margin: 0 5px 0 0;
+  border-radius: 2px;
+  background-image: url(../../assets/icons/chevron-down-triangle.svg);
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+
+.select:focus {
+  outline: 0;
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  margin-top: -9px;
+}
+
+.input-label {
+  display: block;
+  font-size: 12px;
+  transform: translateY(-60px);
+  color: $darker-blue;
+  opacity: 0.6;
+  font-family: $hanken-sans;
+  line-height: 14px;
+  text-transform: capitalize;
+  transition: all .5s;
+
+  &--focused {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-40px);
+  }
+}

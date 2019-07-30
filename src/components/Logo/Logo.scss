@@ -1,0 +1,26 @@
+@import "~variables";
+
+.logo {
+	display: block;
+	img {
+		min-width: 220px;
+	}
+	@media (max-width: 400px) {
+		width: 66%;
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+	@media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+		margin: 0 auto;
+		a {
+			display: block;
+			width: 220px;
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+}

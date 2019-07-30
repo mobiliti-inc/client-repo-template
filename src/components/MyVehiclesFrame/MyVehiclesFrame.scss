@@ -1,0 +1,135 @@
+@import "~variables";
+
+.my-vehicles-frame {
+	background: rgba(0,0,0,0);
+	display: flex;
+	flex-direction: column;
+}
+
+.my-vehicles-container {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+.my-vehicles-header {
+	background: $black;
+	position: relative;
+	&--scrolled {
+		background: rgba(0,0,0,0.5);
+	}
+}
+
+.content {
+	display: grid;
+	grid-template-rows: 1fr 2fr;
+	width: 100%;
+	max-width: 100%;
+	background-size: 450px;
+	row-gap: 3%;
+	@media (max-width: $mobile-width) {
+		grid-template-rows: 1fr 3fr;
+	}
+}
+
+.loader-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	height: 100vh;
+}
+
+.loader, .loader div {
+	width: 60px;
+	height: 60px
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  max-width: 1264px;
+}
+
+.title {
+  font-family: $futura;
+  font-size: 38px;
+  font-weight: bold;
+	color: $darker-blue;
+	margin: 0;
+	padding-top: 20px;
+	align-self: center;
+	@media (max-width: $mobile-width) {
+		padding-top: 30px;
+	}
+}
+
+.upperSection {
+	display: grid;
+	grid-template-rows: 1fr 2fr 30px;
+	background: #F5F5F5;
+	padding: 0 10%;
+	grid-row-gap: 10px;
+	@media (max-width: $mobile-width) {
+		padding: 0 5%;
+		grid-template-rows: 22% 70% 10%;
+	}
+	.upper-content {
+		display: flex;
+		overflow: auto;
+		white-space: nowrap;
+	}
+
+	.edit-container {
+		width: 50px;
+		height: 50px;
+		display: flex;
+		justify-self: right;
+		z-index: 1;
+		cursor: pointer;
+	}
+	
+}
+
+.lowerSection {
+	display: grid;
+	grid-template-columns: 60% 36%;
+	padding: 0% 10%;
+	column-gap: 4%;
+	@media (max-width: $tablet-width) {
+		grid-template-columns: 1fr;
+		padding: 0 5%;
+		margin-bottom: 100px;
+		.dealer-info {
+			display: grid;
+			grid-template-rows: 70px auto;
+			padding-top: 20px;
+		}
+	}
+	@media (min-width: $desktop-width) {
+		margin-bottom: 40px;
+	}
+}
+
+.car {
+	width: 300px;
+}
+
+.my-dealership-heading {
+    // height: 21px;	
+    color: $darker-blue;
+    font-family: $hanken-sans;
+    font-size: 20px;	
+    font-weight: bold;	
+    letter-spacing: -0.44px;	
+    line-height: 21px;
+}

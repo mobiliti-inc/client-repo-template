@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioSelector renders 1`] = `
+<React.Fragment>
+  <div
+    className="data-selector"
+    key="2000 Miles"
+    onClick={[Function]}
+    role="presentation"
+  >
+    <div
+      className="key"
+    >
+      <div
+        className="radio-button"
+      >
+        <div
+          className="hide"
+        />
+      </div>
+      <p
+        className="key-text"
+      >
+        2000 Miles
+      </p>
+      <div
+        className="optional-text"
+      />
+    </div>
+    <p
+      className="value"
+    >
+      $1633
+    </p>
+  </div>
+  <div
+    className="data-selector"
+    key="200 Miles"
+    onClick={[Function]}
+    role="presentation"
+  >
+    <div
+      className="key"
+    >
+      <div
+        className="radio-button"
+      >
+        <div
+          className="hide"
+        />
+      </div>
+      <p
+        className="key-text"
+      >
+        200 Miles
+      </p>
+      <div
+        className="optional-text"
+      />
+    </div>
+    <p
+      className="value"
+    >
+      $633
+    </p>
+  </div>
+</React.Fragment>
+`;

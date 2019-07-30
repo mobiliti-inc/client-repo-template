@@ -1,0 +1,26 @@
+@import '../../stylesheets/variables';
+
+.available {
+	color: #fff;
+	background: #26A86F;
+	border-radius: 4px;
+	font-family: $hanken-sans;
+	font-size: 14px;
+	padding: 6px 0;
+	text-align: center;
+	width: 80px;
+	height: 30px;
+	text-transform: capitalize;
+	font-weight: 500;
+	margin: 5px 0;
+}
+
+.unavailable {
+	composes: available;
+	background: #8f8f8f;
+	width: 150px;
+}
+
+.coming-soon {
+	width: 110px;
+}

@@ -1,0 +1,103 @@
+@import "~variables";
+/* Customize the label (the container) */
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  user-select: none;
+	height: 21px;
+	font-size: 12px;
+	line-height: 17px;
+}
+
+/* Hide the browser's default checkbox */
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  display: none;
+  cursor: pointer;
+}
+
+/* Div that looks like a checkbox */
+
+.fakebox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  border: 1px solid $taupe;
+  border-radius: 1px;
+  transition: all .2s linear;
+  &:focus {
+    outline: none;
+  }
+}
+
+/* Show error Validation */
+
+.error .fakebox {
+  border: 1px solid $fast-car-red;
+}
+
+.validation-label {
+  opacity: 0;
+  white-space: nowrap;
+  height: 14px;
+  width: 168px;
+  color: $fast-car-red;
+  font-size: 12px;
+  line-height: 14px;
+  transition: all .2s linear;
+  margin-top: 5px;
+  font-family: $hanken-sans;
+}
+
+.error .validation-label {
+  opacity: 1;
+}
+
+/* Hover */
+
+.container:hover input~.fakebox {
+  background-color: rgba(73, 150, 174, 0.377);
+}
+
+/* Checked */
+
+.container input:checked~.fakebox {
+  height: 18px;
+  width: 18px;
+  border: 1px solid $blue;
+  border-radius: 1px;
+  background-color: $blue;
+}
+
+/* Create Checkmark */
+
+.fakebox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show Checkmark */
+
+.container input:checked~.fakebox:after {
+  display: block;
+}
+
+/* Style the Checkmark */
+
+.container .fakebox:after {
+	left: 6px;
+	top: 2px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}

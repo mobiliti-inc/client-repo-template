@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert renders 1`] = `
+<Alert
+  closable={true}
+  onClose={[Function]}
+  scrolling={true}
+  show={true}
+  subTitle=""
+  title=""
+/>
+`;

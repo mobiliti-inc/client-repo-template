@@ -1,0 +1,39 @@
+@import '~variables';
+
+.modal-title {
+	font-size: 24px;
+	font-family: $futura;
+	font-weight: bold;
+	color: $darker-blue;
+}
+
+.modal-ctn {
+	white-space: normal;
+	a:last-child {
+		> div {
+			border: none;
+		}
+	}
+}
+
+.modal-content {
+	cursor: pointer;
+	border-bottom: 1px solid rgba(29, 49, 85, 0.2);
+	p:first-child {
+		font-size: 18px;
+		font-family: $futura;
+		font-weight: bold;
+		line-height: 31px;
+		margin-bottom: 0;
+		color: $darker-blue;
+	}
+	p:last-child {
+		font-size: 16px;
+		font-family: $hanken-sans;
+		opacity: 0.8;
+		line-height: 19px;
+		margin: 0 auto 25px auto;
+		color: $darker-blue;
+	}
+}
+

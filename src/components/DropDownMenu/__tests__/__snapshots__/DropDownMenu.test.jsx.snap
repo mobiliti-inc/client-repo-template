@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropDownMenu renders 1`] = `
+<div
+  className="dropdown-menu"
+>
+  <div
+    className="dropdown-menu-modal dropdown-menu-modal-close"
+    onClick={[Function]}
+    role="presentation"
+  >
+    <div
+      className="left-content-container"
+    >
+      <h2
+        className="dropdown-menu-title"
+      >
+         
+      </h2>
+      <p
+        className="dropdown-menu-description"
+      >
+         
+      </p>
+    </div>
+    <div
+      className="right-content-container"
+    >
+      <img
+        alt="drop icon"
+        src="test-file-stub"
+      />
+    </div>
+  </div>
+  <div
+    className="dropdown-menu-content"
+  />
+</div>
+`;
+
+exports[`DropDownMenu renders with splitted left content container 1`] = `
+<div
+  className="dropdown-menu"
+>
+  <div
+    className="dropdown-menu-modal dropdown-menu-modal-close"
+    onClick={[Function]}
+    role="presentation"
+  >
+    <div
+      className="left-content-container-split"
+    >
+      <h2
+        className="dropdown-menu-title"
+      >
+         
+      </h2>
+      <p
+        className="dropdown-menu-description"
+      >
+         
+      </p>
+    </div>
+    <div
+      className="right-content-container"
+    >
+      <img
+        alt="drop icon"
+        src="test-file-stub"
+      />
+    </div>
+  </div>
+  <div
+    className="dropdown-menu-content"
+  />
+</div>
+`;

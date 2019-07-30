@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Camera renders 1`] = `
+<React.Fragment>
+  <canvas
+    className="hide"
+    height={300}
+    width={500}
+  />
+  <video
+    autoPlay={true}
+    className="video"
+  >
+    <track
+      kind="captions"
+    />
+  </video>
+</React.Fragment>
+`;
+
+exports[`Camera renders video element so one can take photo  1`] = `
+<React.Fragment>
+  <canvas
+    className="hide"
+    height={300}
+    width={500}
+  />
+  <video
+    autoPlay={true}
+    className="video"
+  >
+    <track
+      kind="captions"
+    />
+  </video>
+</React.Fragment>
+`;

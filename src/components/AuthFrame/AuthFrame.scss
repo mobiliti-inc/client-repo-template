@@ -1,0 +1,119 @@
+@import '~variables';
+
+.auth-frame {
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	@media (max-width: $mobile-width) {
+		justify-content: center;
+	}
+}
+
+.section-auth-content {
+	min-width: 40%;
+	height: 100%;
+	overflow-y: scroll;
+	padding: 0 5%;
+
+	@media (max-width: $mobile-width) {
+		display: flex;
+		flex-direction: column;
+		margin-top: 30px;
+		padding: 0 10%;
+		min-width: 100%;
+	}
+}
+
+.navigation-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.back-arrow-container {
+	display: none;
+	height: 18px;
+	width: 24px;
+	justify-self: flex-start;
+
+	@media (max-width: $mobile-width) {
+		display: block;
+	}
+}
+
+.back-arrow-image {
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+}
+
+.close-icon-container {
+	display: none;
+	height: 18px;
+	width: 24px;
+	margin-left: auto;
+
+	@media (max-width: $mobile-width) {
+		display: block;
+	}
+}
+
+.close-icon {
+	height: 100%;
+	width: 100%;
+}
+
+.brand-logo-container {
+	padding-top: 75px;
+	display: block;
+	@media (max-width: $mobile-width) {
+		display: none;
+	}
+}
+
+.brand-logo {
+	height: 22px;
+	width: 116px;
+}
+
+.section-cover-image {
+	width: 60%;
+	min-height: 100%;
+	overflow: hidden;
+
+	@media (max-width: $mobile-width) {
+		display: none;
+	}
+}
+
+.section-cover-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.main-content {
+	min-width: 10px;
+}
+
+.mobile-store-container {
+	height: 38px;
+	cursor: pointer;
+	margin-top: auto;
+	display: block;
+	margin-bottom: 50px;
+	@media (max-width: $mobile-width) {
+		display: none;
+	}
+}
+
+.img-app-store {
+	width: 128px;
+	height: 100%;
+	margin-right: 10px;
+}
+
+.img-play-store {
+	width: 128px;
+	height: 100%;
+}

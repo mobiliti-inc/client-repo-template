@@ -1,0 +1,41 @@
+@import "~variables";
+
+.header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: transparent;
+	z-index: 2;
+	padding: 26px 0 30px;
+	@media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+		padding: 15px 0;
+	}
+	&.alternate {
+		transition: background .6s ease;
+		background: black;
+	}
+}
+
+.header-fixed {
+	@extend .header;
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	&.alternate {
+		background: rgba(0, 0, 0, 0.925);
+	}
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+	padding: 0 50px;
+	@media (min-width: $tablet-width) and (max-width: $desktop-width - 1) {
+		flex-direction: column;
+	}
+}

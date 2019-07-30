@@ -1,0 +1,76 @@
+@import "~variables";
+
+.container {
+	position: fixed;
+	top: 0;
+	width: 50%;
+	z-index: 200;
+	cursor: pointer;
+	transition: all 0.5s ease;
+	border-radius: 5px;
+	// Content display properties
+	background-color: $white;
+	margin: 0;
+	padding: 20px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	transform: translate(0, 75%);
+	display: flex;
+	flex-direction: column;
+	// Traansition properties
+	visibility: visible;
+	opacity: 1;
+
+	@media (min-width: $laptop-width) {
+		width: 40%;
+	}
+
+	&--hide {
+		display: none;
+		visibility: hidden;
+		opacity: 0;
+		transition-duration: 1s;
+		transition-property: opacity;
+	}
+
+	.title {
+		color: $blue;
+		font-family: $futura;
+		font-size: 24px;
+		font-weight: bold;
+		line-height: 31px;
+		margin: 0;
+		width: 100%;
+	}
+
+	&--closable {
+		.title {
+			margin: 20px 0 0 0;
+		}
+	}
+
+	.sub-title {
+		color: $mid-gray;
+		font-family: $hanken-sans;
+		font-size: 15px;
+		line-height: 19px;
+		margin: 0;
+		padding-top: 5px;
+		width: 100%;
+		font-weight: 200;
+	}
+
+	.icon {
+		display: flex;
+		justify-content: center;
+		height: 15px;
+		width: 15px;
+		position: absolute;
+		top: 20px;
+		right: 20px;
+
+		&--close {
+			height: 15px;
+			width: 15px;
+		}
+	}
+}

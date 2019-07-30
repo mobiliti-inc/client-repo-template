@@ -1,0 +1,109 @@
+@import "~variables";
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: $blue-overlay;
+
+  &-box {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-container {
+    display: flex;
+    color: black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $green-check;
+    background-image: url('../../assets//images/img_Green-Pattern.png');
+    background-repeat: no-repeat;
+    background-position: right top;
+    height: 431px;
+    width: 522px;
+    position: relative;
+
+    @media (max-width: $mobile-width) {
+      height: 100%;
+      width: 100%;
+      padding: 10px;
+    }
+
+    &--bordered {
+      border-radius: 5px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  &-visible {
+    display: block;
+  }
+
+  &-hide {
+    display: none
+  }
+
+  &-icon-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+  }
+}
+
+.modal-main-content {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  color: $white;
+}
+
+.content-header {
+  color: $white;
+  max-height: 31px;
+  max-width: 303px;
+  font-family: $futura;
+  font-size: 34px;
+  font-weight: bold;
+  letter-spacing: -0.76px;
+  line-height: 31px;
+  margin-bottom: 2%;
+  margin-top: 6%;
+}
+
+.content-description {
+  max-height: 76px;
+  max-width: 334px;
+  font-family: $hanken-sans;
+  font-size: 16px;
+  line-height: 19px;
+  margin: 0;
+  margin-bottom: 35%;
+}
+
+.browse-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $futura;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 23px;
+  cursor: pointer;
+  height: 44px;
+  width: 203px;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.12);
+  background-color: $white;
+  color: $green-check;
+}

@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditPaymentForm component should render 1`] = `
+<div>
+  <div
+    className="payment-card-holder"
+  >
+    <img
+      alt="payment card icon"
+      className="payment-card-icon"
+      src="fake text"
+    />
+    <p
+      className="payment-card-number"
+    >
+      (......
+      fake text
+      )
+    </p>
+  </div>
+  <div
+    className="edit-payment-form"
+  >
+    <TextInput
+      changePasswordVisibilityStatus={[Function]}
+      className=""
+      dark={false}
+      disabled={false}
+      errorMessage=""
+      id="name"
+      inputDidChange={false}
+      isValid={true}
+      label="Name"
+      name="name"
+      onBlur={null}
+      onChange={[MockFunction]}
+      placeholder="Name"
+      shouldShowVisibility={false}
+      type="text"
+      value="fake text"
+    />
+    <TextInput
+      changePasswordVisibilityStatus={[Function]}
+      className=""
+      dark={false}
+      disabled={false}
+      errorMessage=""
+      id="street"
+      inputDidChange={false}
+      isValid={true}
+      label="Street"
+      name="street"
+      onBlur={null}
+      onChange={[MockFunction]}
+      placeholder="Street"
+      shouldShowVisibility={false}
+      type="text"
+      value="fake text"
+    />
+    <TextInput
+      changePasswordVisibilityStatus={[Function]}
+      className=""
+      dark={false}
+      disabled={false}
+      errorMessage=""
+      id="city"
+      inputDidChange={false}
+      isValid={true}
+      label="City"
+      name="city"
+      onBlur={null}
+      onChange={[MockFunction]}
+      placeholder="City"
+      shouldShowVisibility={false}
+      type="text"
+      value="fake text"
+    />
+    <div
+      className="state-code-wrapper"
+    >
+      <TextInput
+        changePasswordVisibilityStatus={[Function]}
+        className=""
+        dark={false}
+        disabled={false}
+        errorMessage=""
+        id="state"
+        inputDidChange={false}
+        isValid={true}
+        label="State"
+        name="state"
+        onBlur={null}
+        onChange={[MockFunction]}
+        placeholder="State"
+        shouldShowVisibility={false}
+        type="text"
+        value="fake text"
+      />
+      <TextInput
+        changePasswordVisibilityStatus={[Function]}
+        className=""
+        dark={false}
+        disabled={false}
+        errorMessage=""
+        id="zipCode"
+        inputDidChange={false}
+        isValid={true}
+        label="Zip Code"
+        name="zipCode"
+        onBlur={null}
+        onChange={[MockFunction]}
+        placeholder="Zip Code"
+        shouldShowVisibility={false}
+        type="text"
+        value="fake text"
+      />
+    </div>
+    <label
+      className="input-validation-message-label"
+    >
+      fake error
+    </label>
+    <div
+      className="remove-card"
+      onClick={[MockFunction]}
+      role="presentation"
+    >
+      Remove Card
+    </div>
+    <div
+      className="btn-container"
+    >
+      <Button
+        bordered={true}
+        buttonType="standard"
+        className=""
+        customStyles=""
+        disabled={false}
+        icon={null}
+        inverted={false}
+        onClick={[MockFunction]}
+        ripple={false}
+        showLoader={false}
+        type="standard"
+      >
+        Save Changes
+      </Button>
+      <Button
+        bordered={true}
+        buttonType="standard"
+        className=""
+        customStyles=""
+        disabled={false}
+        icon={null}
+        inverted={false}
+        onClick={[MockFunction]}
+        ripple={false}
+        showLoader={false}
+        type="standard"
+      >
+        Close
+      </Button>
+    </div>
+  </div>
+</div>
+`;

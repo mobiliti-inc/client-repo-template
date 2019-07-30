@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageHolder renders 1`] = `
+<div
+  className="image-container"
+>
+  <span
+    className="edit-icon"
+    onClick={[MockFunction]}
+    role="presentation"
+  >
+    <img
+      alt="edit icon"
+      src="test-file-stub"
+    />
+    <input
+      accept="image/jpeg"
+      className="input-upload-image"
+      id="upload-image"
+      onChange={[MockFunction]}
+      type="file"
+    />
+  </span>
+</div>
+`;

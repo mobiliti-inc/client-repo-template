@@ -1,0 +1,111 @@
+@import "~variables";
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-base {
+  height: 50px;
+  width: 100%;
+  font-size: 22px;
+  font-family: inherit;
+  border: none;
+  transition: all .5s;
+  border-bottom: 1px solid rgba(29, 49, 85, 0.2);
+  text-transform: capitalize;
+  font-family: $hanken-sans;
+  &:focus {
+    outline: none;
+    border-bottom: 3px solid $blue;
+  }
+  &::-webkit-input-placeholder {
+    color: $darker-blue;
+    opacity: 0.6;
+  }
+  &:placeholder-shown+.input-label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-40px);
+  }
+  &.error {
+    border-bottom: 3px solid $fast-car-red;
+  }
+}
+
+.input-email,
+.input-password,
+.input-number,
+.input-image,
+.input-text,
+.input-file,
+.input-date,
+.input-url,
+.input-tel {
+  composes: input-base;
+  text-transform: none;
+}
+
+.input-label {
+  display: block;
+  font-size: 12px;
+  transform: translateY(-60px);
+  color: $darker-blue;
+  opacity: 0.6;
+  font-family: $hanken-sans;
+  line-height: 14px;
+  text-transform: capitalize;
+  transition: all .5s;
+}
+
+.checkmark-label {
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 20px;
+  width: 12px;
+  border: solid $green-check;
+  border-width: 0 2px 2px 0;
+  cursor: pointer;
+  transform: rotate(45deg);
+}
+
+.dark {
+  color: $black;
+  border-color: $black;
+  &::placeholder {
+    color: $black;
+  }
+  label {
+    color: $black;
+  }
+}
+
+.error-message {
+  color: $fast-car-red;
+  height: 14px;
+  font-family: $hanken-sans;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.password-visibility-indicator {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  right: 0;
+  line-height: 19px;
+  color: $blue;
+  font-family: $hanken-sans;
+  font-size: 16px;
+  border: none;
+  background-color: transparent;
+  text-transform: capitalize;
+  cursor: pointer;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}

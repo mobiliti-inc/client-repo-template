@@ -1,0 +1,21 @@
+@import "~variables";
+
+/* The input component container */
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-top: 30px;
+    input {
+        font-size: 20px;
+    }
+}
+
+/* Horizontal input container */
+.container-horizontal {
+    flex-direction: row;
+}
+
+/* Vertical input container */
+.container-vertical {
+    flex-direction: column;
+}

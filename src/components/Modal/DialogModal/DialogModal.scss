@@ -1,0 +1,59 @@
+@import "~variables";
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.title {
+  max-height: 62px;
+  max-width: 286px;
+  color: $darker-blue;
+  font-family: $futura;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: -0.49px;
+  line-height: 31px;
+  margin: 0 0 20px 0;
+  word-wrap: break-word;
+}
+
+.box-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.button-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 8px;
+}
+
+.save-button-container {
+  width: 80%;
+  opacity: 1;
+  &--disabled {
+    opacity: 0.6;
+  }
+}
+
+.cancel-button-container {
+  align-self: center;
+  height: 25px;
+  width: 124px;
+  font-family: $futura;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 23px;
+  text-align: center;
+  & button {
+    color: $blue;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+  }
+}

@@ -1,0 +1,101 @@
+@import "~variables";
+.button {
+  // Sample styles. These should be replaced.
+  width: 100%;
+  font-family: $headline-font;
+  font-weight: bold;
+  height: 50px;
+  font-weight: bold;
+  background: $blue;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.12);
+  font-size: 14px;
+  letter-spacing: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:focus,
+  &:active {
+    outline: none;
+  }
+  &:active {
+    box-shadow: 0 9px 14px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
+.button--disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.button--danger,
+.button--warning,
+.button--standard,
+.button--white,
+.button--plain {
+  composes: button;
+}
+
+.button--standard {
+  color: $white;
+  background: $blue;
+}
+
+.button--warning {
+  background: rgb(204, 201, 38); // replace with actual color
+  color: $white;
+}
+
+.button--danger {
+  background: $fast-car-red;
+  color: $white;
+}
+
+.button--plain {
+  color: $blue;
+  background: $white;
+  box-shadow: none;
+}
+
+.ripple {
+  background-position: center;
+  transition: background 1s;
+}
+
+.ripple:hover {
+  background: $dark-blue radial-gradient(circle, transparent 1%, $dark-blue 1%) center/15000%;
+}
+
+.ripple:active {
+  background-color: $blue;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.button--white {
+  background: white;
+  color: $blue;
+}
+
+.bordered {
+  border-radius: 4px;
+}
+
+.inverted {
+  background: none;
+  color: $blue;
+  box-shadow: none;
+
+  &:hover {
+    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: $blue;
+    color: $white;
+  }
+}
