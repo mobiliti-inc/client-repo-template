@@ -4,10 +4,14 @@
   "description": "Core Admin UI",
   "main": "index.js",
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "@types/classnames": "^2.2.9",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.5",
+    "babel-jest": "^24.8.0",
     "classnames": "^2.2.6",
+    "easy-modal-react": "^1.2.3",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
@@ -19,17 +23,23 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@storybook/react": "^5.1.9",
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.16",
     "@types/react-css-modules": "^4.6.2",
     "autoprefixer": "^9.6.1",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.1.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
     "node-sass": "^4.12.0",
     "postcss-pxtorem": "^4.0.1",
     "react-css-modules": "^4.7.11",
     "react-docgen-typescript-loader": "^3.1.0",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "react-test-renderer": "^16.8.6",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "tslint": "^5.18.0",
@@ -53,6 +63,21 @@
   },
   "author": "",
   "license": "ISC",
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/test-shim.js",
+      "<rootDir>/test-setup.js"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "testMatch": [
+      "**/__tests__/*.(ts|tsx|js|jsx)"
+    ]
+  },
   "bugs": {
     "url": "https://github.com/mobiliti-inc/core-admin-ui/issues"
   },
