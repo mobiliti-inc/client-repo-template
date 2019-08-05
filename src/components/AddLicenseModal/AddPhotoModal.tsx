@@ -2,22 +2,33 @@ import React from 'react';
 import Camera from '../Camera/Camera';
 import DialogModal from '../Modal/DialogModal/DialogModal';
 
-class AddPhotoModal extends React.PureComponent {
-	static propTypes = {
-		visible: PropTypes.bool.isRequired,
-		title: PropTypes.string.isRequired,
-		closeModal: PropTypes.func.isRequired,
-		onBack: PropTypes.func.isRequired,
-		onUsePhoto: PropTypes.func.isRequired,
-		closeCamera: PropTypes.bool.isRequired,
-		onCameraAccessFail: PropTypes.func.isRequired,
-	}
+type AddPhotoModalProps = {
+	visible: boolean,
+	title: string,
+	closeModal: (...args: any[]) => any,
+	onBack: (...args: any[]) => any,
+	onUsePhoto: (...args: any[]) => any,
+	closeCamera: boolean,
+	onCameraAccessFail: (...args: any[]) => any
+};
+
+type AddPhotoModalState = {
+	takePhoto: boolean,
+	photoTaken: boolean,
+	image: null,
+	cameraAccessGranted: boolean
+};
+
+class AddPhotoModal extends React.PureComponent<
+	AddPhotoModalProps,
+	AddPhotoModalState
+	> {
 	state = {
 		takePhoto: false,
 		photoTaken: false,
 		image: null,
-		cameraAccessGranted: false,
-	}
+		cameraAccessGranted: false
+	};
 
 	onBack = () => {
 		if (this.state.photoTaken) {
@@ -34,12 +45,10 @@ class AddPhotoModal extends React.PureComponent {
 		this.setState({
 			takePhoto: false,
 			image: null,
-			photoTaken: false,
-
+			photoTaken: false
 		});
 		this.props.closeModal();
 	}
-
 
 	onCameraAccessSuccess = () => {
 		this.setState({
@@ -60,7 +69,7 @@ class AddPhotoModal extends React.PureComponent {
 		if (this.state.photoTaken) {
 			this.setState({
 				image: null,
-				photoTaken: false,
+				photoTaken: false
 			});
 			this.props.onUsePhoto(this.state.image);
 		} else {
@@ -78,7 +87,7 @@ class AddPhotoModal extends React.PureComponent {
 		}
 	}
 
-	captureImage = (image) => {
+	captureImage = image => {
 		this.setState({
 			photoTaken: true,
 			takePhoto: false,
@@ -112,5 +121,4 @@ class AddPhotoModal extends React.PureComponent {
 		);
 	}
 }
-
 export default CSSModules(AddPhotoModal);

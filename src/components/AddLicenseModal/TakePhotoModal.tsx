@@ -1,16 +1,17 @@
 import React from 'react';
 import AddPhotoModal from './AddPhotoModal';
 
-class TakePhotoModal extends React.PureComponent {
-	static propTypes = {
-		modalIsVisible: PropTypes.bool.isRequired,
-		closeModal: PropTypes.func.isRequired,
-		onBack: PropTypes.func.isRequired,
-		onUsePhoto: PropTypes.func.isRequired,
-		closeCamera: PropTypes.bool.isRequired,
-		title: PropTypes.string.isRequired,
-		onCameraAccessFail: PropTypes.func.isRequired,
-	}
+type TakePhotoModalProps = {
+	modalIsVisible: boolean,
+	closeModal: (...args: any[]) => any,
+	onBack: (...args: any[]) => any,
+	onUsePhoto: (...args: any[]) => any,
+	closeCamera: boolean,
+	title: string,
+	onCameraAccessFail: (...args: any[]) => any
+};
+
+class TakePhotoModal extends React.PureComponent<TakePhotoModalProps, {}> {
 	render() {
 		const {
 			closeModal,
@@ -19,7 +20,7 @@ class TakePhotoModal extends React.PureComponent {
 			onCameraAccessFail,
 			onBack,
 			closeCamera,
-			title,
+			title
 		} = this.props;
 		return (
 			<AddPhotoModal
@@ -34,6 +35,5 @@ class TakePhotoModal extends React.PureComponent {
 		);
 	}
 }
-
 
 export default CSSModules(TakePhotoModal);

@@ -1,32 +1,25 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import styles from "./AuthFrame.scss";
+import brandLogo from "../../assets/icons/logo_Dark.svg";
+import appStoreBadge from "../../assets/icons/app-store.svg";
+import googleStoreBadge from "../../assets/icons/google-play.svg";
+import backArrowImage from "../../assets/icons/icon_Arrow-Left.svg";
+import imgSignupBackground from "../../assets/images/img_SignIn-Background.png";
+import { iconClose } from "../../assets/icons";
+import Link from "../Link/Link";
 
-import styles from './AuthFrame.scss';
-import brandLogo from '../../assets/icons/logo_Dark.svg';
-import appStoreBadge from '../../assets/icons/app-store.svg';
-import googleStoreBadge from '../../assets/icons/google-play.svg';
-import backArrowImage from '../../assets/icons/icon_Arrow-Left.svg';
-import imgSignupBackground from '../../assets/images/img_SignIn-Background.png';
-import { iconClose } from '../../assets/icons';
-import Link from '../Link/Link';
+type AuthFrameProps = {
+	showBackButton?: boolean,
+	showCloseButton?: boolean,
+	history: {
+		goBack: (...args: any[]) => any
+	},
+	userIsLoggedIn: boolean
+};
 
-class AuthFrame extends PureComponent {
-	static propTypes = {
-		children: PropTypes.node.isRequired,
-		showBackButton: PropTypes.bool,
-		showCloseButton: PropTypes.bool,
-		history: PropTypes.shape({
-			goBack: PropTypes.func.isRequired,
-		}).isRequired,
-		userIsLoggedIn: PropTypes.bool.isRequired,
-	};
-
-	static defaultProps = {
-		showBackButton: true,
-		showCloseButton: false,
-	};
-
+class AuthFrame extends PureComponent<AuthFrameProps, {}> {
 	componentWillMount = () => {
 		const { history, userIsLoggedIn } = this.props;
 		if (userIsLoggedIn) {
@@ -46,11 +39,7 @@ class AuthFrame extends PureComponent {
 								onClick={this.props.history.goBack}
 								role="presentation"
 							>
-								<img
-									src={backArrowImage}
-									styleName="back-arrow-image"
-									alt="back arrow"
-								/>
+								<img src={backArrowImage} styleName="back-arrow-image" alt="back arrow" />
 							</div>
 						) : null}
 						{showCloseButton ? (
@@ -65,18 +54,10 @@ class AuthFrame extends PureComponent {
 					<div styleName="main-content">{children}</div>
 					<div styleName="mobile-store-container">
 						<Link to="https://itunes.apple.com/us/app/mobiliti/id1326755398?ls=1&amp;mt=8" external>
-							<img
-								styleName="img-app-store"
-								src={appStoreBadge}
-								alt="app-store"
-							/>
+							<img styleName="img-app-store" src={appStoreBadge} alt="app-store" />
 						</Link>
 						<Link to="https://play.google.com/store/apps/details?id=com.mobiliti" external>
-							<img
-								styleName="img-play-store"
-								src={googleStoreBadge}
-								alt="play-store"
-							/>
+							<img styleName="img-play-store" src={googleStoreBadge} alt="play-store" />
 						</Link>
 					</div>
 				</div>
@@ -89,8 +70,9 @@ class AuthFrame extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-	userIsLoggedIn: state.auth.isLoggedIn,
+	userIsLoggedIn: state.auth.isLoggedIn
 });
+
 export const AuthFrameComponent = CSSModules(AuthFrame, styles, { allowMultiple: true });
 
 export default withRouter(connect(mapStateToProps)(AuthFrameComponent));

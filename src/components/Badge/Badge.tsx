@@ -1,13 +1,12 @@
 import React from 'react';
-
 import styles from './Badge.scss';
 import StatusMessages from '../../constants/vehicleStatusCodes';
 
-class Badge extends React.PureComponent {
-	static propTypes = {
-		status: PropTypes.number.isRequired
-	}
+type BadgeProps = {
+	status: number
+};
 
+class Badge extends React.PureComponent<BadgeProps, {}> {
 	renderStatusMessage = status => {
 		const message = StatusMessages[status];
 		return message;

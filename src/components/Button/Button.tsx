@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, FC } from 'react';
 import CSSModules from 'react-css-modules';
 
 import cx from 'classnames';
@@ -15,75 +14,70 @@ export const BUTTON_TYPES = {
 	PLAIN: 'plain'
 };
 
-class Button extends React.PureComponent {
-	static propTypes = {
-		buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
-		children: PropTypes.string.isRequired,
-		onClick: PropTypes.func.isRequired,
-		className: PropTypes.string,
-		customStyles: PropTypes.string,
-		showLoader: PropTypes.bool,
-		disabled: PropTypes.bool,
-		icon: PropTypes.node,
-		ripple: PropTypes.bool,
-		bordered: PropTypes.bool,
-		inverted: PropTypes.bool,
+type ButtonTypes = 'standard' | 'warning' | 'danger' | 'white' | 'plain';
+
+interface Props {
+	buttonType: ButtonTypes;
+	children: string | ReactNode;
+	onClick(): void;
+	className: string;
+	customStyles: string;
+	showLoader: boolean;
+	disabled: boolean;
+	icon: ReactNode;
+	ripple: boolean;
+	bordered: boolean;
+	inverted: boolean;
+}
+
+const Button: FC<Props> = (props) => {
+	// static defaultProps = {
+	// 	buttonType: BUTTON_TYPES.STANDARD,
+	// 	showLoader: false,
+	// 	disabled: false,
+	// 	className: '',
+	// 	customStyles: '',
+	// 	icon: null,
+	// 	ripple: false,
+	// 	bordered: false,
+	// 	inverted: false,
+	// }
+	const {
+		disabled,
+		onClick,
+		icon,
+		customStyles,
+		buttonType,
+		className,
+		showLoader,
+		ripple,
+		bordered,
+		inverted,
+		children
+	} = props;
+
+	const getButtonTypeName = () => Object.values(BUTTON_TYPES).indexOf(buttonType) > -1 ? `button--${buttonType}` : 'button---standard';
+
+	const getClasses = () => {
+		const buttonTypeName = getButtonTypeName();
+		const classes = [buttonTypeName, className];
+		return cx({ 'button--disabled': showLoader || disabled, ripple, bordered, inverted }, classes);
 	};
 
-	static defaultProps = {
-		buttonType: BUTTON_TYPES.STANDARD,
-		showLoader: false,
-		disabled: false,
-		className: '',
-		customStyles: '',
-		icon: null,
-		ripple: false,
-		bordered: false,
-		inverted: false,
-	}
-	getButtonTypeName = () => {
-		const { buttonType } = this.props;
-		return Object.values(BUTTON_TYPES).indexOf(buttonType) > -1 ? `button--${buttonType}` : 'button---standard';
-	}
+	const renderButtonText = () => showLoader ? <LoadingSpinner show /> : children;
 
+	return (
+		<button
+			styleName={getClasses()}
+			className={cx(customStyles, className)}
+			onClick={onClick}
+			disabled={disabled}
+		>
+			{icon && icon}
+			{renderButtonText()}
+		</button>
+	);
 
-	getClasses = () => {
-		const { className, showLoader, ripple, bordered, disabled, inverted, } = this.props;
-		const buttonTypeName = this.getButtonTypeName();
-		const classes = [buttonTypeName, className];
-		return cx({ 'button--disabled': showLoader || disabled, ripple, bordered, inverted, }, classes);
-	}
-
-	renderButtonText = () => (
-		this.props.showLoader ?
-			<LoadingSpinner show />
-			:
-			this.props.children
-	)
-
-	render() {
-		const {
-			disabled,
-			onClick,
-			icon,
-			customStyles,
-			className,
-		} = this.props;
-
-		const classes = this.getClasses();
-
-		return (
-			<button
-				styleName={classes}
-				className={cx(customStyles, className)}
-				onClick={onClick}
-				disabled={disabled}
-			>
-				{icon && icon}
-				{this.renderButtonText()}
-			</button>
-		);
-	}
-}
+};
 
 export default CSSModules(Button, styles, { allowMultiple: true });

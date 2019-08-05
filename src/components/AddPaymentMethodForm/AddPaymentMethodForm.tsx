@@ -1,12 +1,36 @@
+import React, { PureComponent } from 'react';
 import { card } from 'creditcards';
-
 import styles from './AddPaymentMethodForm.scss';
 import TextInput, { INPUT_TYPES } from '../TextInput/TextInput';
 import cardExpiryDateFormatter from '../../utils/cardExpiryDateFormatter';
 import Button, { BUTTON_TYPES } from '../Button/Button';
 import stripeService from '../../services/stripeService';
-
-class AddPaymentMethodForm extends React.PureComponent {
+type AddPaymentMethodFormProps = {
+	onFormValidCheck?: (...args: any[]) => any,
+	addPaymentCard: (...args: any[]) => any,
+	cancelForm: (...args: any[]) => any,
+	displayCancelButton?: boolean,
+	isPaymentCardAdded?: boolean
+};
+type AddPaymentMethodFormState = {
+	cardNumber: string,
+	cardExpirationDate: string,
+	cvv: string,
+	zip: string,
+	formIsValid: boolean,
+	error: string,
+	showLoader: boolean
+};
+type AddPaymentMethodFormState = {
+	cardNumber: string,
+	cardExpirationDate: string,
+	cvv: string,
+	zip: string,
+	formIsValid: boolean,
+	error: string,
+	showLoader: boolean
+};
+class AddPaymentMethodForm extends PureComponent<{}, AddPaymentMethodFormState> {
 	state = {
 		cardNumber: '',
 		cardExpirationDate: '',
@@ -15,9 +39,8 @@ class AddPaymentMethodForm extends React.PureComponent {
 		formIsValid: false,
 		error: '',
 		showLoader: false
-	}
-
-	componentDidUpdate = (prevProps) => {
+	};
+	componentDidUpdate = prevProps => {
 		const { isPaymentCardAdded } = this.props;
 		this.isFormValid();
 		if (prevProps.isPaymentCardAdded !== isPaymentCardAdded) {
@@ -25,19 +48,17 @@ class AddPaymentMethodForm extends React.PureComponent {
 				cardNumber: '',
 				cardExpirationDate: '',
 				cvv: '',
-				zip: '',
+				zip: ''
 			});
 		}
-	}
-
+	};
 	fields = {
-		cardNumber: { maxLength: 16, formatter: (value) => card.format(value) },
-		zip: { maxLength: 6, formatter: (value) => (value) },
-		cvv: { maxLength: 3, formatter: (value) => (value) },
-		cardExpirationDate: { maxLength: 5, formatter: (value) => cardExpiryDateFormatter(value) },
-	}
-
-	handleInputChange = (event) => {
+		cardNumber: { maxLength: 16, formatter: value => card.format(value) },
+		zip: { maxLength: 6, formatter: value => value },
+		cvv: { maxLength: 3, formatter: value => value },
+		cardExpirationDate: { maxLength: 5, formatter: value => cardExpiryDateFormatter(value) }
+	};
+	handleInputChange = event => {
 		const { name, value } = event.target;
 		if (this.fields[name].maxLength < value.replace(/ /g, '').length) {
 			return null;
@@ -50,13 +71,11 @@ class AddPaymentMethodForm extends React.PureComponent {
 			error: ''
 		});
 	};
-
 	formatCardDetail = (key, value) => {
 		this.setState({
-			[key]: this.fields[key].formatter(value.replace(/ /g, '')),
+			[key]: this.fields[key].formatter(value.replace(/ /g, ''))
 		});
-	}
-
+	};
 	isFormValid = () => {
 		const { zip, cvv, cardNumber, cardExpirationDate } = this.state;
 		const formIsValid = !!(zip.length && cvv.length && cardNumber.length && cardExpirationDate.length === 5);
@@ -65,8 +84,7 @@ class AddPaymentMethodForm extends React.PureComponent {
 		});
 		this.props.onFormValidCheck({ cardNumber, formIsValid });
 		return formIsValid;
-	}
-
+	};
 	handleSavePaymentCard = () => {
 		this.setState({
 			showLoader: true
@@ -79,7 +97,8 @@ class AddPaymentMethodForm extends React.PureComponent {
 				exp_month: Number(cardExpirationDate.slice(0, 2)),
 				exp_year: Number(cardExpirationDate.slice(-2)),
 				address_zip: Number(zip)
-			}, (status, data) => {
+			},
+			(status, data) => {
 				if (status === 200) {
 					this.setState({
 						showLoader: false
@@ -90,14 +109,13 @@ class AddPaymentMethodForm extends React.PureComponent {
 					error: data.error.message,
 					showLoader: false
 				});
-			});
-	}
-
+			}
+		);
+	};
 	render() {
 		const { zip, cvv, cardNumber, cardExpirationDate, formIsValid, showLoader, error } = this.state;
 		const { displayCancelButton } = this.props;
 		const buttonDisabledClass = !formIsValid ? 'btn-disabled' : '';
-
 		return (
 			<div styleName="form-container">
 				<TextInput
@@ -122,7 +140,6 @@ class AddPaymentMethodForm extends React.PureComponent {
 						id="cardExpirationDate"
 						isValid
 						onBlur={() => this.formatCardDetail('cardExpirationDate', cardExpirationDate)}
-
 					/>
 
 					<TextInput
@@ -148,15 +165,9 @@ class AddPaymentMethodForm extends React.PureComponent {
 						isValid
 					/>
 				</div>
-				<div>
-					{ error.length > 0 &&
-					<label styleName="input-validation-message-label">
-						{error}
-					</label>
-					}
-				</div>
+				<div>{error.length > 0 && <label styleName="input-validation-message-label">{error}</label>}</div>
 				<div styleName="column-2 btn-container">
-					<div styleName={`${buttonDisabledClass}`} >
+					<div styleName={`${buttonDisabledClass}`}>
 						<Button
 							type={BUTTON_TYPES.STANDARD}
 							showLoader={showLoader}
@@ -167,33 +178,19 @@ class AddPaymentMethodForm extends React.PureComponent {
 							Save
 						</Button>
 					</div>
-					{displayCancelButton &&
-					<Button
-						type={BUTTON_TYPES.STANDARD}
-						disabled={false}
-						onClick={this.props.cancelForm}
-						bordered
-					>
+					{displayCancelButton && (
+						<Button type={BUTTON_TYPES.STANDARD} disabled={false} onClick={this.props.cancelForm} bordered>
 							Cancel
-					</Button>}
+						</Button>
+					)}
 				</div>
 			</div>
 		);
 	}
 }
-
-AddPaymentMethodForm.propTypes = {
-	onFormValidCheck: PropTypes.func,
-	addPaymentCard: PropTypes.func.isRequired,
-	cancelForm: PropTypes.func.isRequired,
-	displayCancelButton: PropTypes.bool,
-	isPaymentCardAdded: PropTypes.bool,
-};
-
 AddPaymentMethodForm.defaultProps = {
-	onFormValidCheck: (value) => value,
+	onFormValidCheck: value => value,
 	displayCancelButton: false,
-	isPaymentCardAdded: false,
+	isPaymentCardAdded: false
 };
-
 export default CSSModules(AddPaymentMethodForm, styles, { allowMultiple: true });

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import AddLicensePhotoModal from './AddPhotoModal';
 
-class AddBackLicensePhoto extends React.PureComponent {
-	static propTypes = {
-		modalIsVisible: PropTypes.bool.isRequired,
-		closeModal: PropTypes.func.isRequired,
-		onBackLicensePhotoModalBack: PropTypes.func.isRequired,
-		onUsePhoto: PropTypes.func.isRequired,
-		closeCamera: PropTypes.bool.isRequired
-	}
+type AddBackLicensePhotoProps = {
+	modalIsVisible: boolean,
+	closeModal: (...args: any[]) => any,
+	onBackLicensePhotoModalBack: (...args: any[]) => any,
+	onUsePhoto: (...args: any[]) => any,
+	closeCamera: boolean
+};
+
+class AddBackLicensePhoto extends PureComponent<
+	AddBackLicensePhotoProps,
+	{}
+	> {
 	render() {
 		return (
 			<AddLicensePhotoModal
@@ -23,6 +27,5 @@ class AddBackLicensePhoto extends React.PureComponent {
 		);
 	}
 }
-
 
 export default CSSModules(AddBackLicensePhoto);

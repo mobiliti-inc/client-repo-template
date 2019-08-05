@@ -1,11 +1,9 @@
 import React from 'react';
-
 import { iconInsurance } from '../../assets/icons';
 import Modal from '../Modal/Modal';
 import Dropdown from '../Dropdown/Dropdown';
 import styles from './AgeSelectModal.scss';
 import Button from '../Button/Button';
-
 
 let ages = [
 	{
@@ -29,17 +27,23 @@ let ages = [
 		current: true
 	}
 ];
-class AgeSelectDropdown extends React.PureComponent {
-	static propTypes = {
-		callback: PropTypes.func.isRequired,
-		scrolling: PropTypes.bool.isRequired,
-		selectUserAge: PropTypes.func.isRequired
-	}
 
+type AgeSelectDropdownProps = {
+	callback: (...args: any[]) => any,
+	scrolling: boolean,
+	selectUserAge: (...args: any[]) => any
+};
+
+type AgeSelectDropdownState = {
+	modalVisible: boolean,
+	selectedAge: string
+};
+
+class AgeSelectDropdown extends React.PureComponent<AgeSelectDropdownProps, AgeSelectDropdownState> {
 	state = {
 		modalVisible: true,
 		selectedAge: '25+'
-	}
+	};
 
 	onContinue = async () => {
 		const { selectedAge } = this.state;
@@ -50,12 +54,11 @@ class AgeSelectDropdown extends React.PureComponent {
 		this.props.callback();
 	}
 
-	ageSelected = (value) => {
+	ageSelected = value => {
 		ages = ages.map(age => ({
 			value: age.value,
 			current: age.value === value
 		}));
-
 		this.setState({
 			selectedAge: value
 		});
@@ -65,30 +68,18 @@ class AgeSelectDropdown extends React.PureComponent {
 		const { modalVisible } = this.state;
 		return (
 			<React.Fragment>
-				<Modal
-					visible={modalVisible}
-					plain
-					scrolling={this.props.scrolling}
-					freezeOverlay
-				>
+				<Modal visible={modalVisible} plain scrolling={this.props.scrolling} freezeOverlay>
 					<div styleName="content-container">
 						<div styleName="icon-circle-wrapper">
 							<img src={iconInsurance} alt="lock" />
 						</div>
-						<div styleName="heading" >
-							Insurance is included in each car&#39;s monthly subscription price.
-						</div>
+						<div styleName="heading">Insurance is included in each car&#39;s monthly subscription price.</div>
 
-						<p styleName="description">
-							Enter your age so we can give you an accurate price.
-						</p>
+						<p styleName="description">Enter your age so we can give you an accurate price.</p>
 						<Dropdown modal data={ages} onChange={this.ageSelected} className="modal-option" scrolling={false} />
 
 						<div styleName="continue-button-container">
-							<Button
-								onClick={this.onContinue}
-							> Continue
-							</Button>
+							<Button onClick={this.onContinue}> Continue</Button>
 						</div>
 					</div>
 				</Modal>
