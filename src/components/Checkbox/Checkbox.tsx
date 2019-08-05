@@ -1,28 +1,19 @@
-import classNames from 'classnames';
-
-import styles from './Checkbox.scss';
-
-class Checkbox extends React.PureComponent {
-	static propTypes = {
-		onChange: PropTypes.func.isRequired,
-		checked: PropTypes.bool.isRequired,
-		validationLabel: PropTypes.string,
-		componentLabel: PropTypes.node,
-		label: PropTypes.string,
-		valid: PropTypes.bool,
-	}
-
-	static defaultProps = {
-		validationLabel: null,
-		componentLabel: null,
-		valid: false,
-		label: null,
-	}
-
+import classNames from "classnames";
+import styles from "./Checkbox.scss";
+type CheckboxProps = {
+	onChange: (...args: any[]) => any,
+	checked: boolean,
+	validationLabel?: string,
+	componentLabel?: React.ReactNode,
+	label?: string,
+	valid?: boolean
+};
+class Checkbox extends React.PureComponent<{}, {}> {
 	render() {
-		const checkboxClasses = classNames('container', { error: !this.props.valid });
+		const checkboxClasses = classNames("container", { error: !this.props.valid });
 		return (
-			<label styleName={checkboxClasses}>{this.props.componentLabel || this.props.label}
+			<label styleName={checkboxClasses}>
+				{this.props.componentLabel || this.props.label}
 				<input
 					type="checkbox"
 					checked={this.props.checked}
@@ -34,5 +25,4 @@ class Checkbox extends React.PureComponent {
 		);
 	}
 }
-
 export default CSSModules(Checkbox, styles, { allowMultiple: true });

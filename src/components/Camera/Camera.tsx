@@ -1,23 +1,23 @@
 import React from 'react';
 import styles from './Camera.scss';
 
-class Camera extends React.PureComponent {
-	static propTypes = {
-		takePhoto: PropTypes.bool.isRequired,
-		height: PropTypes.number.isRequired,
-		width: PropTypes.number.isRequired,
-		onTakingPhoto: PropTypes.func.isRequired,
-		closeCamera: PropTypes.bool.isRequired,
-		onCameraAccessFail: PropTypes.func,
-		onCameraAccessSuccess: PropTypes.func,
+type CameraProps = {
+	takePhoto: boolean,
+	height: number,
+	width: number,
+	onTakingPhoto: (...args: any[]) => any,
+	closeCamera: boolean,
+	onCameraAccessFail?: (...args: any[]) => any,
+	onCameraAccessSuccess?: (...args: any[]) => any
+};
 
-	}
+type CameraState = {
+	photoTaken: boolean,
+	localStream: null,
+	wait: boolean
+};
 
-	static defaultProps = {
-		onCameraAccessSuccess: () => {},
-		onCameraAccessFail: () => {}
-	};
-
+class Camera extends React.PureComponent<CameraProps, CameraState> {
 	constructor(props) {
 		super(props);
 		this.videoStream = React.createRef();
@@ -27,12 +27,12 @@ class Camera extends React.PureComponent {
 			localStream: null,
 			wait: false
 		};
-
 		this.constraints = {
 			video: true
 		};
-		this.timer = () => {};
+		this.timer = () => { };
 	}
+
 	componentWillMount() {
 		if (this.hasGetUserMedia()) {
 			this.initiateStream();
@@ -53,9 +53,10 @@ class Camera extends React.PureComponent {
 				this.retake();
 			}
 		}
-
-		if ((this.props.takePhoto !== prevProps.takePhoto) &&
-		(!this.state.photoTaken || !this.props.takePhoto)) {
+		if (
+			this.props.takePhoto !== prevProps.takePhoto &&
+			(!this.state.photoTaken || !this.props.takePhoto)
+		) {
 			this.captureImage();
 		}
 	}
@@ -65,7 +66,7 @@ class Camera extends React.PureComponent {
 		this.stopTracks();
 	}
 
-	gotStream = (stream) => {
+	gotStream = stream => {
 		if (this.videoStream.current) {
 			this.videoStream.current.srcObject = stream;
 			this.setState({
@@ -77,14 +78,15 @@ class Camera extends React.PureComponent {
 	}
 
 	initiateStream = () => {
-		navigator.mediaDevices.getUserMedia(this.constraints)
-			.then((stream) => this.gotStream(stream)).catch(this.handleError);
+		navigator.mediaDevices
+			.getUserMedia(this.constraints)
+			.then(stream => this.gotStream(stream))
+			.catch(this.handleError);
 	}
 
-	hasGetUserMedia = () => !!(navigator.mediaDevices &&
-		navigator.mediaDevices.getUserMedia);
-
-	handleError = (error) => {
+	hasGetUserMedia = () =>
+		!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
+	handleError = error => {
 		this.props.onCameraAccessFail(error);
 	}
 
@@ -107,7 +109,7 @@ class Camera extends React.PureComponent {
 		if (localStream) {
 			const tracks = this.state.localStream.getTracks();
 			this.videoStream.current.srcObject = null;
-			tracks.forEach((track) => {
+			tracks.forEach(track => {
 				track.stop();
 			});
 		}

@@ -1,15 +1,11 @@
-
 import React, { Component } from 'react';
 import moment from 'moment';
 // // Import React Script Library to load the Google object
 import Script from 'react-load-script';
-
 import TextInput, { INPUT_TYPES } from '../../components/TextInput/TextInput';
 import Button from '../../components/Button/Button';
 import CustomDatePicker from '../../components/CustomDatePicker/CustomDatePicker';
-
 import { KEYS } from '../../../api';
-
 import styles from './DriverLicenseForm.scss';
 
 const defaultTextValue = {
@@ -18,42 +14,73 @@ const defaultTextValue = {
 	value: ''
 };
 
-class DriverLicenseForm extends Component {
-	static propTypes = {
-		submitManualLicenseInfo: PropTypes.func.isRequired,
-		showLoader: PropTypes.bool,
-		subscriber: PropTypes.shape({
-			fetched: PropTypes.bool,
-			fetching: PropTypes.bool,
-			address: PropTypes.shape({
-				address1: PropTypes.string,
-				address2: PropTypes.string,
-				city: PropTypes.string,
-				state: PropTypes.string,
-				country: PropTypes.string,
-				zip_code: PropTypes.string,
-			}),
-			driver_license_info: PropTypes.shape({
-				driver_license_no: PropTypes.string,
-				driver_license_expiry_date: PropTypes.string,
-				driver_license_front_photo: PropTypes.string,
-			}),
-		}),
-		buttonName: PropTypes.string,
-		disabled: PropTypes.bool,
-		validity: PropTypes.func,
-		alertHandler: PropTypes.node,
-	}
+type DriverLicenseFormProps = {
+	submitManualLicenseInfo: (...args: any[]) => any,
+	showLoader?: boolean,
+	subscriber?: {
+		fetched?: boolean,
+		fetching?: boolean,
+		address?: {
+			address1?: string,
+			address2?: string,
+			city?: string,
+			state?: string,
+			country?: string,
+			zip_code?: string
+		},
+		driver_license_info?: {
+			driver_license_no?: string,
+			driver_license_expiry_date?: string,
+			driver_license_front_photo?: string
+		}
+	},
+	buttonName?: string,
+	disabled?: boolean,
+	validity?: (...args: any[]) => any,
+	alertHandler?: React.ReactNode
+};
 
-	static defaultProps = {
-		showLoader: false,
-		subscriber: null,
-		buttonName: '',
-		disabled: false,
-		validity: () => {},
-		alertHandler: null,
-	}
-
+type DriverLicenseFormState = {
+	fields: {
+		address: {
+			valid: boolean,
+			error: string,
+			value: string
+		},
+		city: {
+			valid: boolean,
+			error: string,
+			value: string
+		},
+		state: {
+			valid: boolean,
+			error: string,
+			value: string
+		},
+		zipCode: {
+			valid: boolean,
+			error: string,
+			value: string
+		},
+		dateOfBirth: {
+			valid: boolean,
+			error: string,
+			value: string
+		},
+		driverLicenseNumber: {
+			valid: boolean,
+			error: string,
+			value: string
+		},
+		driverLicenseExpiryDate: {
+			valid: boolean,
+			error: string,
+			value: string
+		}
+	},
+	inputChanged: boolean
+};
+class DriverLicenseForm extends Component<{}, DriverLicenseFormState> {
 	state = {
 		fields: {
 			address: defaultTextValue,
@@ -64,8 +91,8 @@ class DriverLicenseForm extends Component {
 			driverLicenseNumber: defaultTextValue,
 			driverLicenseExpiryDate: defaultTextValue
 		},
-		inputChanged: false,
-	}
+		inputChanged: false
+	};
 
 	componentDidMount() {
 		const { subscriber } = this.props;
@@ -75,27 +102,18 @@ class DriverLicenseForm extends Component {
 	}
 
 	componentDidUpdate = (prevProps, prevState) => {
-		const { validity, } = this.props;
+		const { validity } = this.props;
 		const { inputChanged, fields } = this.state;
 		if (inputChanged && prevState.inputChanged !== inputChanged) {
 			validity(this.validity());
 		}
-
 		if (JSON.stringify(prevState.fields) !== JSON.stringify(fields) && inputChanged) {
 			validity(this.validity());
 		}
 	}
 
 	getUserData = () => {
-		const {
-			address,
-			city,
-			state,
-			zipCode,
-			driverLicenseNumber,
-			driverLicenseExpiryDate,
-			dateOfBirth
-		} = this.state.fields;
+		const { address, city, state, zipCode, driverLicenseNumber, driverLicenseExpiryDate, dateOfBirth } = this.state.fields;
 		return {
 			dateOfBirth: dateOfBirth.value,
 			city: city.value,
@@ -103,7 +121,7 @@ class DriverLicenseForm extends Component {
 			zipCode: zipCode.value,
 			address: address.value,
 			driverLicenseNumber: driverLicenseNumber.value,
-			driverLicenseExpiryDate: driverLicenseExpiryDate.value,
+			driverLicenseExpiryDate: driverLicenseExpiryDate.value
 		};
 	}
 
@@ -115,60 +133,55 @@ class DriverLicenseForm extends Component {
 				address: {
 					valid: true,
 					error: '',
-					value: subscriber.address.address1 || '',
+					value: subscriber.address.address1 || ''
 				},
 				city: {
 					valid: true,
 					error: '',
-					value: subscriber.address.city || '',
+					value: subscriber.address.city || ''
 				},
 				state: {
 					valid: true,
 					error: '',
-					value: subscriber.address.state || '',
+					value: subscriber.address.state || ''
 				},
 				zipCode: {
 					valid: true,
 					error: '',
-					value: subscriber.address.zip_code || '',
+					value: subscriber.address.zip_code || ''
 				},
 				driverLicenseNumber: {
 					valid: true,
 					error: '',
-					value: subscriber.driver_license_info.driver_license_no || '',
+					value: subscriber.driver_license_info.driver_license_no || ''
 				},
 				driverLicenseExpiryDate: {
 					valid: true,
 					error: '',
-					value: subscriber.driver_license_info.driver_license_expiry_date || '',
+					value: subscriber.driver_license_info.driver_license_expiry_date || ''
 				},
 				dateOfBirth: {
 					valid: true,
 					error: '',
-					value: subscriber.user.dob || '',
+					value: subscriber.user.dob || ''
 				}
-			},
+			}
 		}));
 	}
 
 	handleScriptLoad = () => {
 		// Declare Options For Autocomplete
 		const options = { types: ['geocode'] };
-
 		// Initialize Google Autocomplete
-		this.autocomplete = new window.google.maps.places.Autocomplete(
-			document.getElementById('address-input'),
-			options);
+		this.autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('address-input'), options);
 		// Fire event when a suggested name is selected
-		this.autocomplete.addListener('place_changed',
-			this.handlePlaceSelect);
+		this.autocomplete.addListener('place_changed', this.handlePlaceSelect);
 	}
 
 	handlePlaceSelect = () => {
 		// Extract Values From Address Object
 		const addressObject = this.autocomplete.getPlace();
 		const address = addressObject.address_components;
-
 		// Check if address is valid
 		if (address) {
 			// Set State
@@ -194,38 +207,38 @@ class DriverLicenseForm extends Component {
 						valid: true,
 						error: '',
 						value: address[7] ? address[7].long_name : ''
-					},
+					}
 				}
 			}));
 		}
 	}
 
-	checkDateFieldsValidity = (datesToValidate) => {
+	checkDateFieldsValidity = datesToValidate => {
 		/* eslint no-underscore-dangle: 0 */
 		const isObjectValid = [];
-		datesToValidate.map((date) => {
+		datesToValidate.map(date => {
 			const allFields = this.state.fields;
 			if (date.value && moment(date.value, 'MM/DD/YYYY')._isValid) {
 				allFields[date.stateName] = {
 					value: date.value,
 					error: '',
-					valid: true,
+					valid: true
 				};
 				isObjectValid.push(true);
 			} else {
 				allFields[date.stateName] = {
 					value: date.value,
 					error: 'Please enter a valid date',
-					valid: false,
+					valid: false
 				};
 				isObjectValid.push(false);
 			}
 			this.setState({ fields: allFields });
 		});
-		return isObjectValid.every((values) => values === true);
+		return isObjectValid.every(values => values === true);
 	}
 
-	fieldValidator = (toValidate) => {
+	fieldValidator = toValidate => {
 		const validatorRegex = /^[\w\d\s-.,]+$/;
 		const { value } = toValidate;
 		if (value === '') {
@@ -252,19 +265,10 @@ class DriverLicenseForm extends Component {
 			error: '',
 			valid: true
 		};
-	};
+	}
 
 	validity = () => {
-		const {
-			address,
-			city,
-			state,
-			zipCode,
-			driverLicenseNumber,
-			driverLicenseExpiryDate,
-			dateOfBirth,
-		} = this.state.fields;
-
+		const { address, city, state, zipCode, driverLicenseNumber, driverLicenseExpiryDate, dateOfBirth } = this.state.fields;
 		const validTextFields = this.checkInvalidFields([
 			{ value: address.value, stateName: 'address' },
 			{ value: city.value, stateName: 'city' },
@@ -276,7 +280,6 @@ class DriverLicenseForm extends Component {
 			{ value: dateOfBirth.value, stateName: 'dateOfBirth' },
 			{ value: driverLicenseExpiryDate.value, stateName: 'driverLicenseExpiryDate' }
 		]);
-
 		return validTextFields && dateFieldsValid;
 	}
 
@@ -284,18 +287,17 @@ class DriverLicenseForm extends Component {
 		if (this.validity()) this.props.submitManualLicenseInfo(this.getUserData());
 	}
 
-	checkInvalidFields = (toValidate) => {
+	checkInvalidFields = toValidate => {
 		const isObjectValid = [];
-
 		if (toValidate instanceof Array) {
-			toValidate.map((valueToValidate) => {
+			toValidate.map(valueToValidate => {
 				const handleObjectValidation = this.fieldValidator(valueToValidate);
 				const allFields = this.state.fields;
 				allFields[valueToValidate.stateName] = handleObjectValidation;
 				this.setState({ fields: allFields });
 				isObjectValid.push(handleObjectValidation.valid);
 			});
-			return isObjectValid.every((values) => values === true);
+			return isObjectValid.every(values => values === true);
 		}
 		const { value, stateName } = toValidate;
 		const handleValidation = this.fieldValidator(toValidate);
@@ -318,10 +320,9 @@ class DriverLicenseForm extends Component {
 					value
 				}
 			},
-			inputChanged: true,
+			inputChanged: true
 		}));
-	}
-
+	};
 	handleDatePicked = (date, state) => {
 		if (date) {
 			return this.setState({
@@ -329,7 +330,7 @@ class DriverLicenseForm extends Component {
 					...this.state.fields,
 					[state]: { ...date }
 				},
-				inputChanged: true,
+				inputChanged: true
 			});
 		}
 		return null;
@@ -338,17 +339,8 @@ class DriverLicenseForm extends Component {
 	renderGooglePlacesScript = () => <Script url={`https://maps.googleapis.com/maps/api/js?key=${KEYS.GOOGLE_PLACES}&libraries=places`} onLoad={this.handleScriptLoad} />;
 
 	render() {
-		const {
-			address,
-			city,
-			state,
-			zipCode,
-			dateOfBirth,
-			driverLicenseNumber,
-			driverLicenseExpiryDate,
-		} = this.state.fields;
-
-		const { showLoader, buttonName, disabled, alertHandler, } = this.props;
+		const { address, city, state, zipCode, dateOfBirth, driverLicenseNumber, driverLicenseExpiryDate } = this.state.fields;
+		const { showLoader, buttonName, disabled, alertHandler } = this.props;
 		return (
 			<div styleName="container">
 				{this.renderGooglePlacesScript()}
@@ -411,7 +403,7 @@ class DriverLicenseForm extends Component {
 							openToDate="1990/01/01"
 							isValid={dateOfBirth.valid}
 							errorMessage={!dateOfBirth.valid ? dateOfBirth.error : null}
-							onDatePicked={(date) => this.handleDatePicked(date, 'dateOfBirth')}
+							onDatePicked={date => this.handleDatePicked(date, 'dateOfBirth')}
 							selectedDate={dateOfBirth.value}
 							id="dob"
 							label="Date of Birth"
@@ -438,7 +430,7 @@ class DriverLicenseForm extends Component {
 						openToDate="2020/01/01"
 						isValid={driverLicenseExpiryDate.valid}
 						errorMessage={!driverLicenseExpiryDate.valid ? driverLicenseExpiryDate.error : null}
-						onDatePicked={(date) => this.handleDatePicked(date, 'driverLicenseExpiryDate')}
+						onDatePicked={date => this.handleDatePicked(date, 'driverLicenseExpiryDate')}
 						selectedDate={driverLicenseExpiryDate.value}
 						license
 						id="expiration"
@@ -447,13 +439,7 @@ class DriverLicenseForm extends Component {
 				</div>
 				{alertHandler}
 				<div styleName="button">
-					<Button
-						showLoader={showLoader}
-						onClick={this.submitLisenseInfo}
-						customStyles={styles.button}
-						ripple
-						disabled={disabled}
-					>
+					<Button showLoader={showLoader} onClick={this.submitLisenseInfo} customStyles={styles.button} ripple disabled={disabled}>
 						{buttonName || 'Continue'}
 					</Button>
 				</div>

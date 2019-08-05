@@ -1,42 +1,30 @@
-/*
-	eslint jsx-a11y/no-noninteractive-element-interactions: 0,
-	jsx-a11y/click-events-have-key-events: 0,
-	jsx-a11y/no-static-element-interactions: 0,
-*/
 import React from 'react';
 import classNames from 'classnames';
 import { isUndefined } from 'util';
-
 import styles from './Dropdown.scss';
 import { chevronUp, chevronDown } from '../../assets/icons';
 
-class Dropdown extends React.PureComponent {
-	static propTypes = {
-		data: PropTypes.arrayOf(PropTypes.shape({
-			value: PropTypes.string.isRequired,
-			current: PropTypes.bool
-		})).isRequired,
-		onChange: PropTypes.func.isRequired,
-		scrolling: PropTypes.bool.isRequired,
-		modal: PropTypes.bool,
-		header: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-		customOptionsList: PropTypes.node,
-		dropdownSelectedClass: PropTypes.string,
-		dropdownParentClass: PropTypes.string,
-		dropDownMenuTitleClass: PropTypes.string,
-		customSelected: PropTypes.node,
-	};
+type DropdownProps = {
+	data: {
+		value: string,
+		current?: boolean
+	}[],
+	onChange: (...args: any[]) => any,
+	scrolling: boolean,
+	modal?: boolean,
+	header?: string | React.ReactNode,
+	customOptionsList?: React.ReactNode,
+	dropdownSelectedClass?: string,
+	dropdownParentClass?: string,
+	dropDownMenuTitleClass?: string,
+	customSelected?: React.ReactNode
+};
 
-	static defaultProps = {
-		modal: false,
-		header: null,
-		customOptionsList: null,
-		dropdownSelectedClass: '',
-		dropdownParentClass: '',
-		dropDownMenuTitleClass: '',
-		customSelected: null
-	}
+type DropdownState = {
+	dropdown: boolean
+};
 
+class Dropdown extends React.PureComponent<DropdownProps, DropdownState> {
 	constructor(props) {
 		super(props);
 		this.node = React.createRef();
@@ -48,11 +36,11 @@ class Dropdown extends React.PureComponent {
 
 	componentDidMount = () => {
 		document.addEventListener('mousedown', this.handleClick, false);
-	};
+	}
 
 	componentWillUnmount = () => {
 		document.removeEventListener('mousedown', this.handleClick, false);
-	};
+	}
 
 	getSelectedValue = locations => {
 		const { customOptionsList, customSelected } = this.props;
@@ -62,7 +50,6 @@ class Dropdown extends React.PureComponent {
 		} else {
 			selectedItem = locations.find(loc => loc.current);
 		}
-
 		return selectedItem;
 	}
 
@@ -73,49 +60,44 @@ class Dropdown extends React.PureComponent {
 		this.setState({
 			dropdown: false
 		});
-	};
+	}
 
 	showDropdown = () => {
 		this.setState({
 			dropdown: !this.state.dropdown
 		});
-	};
+	}
 
 	hideDropdown = e => {
 		e.preventDefault();
 		this.setState({
 			dropdown: false
 		});
-	};
+	}
 
 	handleChange = e => {
 		const value = e.target.getAttribute('value');
 		this.props.onChange(value);
-	};
+	}
 
 	renderItems = options =>
-		options.map(
-			option => {
-				const { modal, dropdownOptionsClass } = this.props;
-				const modalDropdownClass = classNames('dropdown-option', { 'modal-option': modal });
-				const defaultModalClass = option.current
-					? 'dropdown-option selected'
-					: 'dropdown-option';
-
-				return (
-					<li
-						styleName={defaultModalClass}
-						className={`${defaultModalClass}${dropdownOptionsClass}`}
-						key={option.value}
-						onClick={this.handleChange}
-						onKeyDown={this.handleChange}
-						value={option.value}
-					>
-						{option.value}
-					</li>
-				);
-			}
-		);
+		options.map(option => {
+			const { modal, dropdownOptionsClass } = this.props;
+			const modalDropdownClass = classNames('dropdown-option', { 'modal-option': modal });
+			const defaultModalClass = option.current ? 'dropdown-option selected' : 'dropdown-option';
+			return (
+				<li
+					styleName={defaultModalClass}
+					className={`${defaultModalClass}${dropdownOptionsClass}`}
+					key={option.value}
+					onClick={this.handleChange}
+					onKeyDown={this.handleChange}
+					value={option.value}
+				>
+					{option.value}
+				</li>
+			);
+		})
 
 	render() {
 		const {
@@ -128,15 +110,19 @@ class Dropdown extends React.PureComponent {
 			dropDownMenuTitleClass,
 			customSelected
 		} = this.props;
+
 		const selectedValue = this.getSelectedValue(data);
-		if (isUndefined(selectedValue)) { return null; }
+
+		if (isUndefined(selectedValue)) {
+			return null;
+		}
+
 		const dropdownClass = classNames('dropdown-menu', { visible: this.state.dropdown, modal });
+
 		const modalDropdownClass = modal ? 'modal-dropdown-list' : '';
+
 		return (
-			<div
-				styleName={`dropdown ${this.props.scrolling ? 'scroll' : ''}`}
-				ref={this.node}
-			>
+			<div styleName={`dropdown ${this.props.scrolling ? 'scroll' : ''}`} ref={this.node}>
 				<p
 					styleName="dropdown-selected"
 					className={`dropdown-selected ${dropdownSelectedClass}`}
@@ -149,22 +135,18 @@ class Dropdown extends React.PureComponent {
 						alt="chevron-down"
 					/>
 				</p>
-				<div
-					styleName={dropdownClass}
-					onClick={this.hideDropdown}
-					className={`${dropdownClass} ${dropdownParentClass}`}
-				>
+				<div styleName={dropdownClass} onClick={this.hideDropdown} className={`${dropdownClass} ${dropdownParentClass}`}>
 					<h3 styleName="dropdown-menu-title" className={`dropdown-menu-title ${dropDownMenuTitleClass}`}>
-						<span >{header}</span>
+						<span>{header}</span>
 						<img src={chevronUp} alt="chevron-up" />
 					</h3>
-					{customOptionsList ?
-						<div key={customSelected} styleName={!this.state.dropdown ? 'hide' : modalDropdownClass}>{customOptionsList}</div>
-						:
-						<ul styleName={!this.state.dropdown ? 'hide' : modalDropdownClass}>
-							{this.renderItems(data)}
-						</ul>
-					}
+					{customOptionsList ? (
+						<div key={customSelected} styleName={!this.state.dropdown ? 'hide' : modalDropdownClass}>
+							{customOptionsList}
+						</div>
+					) : (
+							<ul styleName={!this.state.dropdown ? 'hide' : modalDropdownClass}>{this.renderItems(data)}</ul>
+						)}
 				</div>
 			</div>
 		);
