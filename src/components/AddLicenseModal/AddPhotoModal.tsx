@@ -121,4 +121,5 @@ class AddPhotoModal extends React.PureComponent<
 		);
 	}
 }
+
 export default CSSModules(AddPhotoModal);
