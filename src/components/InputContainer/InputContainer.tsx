@@ -1,24 +1,28 @@
+import React, { PureComponent } from 'react'
 import classNames from 'classnames';
-
 import styles from './InputContainer.scss';
 
-class InputContainer extends React.PureComponent {
-	static propTypes = {
-		children: PropTypes.node.isRequired,
-		horizontal: PropTypes.bool,
-		vertical: PropTypes.bool,
-		className: PropTypes.string,
-	};
+type InputContainerProps = {
+	horizontal?: boolean,
+	vertical?: boolean,
+	className?: string
+};
 
-	static defaultProps = {
-		horizontal: false,
-		vertical: false,
-		className: '',
-	};
+type InputContainerState = {
+	vertical: boolean,
+	horizontal: boolean,
+	vertical: any,
+	horizontal: any,
+	vertical: boolean
+};
 
+class InputContainer extends PureComponent<
+	InputContainerProps,
+	InputContainerState
+	> {
 	state = {
-		vertical: false,
-	}
+		vertical: false
+	};
 
 	componentWillMount() {
 		const { horizontal, vertical } = this.props;
@@ -39,12 +43,10 @@ class InputContainer extends React.PureComponent {
 		const { children, className } = this.props;
 		const { vertical, horizontal } = this.state;
 		const defaultClassNames = 'input-container';
-		const combinedClassNames = classNames(defaultClassNames,
-			{
-				'container-horizontal': horizontal,
-				'container-vertical': vertical
-			});
-
+		const combinedClassNames = classNames(defaultClassNames, {
+			'container-horizontal': horizontal,
+			'container-vertical': vertical
+		});
 		return (
 			<div styleName={combinedClassNames} className={className}>
 				{children}

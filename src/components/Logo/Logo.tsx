@@ -1,10 +1,6 @@
-import styles from './Logo.scss';
-import image from '../../assets/logos/mobiliti_white.png';
-
-class Logo extends React.PureComponent {
-	static defaultProps = {
-		image
-	}
+import styles from "./Logo.scss";
+import image from "../../assets/logos/mobiliti_white.png";
+class Logo extends React.PureComponent<{}, {}> {
 	render() {
 		return (
 			<div styleName="logo">

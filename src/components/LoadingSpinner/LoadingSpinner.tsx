@@ -1,31 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
+import React, { Fragment } from 'react';
 import styles from './LoadingSpinner.scss';
 
-const LoadingSpinner = ({ show, black, blue, parentClass }) => (
-	<React.Fragment >
-		{ typeof show !== 'undefined' && show && (
-			<div className={`loading-spinner ${parentClass}`} styleName={`loading-ring ${black ? 'black' : ''} ${blue ? 'blue' : ''}`}>
-				<div />
-				<div />
-				<div />
-			</div>
-		)}
-	</React.Fragment>
+type LoadingSpinnerProps = {
+	show: boolean,
+	black?: boolean,
+	blue?: boolean,
+	parentClass?: string
+};
+
+const LoadingSpinner: React.SFC<LoadingSpinnerProps> = ({ show, black, blue, parentClass }) => (
+	<Fragment>
+		{typeof show !== 'undefined' &&
+			show && (
+				<div
+					className={`loading-spinner ${parentClass}`}
+					styleName={`loading-ring ${black ? 'black' : ''} ${blue ? 'blue' : ''}`}
+				>
+					<div />
+					<div />
+					<div />
+				</div>
+			)}
+	</Fragment>
 );
 
-LoadingSpinner.propTypes = {
-	show: PropTypes.bool.isRequired,
-	black: PropTypes.bool,
-	blue: PropTypes.bool,
-	parentClass: PropTypes.string,
-};
-
-LoadingSpinner.defaultProps = {
-	black: false,
-	blue: false,
-	parentClass: '',
-};
+// LoadingSpinner.defaultProps = {
+// 	black: false,
+// 	blue: false,
+// 	parentClass: ''
+// };
 
 export default CSSModules(LoadingSpinner, styles, { allowMultiple: true });

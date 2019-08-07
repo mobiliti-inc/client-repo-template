@@ -1,5 +1,5 @@
-import styles from './EditIcon.scss';
-import editImage from '../../assets/images/edit_image.png';
+import styles from "./EditIcon.scss";
+import editImage from "../../assets/images/edit_image.png";
 
 const EditIcon = () => (
 	<div styleName="edit-icon">

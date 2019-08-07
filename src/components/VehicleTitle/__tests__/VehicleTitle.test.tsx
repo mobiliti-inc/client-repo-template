@@ -1,4 +1,4 @@
-import VehicleTitle from './VehicleTitle';
+import VehicleTitle from '../VehicleTitle';
 
 
 describe('VehicleTitle', () => {

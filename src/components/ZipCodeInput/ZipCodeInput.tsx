@@ -1,25 +1,23 @@
 import React from 'react';
 import TextInput, { INPUT_TYPES } from '../TextInput/TextInput';
-
 import styles from './ZipCodeInput.scss';
 
-class ZipCodeInput extends React.PureComponent {
-	static propTypes = {
-		value: PropTypes.string.isRequired,
-		valid: PropTypes.bool.isRequired,
-		onChange: PropTypes.func.isRequired,
-	}
+type ZipCodeInputProps = {
+	value: string,
+	valid: boolean,
+	onChange: (...args: any[]) => any
+};
 
+class ZipCodeInput extends React.PureComponent<ZipCodeInputProps, {}> {
 	validate = ({ target: { value } }) => {
 		let valid = true;
 		if (!/^\d{5}(?:[-\s]\d{4})?$/.test(value)) valid = false;
 		const zipCode = {
 			value,
-			valid,
+			valid
 		};
 		this.props.onChange(zipCode);
-	}
-
+	};
 	render() {
 		return (
 			<TextInput
@@ -30,7 +28,8 @@ class ZipCodeInput extends React.PureComponent {
 				isValid={this.props.valid}
 				onChange={this.validate}
 				dark
-			/>);
+			/>
+		);
 	}
 }
 

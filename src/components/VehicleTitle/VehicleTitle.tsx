@@ -1,33 +1,23 @@
 import React from 'react';
-
 import styles from './VehicleTitle.scss';
 import Badge from '../Badge/Badge';
 
-class VehicleTitle extends React.PureComponent {
-	static propTypes = {
-		yearOfMake: PropTypes.string,
-		vehicleModel: PropTypes.string,
-		vehicleMake: PropTypes.string,
-		vehicleStatus: PropTypes.number.isRequired,
-	}
+type VehicleTitleProps = {
+	yearOfMake?: string,
+	vehicleModel?: string,
+	vehicleMake?: string,
+	vehicleStatus: number
+};
 
-	static defaultProps = {
-		yearOfMake: '',
-		vehicleModel: '',
-		vehicleMake: '',
-	}
-
+class VehicleTitle extends React.PureComponent<VehicleTitleProps, {}> {
 	render() {
-		const {
-			yearOfMake,
-			vehicleMake,
-			vehicleModel,
-			vehicleStatus,
-		} = this.props;
+		const { yearOfMake, vehicleMake, vehicleModel, vehicleStatus } = this.props;
 		return (
 			<div styleName="title-content">
 				<small>{yearOfMake}</small>
-				<h1>{vehicleMake} {vehicleModel}</h1>
+				<h1>
+					{vehicleMake} {vehicleModel}
+				</h1>
 				<Badge status={vehicleStatus} />
 			</div>
 		);

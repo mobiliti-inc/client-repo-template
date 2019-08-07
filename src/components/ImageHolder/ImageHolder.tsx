@@ -1,14 +1,27 @@
-import React, { Fragment, PureComponent } from 'react';
-import classNames from 'classnames';
+import React, { Fragment, PureComponent } from "react";
+import classNames from "classnames";
+import styles from "./ImageHolder.scss";
+import { iconEdit } from "../../assets/icons/";
 
-import styles from './ImageHolder.scss';
-import { iconEdit } from '../../assets/icons/';
+type ImageHolderProps = {
+	onUploadImageClick: (...args: any[]) => any,
+	onUploadImageInputChange: (...args: any[]) => any,
+	imagefile?: string,
+	placeholder?: React.ReactNode,
+	squared?: boolean,
+	id?: string,
+	imagePlaceholder?: string
+};
 
-class ImageHolder extends PureComponent {
+type ImageHolderState = {
+	loaded: boolean
+};
+
+class ImageHolder extends PureComponent<ImageHolderProps, ImageHolderState> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loaded: false,
+			loaded: false
 		};
 		this.image = React.createRef();
 	}
@@ -24,26 +37,20 @@ class ImageHolder extends PureComponent {
 		if (!this.state.loaded) {
 			this.setState({ loaded: true });
 		}
-	}
+	};
 
 	renderImageInput = () => (
 		<input
 			styleName="input-upload-image"
 			type="file"
-			id={this.props.id || 'upload-image'}
+			id={this.props.id || "upload-image"}
 			accept="image/jpeg"
 			onChange={this.props.onUploadImageInputChange}
 		/>
 	);
 
 	render() {
-		const {
-			onUploadImageClick,
-			imagefile,
-			squared,
-			placeholder,
-			imagePlaceholder,
-		} = this.props;
+		const { onUploadImageClick, imagefile, squared, placeholder, imagePlaceholder } = this.props;
 		if (!imagefile && placeholder) {
 			return (
 				<Fragment>
@@ -53,14 +60,10 @@ class ImageHolder extends PureComponent {
 			);
 		}
 		return (
-			<div styleName={classNames('image-container', { 'image-container--squared': squared })}>
+			<div styleName={classNames("image-container", { "image-container--squared": squared })}>
 				{imagefile && <img src={imagefile} ref={this.image} alt="Holder" onLoad={this.handleImageLoaded} styleName="image" />}
 				{!this.state.loaded && imagePlaceholder && <img src={imagePlaceholder} alt="Placeholder" styleName="image-placeholder" />}
-				<span
-					role="presentation"
-					styleName="edit-icon"
-					onClick={onUploadImageClick}
-				>
+				<span role="presentation" styleName="edit-icon" onClick={onUploadImageClick}>
 					<img src={iconEdit} alt="edit icon" />
 					{this.renderImageInput(...this.props)}
 				</span>
@@ -69,22 +72,12 @@ class ImageHolder extends PureComponent {
 	}
 }
 
-ImageHolder.propTypes = {
-	onUploadImageClick: PropTypes.func.isRequired,
-	onUploadImageInputChange: PropTypes.func.isRequired,
-	imagefile: PropTypes.string,
-	placeholder: PropTypes.node,
-	squared: PropTypes.bool,
-	id: PropTypes.string,
-	imagePlaceholder: PropTypes.string,
-};
-
-ImageHolder.defaultProps = {
-	squared: false,
-	placeholder: null,
-	imagefile: null,
-	id: '',
-	imagePlaceholder: '',
-};
+// ImageHolder.defaultProps = {
+// 	squared: false,
+// 	placeholder: null,
+// 	imagefile: null,
+// 	id: "",
+// 	imagePlaceholder: ""
+// };
 
 export default CSSModules(ImageHolder, styles, { allowMultiple: true });

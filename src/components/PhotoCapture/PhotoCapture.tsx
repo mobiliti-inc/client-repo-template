@@ -1,48 +1,53 @@
 import React, { Component, Fragment } from 'react';
-
 import DialogModal from '../../components/Modal/DialogModal/DialogModal';
 import PhotoRecBox from '../../components/PhotoRecBox/PhotoRecBox';
 import TakePhotoModal from '../../components/AddLicenseModal/TakePhotoModal';
-
 import { iconCamera } from '../../assets/icons';
 
-class PhotoCapture extends Component {
+type PhotoCaptureProps = {
+	modalIsVisible: boolean,
+	onCameraAccessFail: (...args: any[]) => any,
+	handleCapturedPhoto: (...args: any[]) => any,
+	handleModalVisibility: (...args: any[]) => any,
+	holderId?: string
+};
+
+type PhotoCaptureState = {
+	isPhotoModalVisible: boolean,
+	isTakePhotoModalVisible: boolean
+};
+
+class PhotoCapture extends Component<PhotoCaptureProps, PhotoCaptureState> {
 	state = {
 		isPhotoModalVisible: false,
-		isTakePhotoModalVisible: false,
-	}
-
-
+		isTakePhotoModalVisible: false
+	};
 	static getDerivedStateFromProps(props, state) {
 		if (props.modalIsVisible !== state.isPhotoModalVisible) {
 			return {
-				isPhotoModalVisible: props.modalIsVisible,
+				isPhotoModalVisible: props.modalIsVisible
 			};
 		}
 		return null;
 	}
-
-	onUsePhoto = (image) => {
+	onUsePhoto = image => {
 		this.handleTakePhotoModalVisibility();
 		this.props.handleCapturedPhoto(image);
-	}
-
+	};
 	handlePhotoDialogModalVisibility = (isPhotoModalVisible = false) => {
 		this.props.handleModalVisibility(isPhotoModalVisible);
 		this.setState({
-			isPhotoModalVisible,
+			isPhotoModalVisible
 		});
-	}
-
+	};
 	handleTakePhotoModalVisibility = (isTakePhotoModalVisible = false) => {
 		this.handlePhotoDialogModalVisibility();
 		this.setState({
-			isTakePhotoModalVisible,
+			isTakePhotoModalVisible
 		});
-	}
-
+	};
 	render() {
-		const { isPhotoModalVisible, isTakePhotoModalVisible, } = this.state;
+		const { isPhotoModalVisible, isTakePhotoModalVisible } = this.state;
 		const elementId = this.props.holderId || 'upload-image';
 		return (
 			<Fragment>
@@ -93,16 +98,8 @@ class PhotoCapture extends Component {
 	}
 }
 
-PhotoCapture.propTypes = {
-	modalIsVisible: PropTypes.bool.isRequired,
-	onCameraAccessFail: PropTypes.func.isRequired,
-	handleCapturedPhoto: PropTypes.func.isRequired,
-	handleModalVisibility: PropTypes.func.isRequired,
-	holderId: PropTypes.string,
-};
-
-PhotoCapture.defaultProps = {
-	holderId: '',
-};
+// PhotoCapture.defaultProps = {
+// 	holderId: ''
+// };
 
 export default PhotoCapture;

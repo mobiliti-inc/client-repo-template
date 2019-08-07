@@ -1,34 +1,43 @@
 import React from 'react';
-
 import TextInput, { INPUT_TYPES } from '../TextInput/TextInput';
 import styles from './EmailInput.scss';
 
-class EmailInput extends React.Component {
+type EmailInputProps = {
+	onChange: (...args: any[]) => any,
+	shouldShowCheckMark?: boolean
+};
+
+type EmailInputState = {
+	value: string,
+	error: string
+};
+
+class EmailInput extends React.Component<EmailInputProps, EmailInputState> {
 	state = {
 		value: '',
-		error: '',
+		error: ''
 	};
 
 	static getDerivedStateFromProps(props, state) {
 		if (props.value && state.value !== props.value) {
 			return {
-				value: props.value,
+				value: props.value
 			};
 		}
 		return null;
 	}
 
-	inputChange = (event) => {
+	inputChange = event => {
 		const { value } = event.target;
 		const error = this.validateInput(value);
 		this.setState({
 			value,
-			error,
+			error
 		});
 		this.props.onChange({ email: value, emailError: error });
-	}
+	};
 
-	validateInput = (value) => {
+	validateInput = value => {
 		let error;
 		if (!value.length) {
 			error = 'Please enter your email';
@@ -38,7 +47,7 @@ class EmailInput extends React.Component {
 			error = '';
 		}
 		return error;
-	}
+	};
 
 	render() {
 		const { value, error } = this.state;
@@ -53,21 +62,15 @@ class EmailInput extends React.Component {
 					value={value}
 					inputDidChange={shouldShowCheckMark}
 				/>
-				{ error.length > 0 &&
-				<label styleName="input-validation-message-label">
-					{error}
-				</label>
-				}
-			</div>);
+				{error.length > 0 && (
+					<label styleName="input-validation-message-label">{error}</label>
+				)}
+			</div>
+		);
 	}
 }
 
-EmailInput.defaultProps = {
-	shouldShowCheckMark: false
-};
-
-EmailInput.propTypes = {
-	onChange: PropTypes.func.isRequired,
-	shouldShowCheckMark: PropTypes.bool
-};
+// EmailInput.defaultProps = {
+// 	shouldShowCheckMark: false
+// };
 export default CSSModules(EmailInput, styles, { allowMultiple: true });

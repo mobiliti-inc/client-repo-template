@@ -1,6 +1,5 @@
 import React from 'react';
 import zxcvbn from 'zxcvbn';
-
 import TextInput, { INPUT_TYPES } from '../TextInput/TextInput';
 import styles from './PasswordInput.scss';
 
@@ -15,15 +14,31 @@ export const ERROR_MESSAGES = {
 	PASSWORD_LESS_THAN_8: 'Please enter at least 8 characters.'
 };
 
-class PasswordInput extends React.Component {
+type PasswordInputProps = {
+	onChange: (...args: any[]) => any,
+	showPasswordStrength?: boolean,
+	id?: string,
+	inputError?: string,
+	placeholder?: string,
+	label?: string,
+	name?: string
+};
+
+type PasswordInputState = {
+	value: string,
+	passwordError: string,
+	passwordStrength: string,
+	isPasswordTextVisible: boolean
+};
+
+class PasswordInput extends React.Component<PasswordInputProps, PasswordInputState> {
 	state = {
 		value: '',
 		passwordError: '',
 		passwordStrength: PASSWORD_STRENGTH_TYPE.WEAK,
-		isPasswordTextVisible: false,
+		isPasswordTextVisible: false
 	};
-
-	inputChange = (event) => {
+	inputChange = event => {
 		const { value } = event.target;
 		// Prevent empty value
 		if (value !== value.trim()) {
@@ -31,26 +46,22 @@ class PasswordInput extends React.Component {
 		}
 		const passwordError = this.validatePassword(value);
 		const passwordStrength = this.calculatePasswordStrength(value);
-
 		this.setState({
 			value,
 			passwordError,
 			passwordStrength
 		});
-
 		this.props.onChange({ password: value, passwordError, passwordStrength });
-	}
-
-	validatePassword = (value) => {
+	};
+	validatePassword = value => {
 		if (!value.length) {
 			return ERROR_MESSAGES.EMPTY_PASSWORD;
 		} else if (value.length < 8) {
 			return ERROR_MESSAGES.PASSWORD_LESS_THAN_8;
 		}
 		return '';
-	}
-
-	calculatePasswordStrength = (value) => {
+	};
+	calculatePasswordStrength = value => {
 		const results = zxcvbn(value);
 		if (results.score <= 1) {
 			return PASSWORD_STRENGTH_TYPE.WEAK;
@@ -58,17 +69,14 @@ class PasswordInput extends React.Component {
 			return PASSWORD_STRENGTH_TYPE.MEDIUM;
 		}
 		return PASSWORD_STRENGTH_TYPE.STRONG;
-	}
-
+	};
 	changePasswordVisibilityStatus = () => {
 		this.setState(currentState => ({
 			...currentState,
 			isPasswordTextVisible: !currentState.isPasswordTextVisible
 		}));
-	}
-
-	renderError = (error) => <label styleName="input-validation-message-label">{error}</label>
-
+	};
+	renderError = error => <label styleName="input-validation-message-label">{error}</label>;
 	render() {
 		const { value, passwordError, isPasswordTextVisible, passwordStrength } = this.state;
 		const { showPasswordStrength, id, inputError, placeholder, label, name } = this.props;
@@ -89,51 +97,39 @@ class PasswordInput extends React.Component {
 				/>
 
 				{shouldShowVisibility &&
-						value &&
+					value && (
 						<button
 							onClick={changePasswordVisibilityStatus}
 							styleName="password-visibility-indicator"
 						>
-							{INPUT_TYPES.PASSWORD === type ?
-								'Show' :
-								'Hide'}
+							{INPUT_TYPES.PASSWORD === type ? 'Show' : 'Hide'}
 						</button>
-				}
+					)}
 
-				{ passwordError.length > 0 && this.renderError(passwordError)}
+				{passwordError.length > 0 && this.renderError(passwordError)}
 
-				{ inputError && inputError.length > 0 && this.renderError(inputError)}
+				{inputError && inputError.length > 0 && this.renderError(inputError)}
 
-				{
-					inputError.length === 0 &&
+				{inputError.length === 0 &&
 					passwordError.length === 0 &&
 					value.length > 0 &&
-					showPasswordStrength &&
-					<label styleName="password-strength-label">
-						Strength:<span styleName={`password-${passwordStrength}`}>{passwordStrength}</span>
-					</label>
-				}
-			</div>);
+					showPasswordStrength && (
+						<label styleName="password-strength-label">
+							Strength:<span styleName={`password-${passwordStrength}`}>{passwordStrength}</span>
+						</label>
+					)}
+			</div>
+		);
 	}
 }
 
-PasswordInput.propTypes = {
-	onChange: PropTypes.func.isRequired,
-	showPasswordStrength: PropTypes.bool,
-	id: PropTypes.string,
-	inputError: PropTypes.string,
-	placeholder: PropTypes.string,
-	label: PropTypes.string,
-	name: PropTypes.string,
-};
-
-PasswordInput.defaultProps = {
-	showPasswordStrength: true,
-	id: 'password',
-	inputError: '',
-	label: null,
-	placeholder: null,
-	name: null,
-};
+// PasswordInput.defaultProps = {
+// 	showPasswordStrength: true,
+// 	id: 'password',
+// 	inputError: '',
+// 	label: null,
+// 	placeholder: null,
+// 	name: null
+// };
 
 export default CSSModules(PasswordInput, styles, { allowMultiple: true });

@@ -1,10 +1,8 @@
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-
 import { scroll, logOut, refreshAccessToken, uploadUserProfilePhoto } from '../../actions';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-
 import styles from './ProfileFrame.scss';
 import { LocationModel } from '../../models';
 import verifyToken from '../../utils/verifyToken';
@@ -13,49 +11,38 @@ import ProfileWrapper from '../../pages/Profile/common/ProfileWrapper/ProfileWra
 import handleAuthRequiredApiCall from '../../utils/handleAuthRequiredApiCall';
 
 const NO_FOOTER_ROUTES = ['/'];
-
 let lastScrollY = 0;
 
-class ProfileFrame extends React.PureComponent {
-	static propTypes = {
-		children: PropTypes.node.isRequired,
-		location: LocationModel.isRequired,
-		scroll: PropTypes.func.isRequired,
-		scrolling: PropTypes.bool.isRequired,
-		isLoggedIn: PropTypes.bool.isRequired,
-		logOut: PropTypes.func.isRequired,
-		requiresAuth: PropTypes.bool,
-		accessToken: PropTypes.string,
-		refreshToken: PropTypes.string,
-		refreshAccessToken: PropTypes.func.isRequired,
-		history: PropTypes.shape({
-			push: PropTypes.func.isRequired,
-		}).isRequired,
-		subscriber: PropTypes.shape({
-			profile_photo: PropTypes.string,
-		}).isRequired,
-		uploadUserProfilePhoto: PropTypes.func.isRequired,
-	};
+type ProfileFrameProps = {
+	location: any,
+	scroll: (...args: any[]) => any,
+	scrolling: boolean,
+	isLoggedIn: boolean,
+	logOut: (...args: any[]) => any,
+	requiresAuth?: boolean,
+	accessToken?: string,
+	refreshToken?: string,
+	refreshAccessToken: (...args: any[]) => any,
+	history: {
+		push: (...args: any[]) => any
+	},
+	subscriber: {
+		profile_photo?: string
+	},
+	uploadUserProfilePhoto: (...args: any[]) => any
+};
 
-	static defaultProps = {
-		requiresAuth: false,
-		accessToken: '',
-		refreshToken: '',
-	}
-
+class ProfileFrame extends React.PureComponent<ProfileFrameProps, {}> {
 	componentWillMount = () => {
 		this.handleVerifyToken();
-	}
-
+	};
 	componentDidMount() {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 		window.addEventListener('scroll', this.handleScroll);
 	}
-
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.handleScroll);
 	}
-
 	handleVerifyToken = () => {
 		const { accessToken, refreshAccessToken, refreshToken, requiresAuth } = this.props;
 		if ((!accessToken || !refreshAccessToken) && requiresAuth) {
@@ -64,23 +51,20 @@ class ProfileFrame extends React.PureComponent {
 		if (!verifyToken(accessToken) && requiresAuth) {
 			refreshAccessToken(refreshToken, this.props.history);
 		}
-	}
-
+	};
 	handleScroll = () => {
 		lastScrollY = window.pageYOffset;
 		const scrolling = lastScrollY > 0;
 		this.props.scroll(scrolling);
 	};
-
-	toggleShowVideo = () => this.setState({ showVideo: !this.state.showVideo })
-
-	handleUploadUserProfilePhoto = (imageData) => {
+	toggleShowVideo = () => this.setState({ showVideo: !this.state.showVideo });
+	handleUploadUserProfilePhoto = imageData => {
 		const {
 			accessToken,
 			refreshToken,
 			refreshAccessToken,
 			uploadUserProfilePhoto,
-			history,
+			history
 		} = this.props;
 		handleAuthRequiredApiCall(
 			accessToken,
@@ -90,7 +74,7 @@ class ProfileFrame extends React.PureComponent {
 			refreshAccessToken,
 			imageData
 		);
-	}
+	};
 	render() {
 		const {
 			location: { pathname },
@@ -100,15 +84,15 @@ class ProfileFrame extends React.PureComponent {
 			accessToken,
 			requiresAuth,
 			scrolling,
-			subscriber,
+			subscriber
 		} = this.props;
-
 		const noFooter = NO_FOOTER_ROUTES.some(el => pathname === el);
 		if (!verifyToken(accessToken) && requiresAuth) {
 			return (
 				<div styleName="loader-container">
 					<LoadingSpinner show blue parentClass={styles.loader} />
-				</div>);
+				</div>
+			);
 		}
 		return (
 			<div styleName="profile-frame">
@@ -128,13 +112,7 @@ class ProfileFrame extends React.PureComponent {
 						</ProfileWrapper>
 					</main>
 				</div>
-				{
-					!noFooter &&
-					<Footer
-						logOut={logOut}
-						isLoggedIn={isLoggedIn}
-					/>
-				}
+				{!noFooter && <Footer logOut={logOut} isLoggedIn={isLoggedIn} />}
 			</div>
 		);
 	}
@@ -145,12 +123,11 @@ const mapStateToProps = state => ({
 	isLoggedIn: state.auth.isLoggedIn,
 	accessToken: state.auth.userData.accessToken,
 	refreshToken: state.auth.userData.refreshToken,
-	subscriber: state.subscriber.data.user,
+	subscriber: state.subscriber.data.user
 });
 
 export default withRouter(
-	connect(
-		mapStateToProps,
-		{ scroll, logOut, refreshAccessToken, uploadUserProfilePhoto, }
-	)(CSSModules(ProfileFrame, styles, { allowMultiple: true }))
+	connect(mapStateToProps, { scroll, logOut, refreshAccessToken, uploadUserProfilePhoto })(
+		CSSModules(ProfileFrame, styles, { allowMultiple: true })
+	)
 );

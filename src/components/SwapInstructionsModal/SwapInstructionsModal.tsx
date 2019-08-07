@@ -1,17 +1,17 @@
+import Modal from "../Modal/Modal";
+import Button from "../Button/Button";
+import ItemList from "../ItemList/ItemList";
+import styles from "./SwapInstructionsModal.scss";
 
-import Modal from '../Modal/Modal';
-import Button from '../Button/Button';
-import ItemList from '../ItemList/ItemList';
+type SwapInstructionsModalProps = {
+	modalVisible: boolean,
+	scrolling: boolean,
+	onCancel: (...args: any[]) => any,
+	onContinue: (...args: any[]) => any,
+	freezeOverlay: boolean
+};
 
-import styles from './SwapInstructionsModal.scss';
-
-const SwapInstructionsModal = ({
-	modalVisible,
-	scrolling,
-	onContinue,
-	onCancel,
-	freezeOverlay,
-}) => (
+const SwapInstructionsModal: React.SFC<SwapInstructionsModalProps> = ({ modalVisible, scrolling, onContinue, onCancel, freezeOverlay }) => (
 	<Modal
 		plain
 		plainHeader
@@ -29,18 +29,14 @@ const SwapInstructionsModal = ({
 			<ItemList header="Reserve your new vehicle" subHeader="Reserve your new vehicle and set your pick up date. Enjoy the adventure!" number="3" />
 		</div>
 		<div styleName="button-container">
-			<Button onClick={onContinue} ripple>Continue</Button>
-			<Button onClick={onCancel} inverted>Cancel</Button>
+			<Button onClick={onContinue} ripple>
+				Continue
+			</Button>
+			<Button onClick={onCancel} inverted>
+				Cancel
+			</Button>
 		</div>
 	</Modal>
 );
-
-SwapInstructionsModal.propTypes = {
-	modalVisible: PropTypes.bool.isRequired,
-	scrolling: PropTypes.bool.isRequired,
-	onCancel: PropTypes.func.isRequired,
-	onContinue: PropTypes.func.isRequired,
-	freezeOverlay: PropTypes.bool.isRequired,
-};
 
 export default CSSModules(SwapInstructionsModal, styles, { allowMultiple: true });

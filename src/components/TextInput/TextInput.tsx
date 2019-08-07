@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-
 import styles from './TextInput.scss';
 
 export const INPUT_TYPES = {
@@ -11,43 +10,29 @@ export const INPUT_TYPES = {
 	FILE: 'file',
 	DATE: 'date',
 	PHONE: 'tel',
-	URL: 'url',
+	URL: 'url'
 };
 
-class TextInput extends React.PureComponent {
-	static propTypes = {
-		type: PropTypes.oneOf(Object.values(INPUT_TYPES)).isRequired,
-		onChange: PropTypes.func.isRequired,
-		value: PropTypes.string.isRequired,
-		id: PropTypes.string.isRequired,
-		placeholder: PropTypes.string,
-		disabled: PropTypes.bool,
-		isValid: PropTypes.bool.isRequired,
-		inputDidChange: PropTypes.bool,
-		onBlur: PropTypes.func,
-		label: PropTypes.string,
-		name: PropTypes.string,
-		dark: PropTypes.bool,
-		className: PropTypes.string,
-		errorMessage: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-		shouldShowVisibility: PropTypes.bool,
-		changePasswordVisibilityStatus: PropTypes.func
-	};
+type TextInputProps = {
+	type: any,
+	onChange: (...args: any[]) => any,
+	value: string,
+	id: string,
+	placeholder?: string,
+	disabled?: boolean,
+	isValid: boolean,
+	inputDidChange?: boolean,
+	onBlur?: (...args: any[]) => any,
+	label?: string,
+	name?: string,
+	dark?: boolean,
+	className?: string,
+	errorMessage?: React.ReactNode | string,
+	shouldShowVisibility?: boolean,
+	changePasswordVisibilityStatus?: (...args: any[]) => any
+};
 
-	static defaultProps = {
-		disabled: false,
-		placeholder: '',
-		label: '',
-		name: '',
-		dark: false,
-		className: '',
-		inputDidChange: false,
-		onBlur: null,
-		errorMessage: '',
-		shouldShowVisibility: false,
-		changePasswordVisibilityStatus: () => { }
-	};
-
+class TextInput extends React.PureComponent<TextInputProps, {}> {
 	render() {
 		const {
 			placeholder,
@@ -67,12 +52,10 @@ class TextInput extends React.PureComponent {
 			shouldShowVisibility,
 			changePasswordVisibilityStatus
 		} = this.props;
-
 		const baseStyles = classNames(`input-${type}`, {
-			error: !this.props.isValid,
+			error: !this.props.isValid
 		});
 		const styleName = classNames(baseStyles, { dark }, className);
-
 		return (
 			<React.Fragment>
 				<div styleName="input-group">
@@ -94,10 +77,7 @@ class TextInput extends React.PureComponent {
 						</label>
 					)}
 					{isValid && inputDidChange && value && value.length > 0 && <label styleName="checkmark-label" />}
-					{!isValid &&
-						errorMessage && (
-						<span styleName="error-message">{errorMessage}</span>
-					)}
+					{!isValid && errorMessage && <span styleName="error-message">{errorMessage}</span>}
 				</div>
 			</React.Fragment>
 		);

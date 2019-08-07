@@ -1,25 +1,34 @@
 import React from 'react';
-
 import TextInput, { INPUT_TYPES } from '../TextInput/TextInput';
 import styles from './NameInput.scss';
 
-class NameInput extends React.Component {
+type NameInputProps = {
+	onChange: (...args: any[]) => any,
+	customType?: string
+};
+
+type NameInputState = {
+	value: string,
+	error: string
+};
+
+class NameInput extends React.Component<NameInputProps, NameInputState> {
 	state = {
 		value: '',
-		error: '',
+		error: ''
 	};
 
-	inputChange = (event) => {
+	inputChange = event => {
 		const { value } = event.target;
 		const error = this.validateInput(value);
 		this.setState({
 			value,
-			error,
+			error
 		});
 		this.props.onChange({ name: value, nameError: error });
-	}
+	};
 
-	validateInput = (value) => {
+	validateInput = value => {
 		const { customType } = this.props;
 		let error;
 		if (!value.length) {
@@ -32,7 +41,7 @@ class NameInput extends React.Component {
 			error = '';
 		}
 		return error;
-	}
+	};
 
 	render() {
 		const { value, error } = this.state;
@@ -45,22 +54,16 @@ class NameInput extends React.Component {
 					onChange={this.inputChange}
 					value={value}
 				/>
-				{ error.length > 0 &&
-				<label styleName="input-validation-message-label">
-					{error}
-				</label>
-				}
-			</div>);
+				{error.length > 0 && (
+					<label styleName="input-validation-message-label">{error}</label>
+				)}
+			</div>
+		);
 	}
 }
 
-NameInput.propTypes = {
-	onChange: PropTypes.func.isRequired,
-	customType: PropTypes.string,
-};
-
-NameInput.defaultProps = {
-	customType: 'name',
-};
+// NameInput.defaultProps = {
+// 	customType: 'name'
+// };
 
 export default CSSModules(NameInput, styles, { allowMultiple: true });

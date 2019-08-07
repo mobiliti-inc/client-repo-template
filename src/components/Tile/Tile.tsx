@@ -1,25 +1,15 @@
 import React from 'react';
 import classNames from 'classnames';
-
 import styles from './Tile.scss';
 
-class Tile extends React.PureComponent {
-	static propTypes = {
-		children: PropTypes.node.isRequired,
-		className: PropTypes.string,
-	}
+type TileProps = {
+	className?: string
+};
 
-	static defaultProps = {
-		className: ''
-	}
-
+class Tile extends React.PureComponent<TileProps, {}> {
 	render() {
 		const classes = classNames('bare-tile', this.props.className);
-		return (
-			<div styleName={classes}>
-				{ this.props.children }
-			</div>
-		);
+		return <div styleName={classes}>{this.props.children}</div>;
 	}
 }
 

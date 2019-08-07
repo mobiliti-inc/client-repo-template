@@ -1,13 +1,13 @@
-import styles from './ProgressEllipsis.scss';
+import styles from "./ProgressEllipsis.scss";
 
-class ProgressEllipsis extends React.PureComponent {
-	static propTypes = {
-		step: PropTypes.string.isRequired,
-	};
+type ProgressEllipsisProps = {
+	step: string
+};
 
+class ProgressEllipsis extends React.PureComponent<ProgressEllipsisProps, {}> {
 	render() {
 		switch (this.props.step) {
-			case 'name':
+			case "name":
 				return (
 					<div styleName="container">
 						<div styleName="dot--dark" />
@@ -15,7 +15,7 @@ class ProgressEllipsis extends React.PureComponent {
 						<div styleName="dot" />
 					</div>
 				);
-			case 'email':
+			case "email":
 				return (
 					<div styleName="container">
 						<div styleName="dot" />
@@ -23,7 +23,7 @@ class ProgressEllipsis extends React.PureComponent {
 						<div styleName="dot" />
 					</div>
 				);
-			case 'password':
+			case "password":
 				return (
 					<div styleName="container">
 						<div styleName="dot" />

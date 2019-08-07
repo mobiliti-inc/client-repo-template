@@ -1,42 +1,34 @@
 /* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import classNames from 'classnames';
-
 import styles from './RadioSelector.scss';
 
-class RadioSelector extends React.PureComponent {
-	static propTypes = {
-		onSelectOption: PropTypes.func.isRequired,
-		options: PropTypes.oneOfType([
-			PropTypes.arrayOf(PropTypes.shape({
-				key: PropTypes.oneOfType([
-					PropTypes.string,
-					PropTypes.number
-				]),
-				value: PropTypes.oneOfType([
-					PropTypes.string,
-					PropTypes.number
-				])
-			})),
-			PropTypes.arrayOf(PropTypes.shape({
-				value: PropTypes.oneOfType([
-					PropTypes.string,
-					PropTypes.number
-				])
-			}))
-		]).isRequired,
-		disabled: PropTypes.bool,
-		hideValue: PropTypes.bool,
-		keyIsVisible: PropTypes.bool,
-		selectedItem: PropTypes.string,
-	}
+type RadioSelectorProps = {
+	onSelectOption: (...args: any[]) => any,
+	options:
+	| {
+		key?: string | number,
+		value?: string | number
+	}[]
+	| {
+		value?: string | number
+	}[],
+	disabled?: boolean,
+	hideValue?: boolean,
+	keyIsVisible?: boolean,
+	selectedItem?: string
+};
 
-	static defaultProps = {
-		disabled: false,
-		hideValue: false,
-		keyIsVisible: true,
-		selectedItem: '',
-	}
+type RadioSelectorState = {
+	data: { key: any },
+	options: any,
+	data: { key: any },
+	selectedIndex: null,
+	data: {},
+	options: any
+};
+
+class RadioSelector extends React.PureComponent<RadioSelectorProps, RadioSelectorState> {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -45,29 +37,25 @@ class RadioSelector extends React.PureComponent {
 			options: props.options
 		};
 	}
-
 	componentWillMount() {
 		const { selectedItem } = this.props;
 		this.setState({
 			data: { key: selectedItem }
 		});
 	}
-
 	componentDidUpdate(prevProps) {
 		const { options, selectedItem } = this.props;
 		if (options.length !== prevProps.options.length) {
 			this.setState({
-				options,
+				options
 			});
 		}
-
 		if (prevProps.selectedItem !== selectedItem) {
 			this.setState({
 				data: { key: selectedItem }
 			});
 		}
 	}
-
 	onSelect = (event, data, index) => {
 		const { selectedIndex } = this.state;
 		const { options, disabled } = this.props;
@@ -76,7 +64,9 @@ class RadioSelector extends React.PureComponent {
 		if (optionDisabled || radioDisabled) {
 			event.stopPropagation();
 		} else {
-			if (selectedIndex) { Object.assign(options[selectedIndex], { current: false }); }
+			if (selectedIndex) {
+				Object.assign(options[selectedIndex], { current: false });
+			}
 			Object.assign(options[index], { current: true });
 			Object.assign({}, options);
 			Object.assign(data, { current: true });
@@ -87,53 +77,44 @@ class RadioSelector extends React.PureComponent {
 			});
 			this.props.onSelectOption(data, index);
 		}
-	}
-
-	checkSeleceted = (selectedData) => {
+	};
+	checkSeleceted = selectedData => {
 		const { data } = this.state;
 		if (selectedData.key) {
 			return selectedData.current && data.key === selectedData.key;
 		}
-	}
-
-	renderOptions = (options) => options.map((data, index) => {
-		const { key, value, imageUrl, optionalText } = data;
-		const { disabled, hideValue, keyIsVisible } = this.props;
-		const optionDisabled = data.disabled;
-		const radioDisabled = disabled;
-		const radioButtonClass = classNames('radio-button', { selected: this.checkSeleceted(data) });
-		const dataSelectorClass = classNames('data-selector', { selected: this.checkSeleceted(data), disabled: optionDisabled || radioDisabled });
-		const valueClass = classNames('value', { selected: this.checkSeleceted(data), disabled: optionDisabled || radioDisabled, hide: hideValue });
-		const keyTextClass = classNames('key-text', { disabled: optionDisabled || radioDisabled });
-		return (
-			<div
-				role="presentation"
-				styleName={dataSelectorClass}
-				onClick={(event) => this.onSelect(event, data, index)}
-				key={key}
-			>
-				<div styleName="key">
-					<div styleName={radioButtonClass}>
-						<div styleName={this.checkSeleceted(data) ? 'radio-button-selected' : 'hide'} />
+	};
+	renderOptions = options =>
+		options.map((data, index) => {
+			const { key, value, imageUrl, optionalText } = data;
+			const { disabled, hideValue, keyIsVisible } = this.props;
+			const optionDisabled = data.disabled;
+			const radioDisabled = disabled;
+			const radioButtonClass = classNames('radio-button', { selected: this.checkSeleceted(data) });
+			const dataSelectorClass = classNames('data-selector', { selected: this.checkSeleceted(data), disabled: optionDisabled || radioDisabled });
+			const valueClass = classNames('value', {
+				selected: this.checkSeleceted(data),
+				disabled: optionDisabled || radioDisabled,
+				hide: hideValue
+			});
+			const keyTextClass = classNames('key-text', { disabled: optionDisabled || radioDisabled });
+			return (
+				<div role="presentation" styleName={dataSelectorClass} onClick={event => this.onSelect(event, data, index)} key={key}>
+					<div styleName="key">
+						<div styleName={radioButtonClass}>
+							<div styleName={this.checkSeleceted(data) ? 'radio-button-selected' : 'hide'} />
+						</div>
+						{keyIsVisible && <p styleName={keyTextClass}>{key}</p>}
+						{imageUrl && <img styleName="radio-icon" src={imageUrl} alt="radio icon" />}
+						<div styleName="optional-text">{optionalText}</div>
 					</div>
-					{keyIsVisible && <p styleName={keyTextClass}>{key}</p> }
-					{imageUrl && <img styleName="radio-icon" src={imageUrl} alt="radio icon" />}
-					<div styleName="optional-text">
-						{ optionalText }
-					</div>
+					{value && <p styleName={valueClass}>{value}</p>}
 				</div>
-				{value && <p styleName={valueClass}>{value}</p>}
-			</div>
-		);
-	})
-
+			);
+		});
 	render() {
 		const { options } = this.state;
-		return (
-			<React.Fragment>
-				{this.renderOptions(options)}
-			</React.Fragment>
-		);
+		return <React.Fragment>{this.renderOptions(options)}</React.Fragment>;
 	}
 }
 

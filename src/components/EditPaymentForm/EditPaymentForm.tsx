@@ -1,8 +1,25 @@
-import styles from './EditPaymentForm.scss';
-import TextInput, { INPUT_TYPES } from '../TextInput/TextInput';
-import Button, { BUTTON_TYPES } from '../Button/Button';
+import styles from "./EditPaymentForm.scss";
+import TextInput, { INPUT_TYPES } from "../TextInput/TextInput";
+import Button, { BUTTON_TYPES } from "../Button/Button";
 
-const EditPaymentForm = (props) => {
+type EditPaymentFormProps = {
+	name: string,
+	state: string,
+	city: string,
+	zipCode: string,
+	isFormValid: boolean,
+	handleInputChange: (...args: any[]) => any,
+	updatePaymentMethod: (...args: any[]) => any,
+	deletePaymentMethod: (...args: any[]) => any,
+	imageUrl: string,
+	lastFour: string,
+	street: string,
+	closeEditPaymentMethod: (...args: any[]) => any,
+	isCardUpdating: boolean,
+	error: string
+};
+
+const EditPaymentForm: React.SFC<EditPaymentFormProps> = props => {
 	const {
 		name,
 		state,
@@ -17,13 +34,12 @@ const EditPaymentForm = (props) => {
 		isFormValid,
 		closeEditPaymentMethod,
 		isCardUpdating,
-		error,
+		error
 	} = props;
+
 	return (
 		<div>
-			<div
-				styleName="payment-card-holder"
-			>
+			<div styleName="payment-card-holder">
 				{imageUrl && <img styleName="payment-card-icon" src={imageUrl} alt="payment card icon" />}
 				<p styleName="payment-card-number">(......{lastFour})</p>
 			</div>
@@ -82,17 +98,9 @@ const EditPaymentForm = (props) => {
 					/>
 				</div>
 
-				{ error.length > 0 &&
-				<label styleName="input-validation-message-label">
-					{error}
-				</label>
-				}
+				{error.length > 0 && <label styleName="input-validation-message-label">{error}</label>}
 
-				<div
-					role="presentation"
-					onClick={deletePaymentMethod}
-					styleName="remove-card"
-				>
+				<div role="presentation" onClick={deletePaymentMethod} styleName="remove-card">
 					Remove Card
 				</div>
 
@@ -107,11 +115,7 @@ const EditPaymentForm = (props) => {
 						Save Changes
 					</Button>
 
-					<Button
-						type={BUTTON_TYPES.STANDARD}
-						onClick={closeEditPaymentMethod}
-						bordered
-					>
+					<Button type={BUTTON_TYPES.STANDARD} onClick={closeEditPaymentMethod} bordered>
 						Close
 					</Button>
 				</div>
@@ -120,25 +124,6 @@ const EditPaymentForm = (props) => {
 	);
 };
 
-EditPaymentForm.propTypes = {
-	name: PropTypes.string.isRequired,
-	state: PropTypes.string.isRequired,
-	city: PropTypes.string.isRequired,
-	zipCode: PropTypes.string.isRequired,
-	isFormValid: PropTypes.bool.isRequired,
-	handleInputChange: PropTypes.func.isRequired,
-	updatePaymentMethod: PropTypes.func.isRequired,
-	deletePaymentMethod: PropTypes.func.isRequired,
-	imageUrl: PropTypes.string.isRequired,
-	lastFour: PropTypes.string.isRequired,
-	street: PropTypes.string.isRequired,
-	closeEditPaymentMethod: PropTypes.func.isRequired,
-	isCardUpdating: PropTypes.bool.isRequired,
-	error: PropTypes.string.isRequired,
-};
-
-EditPaymentForm.defaultProps = {
-
-};
+EditPaymentForm.defaultProps = {};
 
 export default CSSModules(EditPaymentForm, styles, { allowMultiple: true });

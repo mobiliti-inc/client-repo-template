@@ -10,7 +10,26 @@ import handleAuthRequiredApiCall from '../../utils/handleAuthRequiredApiCall';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import Button, { BUTTON_TYPES } from '../Button/Button';
 
-class PaymentMethod extends React.PureComponent {
+type PaymentMethodProps = {
+	newPaymentCardId: string,
+	isPaymentCardAdded: boolean,
+	selectedPaymentCardId: string,
+	paymentTitle: string,
+	updateSubscriptionPaymetMethod?: (...args: any[]) => any,
+	allowUpdateSubscriptionPaymetMethod?: boolean,
+	disableUpdateSubscriptionPaymetMethodButton?: boolean,
+	subscriptionPaymentMethodUpdateMessage?: string,
+	shouldShowLoader?: boolean
+};
+
+type PaymentMethodState = {
+	paymentCardData: any,
+	displayPaymentForm: boolean,
+	displayPaymentForm: boolean,
+	paymentCardData: any
+};
+
+class PaymentMethod extends React.PureComponent<PaymentMethodProps, PaymentMethodState> {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,7 +37,6 @@ class PaymentMethod extends React.PureComponent {
 			paymentCardData: this.formatPaymentCardData()
 		};
 	}
-
 	componentWillMount() {
 		const { paymentCards } = this.props;
 		return !paymentCards.length ? this.handleFetchPaymentCards() : null;
@@ -28,46 +46,25 @@ class PaymentMethod extends React.PureComponent {
 		if (newPaymentCardId !== prevProps.newPaymentCardId) {
 			this.handleFetchPaymentCards();
 		}
-
 		if (paymentCards.length !== prevProps.paymentCards.length) {
 			this.setState({
 				paymentCardData: this.formatPaymentCardData(),
-				displayPaymentForm: false,
+				displayPaymentForm: false
 			});
 		}
 	}
 	handleFetchPaymentCards = () => {
-		const {
-			accessToken,
-			refreshToken,
-			history,
-			fetchPaymentCards,
-			refreshAccessToken
-		} = this.props;
-		handleAuthRequiredApiCall(
-			accessToken,
-			refreshToken,
-			history,
-			fetchPaymentCards,
-			refreshAccessToken,
-		);
+		const { accessToken, refreshToken, history, fetchPaymentCards, refreshAccessToken } = this.props;
+		handleAuthRequiredApiCall(accessToken, refreshToken, history, fetchPaymentCards, refreshAccessToken);
 	};
-
-	handleAddPaymentCard = (subscriberStripeId) => {
+	handleAddPaymentCard = subscriberStripeId => {
 		const { accessToken, refreshToken, history, addPaymentCard, refreshAccessToken } = this.props;
-		handleAuthRequiredApiCall(
-			accessToken,
-			refreshToken,
-			history,
-			addPaymentCard,
-			refreshAccessToken,
-			subscriberStripeId
-		);
+		handleAuthRequiredApiCall(accessToken, refreshToken, history, addPaymentCard, refreshAccessToken, subscriberStripeId);
 	};
 	formatPaymentCardData = () => {
 		const { paymentCards } = this.props;
 		let formatedPaymentCards = {};
-		return paymentCards.map((cardData) => {
+		return paymentCards.map(cardData => {
 			const { icon_url, last_four, card_id } = cardData;
 			formatedPaymentCards = {
 				...{
@@ -75,20 +72,17 @@ class PaymentMethod extends React.PureComponent {
 					imageUrl: icon_url,
 					optionalText: <p styleName="card-number">(......{last_four})</p>,
 					current: true
-				},
+				}
 			};
 			return formatedPaymentCards;
 		});
 	};
-	handleSelectPaymentCard = (data, selectedCardIndex) =>
-		this.props.addSelectedPaymentCard(data.key, selectedCardIndex);
-
-	handlePayformVisibility = (visibilityStatus) => {
+	handleSelectPaymentCard = (data, selectedCardIndex) => this.props.addSelectedPaymentCard(data.key, selectedCardIndex);
+	handlePayformVisibility = visibilityStatus => {
 		this.setState({
 			displayPaymentForm: visibilityStatus
 		});
-	}
-
+	};
 	render() {
 		const {
 			isPaymentCardAdded,
@@ -103,7 +97,6 @@ class PaymentMethod extends React.PureComponent {
 		const { displayPaymentForm, paymentCardData } = this.state;
 		const displayPaymentFormClass = displayPaymentForm ? 'display' : 'hide';
 		const displayPaymentListClass = !displayPaymentForm ? 'display' : 'hide';
-
 		if (!this.props.isPaymentCardFetched && !this.state.paymentCardData.length) {
 			return (
 				<Tile>
@@ -111,7 +104,6 @@ class PaymentMethod extends React.PureComponent {
 				</Tile>
 			);
 		}
-
 		return (
 			<Tile>
 				<div styleName="payment-card-container">
@@ -127,27 +119,22 @@ class PaymentMethod extends React.PureComponent {
 						<p styleName="add-payment-text">Add Payment Method</p>
 					</div>
 					<div styleName={`payment-list payment-list-${displayPaymentListClass}`}>
-						<RadioSelector
-							onSelectOption={this.handleSelectPaymentCard}
-							keyIsVisible={false}
-							options={paymentCardData}
-							selectedItem={selectedPaymentCardId}
-						/>
+						<RadioSelector onSelectOption={this.handleSelectPaymentCard} keyIsVisible={false} options={paymentCardData} selectedItem={selectedPaymentCardId} />
 						{subscriptionPaymentMethodUpdateMessage && <div styleName="subscription-card-update-text side-padding">{subscriptionPaymentMethodUpdateMessage}</div>}
 
-						{allowUpdateSubscriptionPaymetMethod &&
-						<div styleName="update-payment-card-btn side-padding">
-							<Button
-								type={BUTTON_TYPES.STANDARD}
-								disabled={disableUpdateSubscriptionPaymetMethodButton}
-								onClick={updateSubscriptionPaymetMethod}
-								bordered
-								showLoader={shouldShowLoader}
-							>
-								Save
-							</Button>
-						</div>
-						}
+						{allowUpdateSubscriptionPaymetMethod && (
+							<div styleName="update-payment-card-btn side-padding">
+								<Button
+									type={BUTTON_TYPES.STANDARD}
+									disabled={disableUpdateSubscriptionPaymetMethodButton}
+									onClick={updateSubscriptionPaymetMethod}
+									bordered
+									showLoader={shouldShowLoader}
+								>
+									Save
+								</Button>
+							</div>
+						)}
 					</div>
 					<div styleName={`side-padding payment-form payment-form-${displayPaymentFormClass}`}>
 						<AddPaymentMethodForm
@@ -163,23 +150,12 @@ class PaymentMethod extends React.PureComponent {
 	}
 }
 
-PaymentMethod.propTypes = {
-	newPaymentCardId: PropTypes.string.isRequired,
-	isPaymentCardAdded: PropTypes.bool.isRequired,
-	selectedPaymentCardId: PropTypes.string.isRequired,
-	paymentTitle: PropTypes.string.isRequired,
-	updateSubscriptionPaymetMethod: PropTypes.func,
-	allowUpdateSubscriptionPaymetMethod: PropTypes.bool,
-	disableUpdateSubscriptionPaymetMethodButton: PropTypes.bool,
-	subscriptionPaymentMethodUpdateMessage: PropTypes.string,
-	shouldShowLoader: PropTypes.bool,
-};
+// PaymentMethod.defaultProps = {
+// 	updateSubscriptionPaymetMethod: () => {},
+// 	allowUpdateSubscriptionPaymetMethod: false,
+// 	disableUpdateSubscriptionPaymetMethodButton: false,
+// 	subscriptionPaymentMethodUpdateMessage: '',
+// 	shouldShowLoader: false
+// };
 
-PaymentMethod.defaultProps = {
-	updateSubscriptionPaymetMethod: () => {},
-	allowUpdateSubscriptionPaymetMethod: false,
-	disableUpdateSubscriptionPaymetMethodButton: false,
-	subscriptionPaymentMethodUpdateMessage: '',
-	shouldShowLoader: false,
-};
-export default (CSSModules(PaymentMethod, styles, { allowMultiple: true }));
+export default CSSModules(PaymentMethod, styles, { allowMultiple: true });

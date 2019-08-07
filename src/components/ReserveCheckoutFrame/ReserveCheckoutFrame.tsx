@@ -1,36 +1,31 @@
-/* eslint-disable camelcase */// API returns lots of snake_case data
+import { backArrow } from "../../assets/icons";
+import styles from "./ReserveCheckoutFrame.scss";
+import Tile from "../Tile/Tile";
+import VehicleTitle from "../VehicleTitle/VehicleTitle";
+import VehicleCostBreakdown from "../../pages/Vehicles/Detail/VehicleCostBreakdown/VehicleCostBreakdown";
+import VehicleDealer from "../../pages/Vehicles/Detail/VehicleDealer/VehicleDealer";
+import VehicleModel from "../../models/Vehicle";
 
-import PropTypes from 'prop-types';
+type ReserveCheckoutFrameProps = {
+	vehicle: any,
+	pageTitle: string,
+	history: {
+		goBack?: (...args: any[]) => any
+	},
+	location: {
+		data?: {
+			latitude?: number,
+			longitude?: number
+		},
+		geolocationUnavailable?: boolean
+	},
+	getUserLocation: (...args: any[]) => any
+};
 
-import { backArrow } from '../../assets/icons';
-import styles from './ReserveCheckoutFrame.scss';
-import Tile from '../Tile/Tile';
-import VehicleTitle from '../VehicleTitle/VehicleTitle';
-import VehicleCostBreakdown from '../../pages/Vehicles/Detail/VehicleCostBreakdown/VehicleCostBreakdown';
-import VehicleDealer from '../../pages/Vehicles/Detail/VehicleDealer/VehicleDealer';
-import VehicleModel from '../../models/Vehicle';
-
-class ReserveCheckoutFrame extends React.Component {
-	static propTypes = {
-		vehicle: VehicleModel.isRequired,
-		pageTitle: PropTypes.string.isRequired,
-		history: PropTypes.shape({
-			goBack: PropTypes.func
-		}).isRequired,
-		location: PropTypes.shape({
-			data: PropTypes.shape({
-				latitude: PropTypes.number,
-				longitude: PropTypes.number
-			}),
-			geolocationUnavailable: PropTypes.bool
-		}).isRequired,
-		getUserLocation: PropTypes.func.isRequired,
-		children: PropTypes.node.isRequired
-	}
+class ReserveCheckoutFrame extends React.Component<ReserveCheckoutFrameProps, {}> {
 	componentWillMount() {
-		window.scrollTo({ top: 0, behavior: 'smooth' });
+		window.scrollTo({ top: 0, behavior: "smooth" });
 	}
-
 	render() {
 		const {
 			vehicle_title,
@@ -39,20 +34,15 @@ class ReserveCheckoutFrame extends React.Component {
 			vehicle_model,
 			vehicle_make,
 			vehicle_status,
-			subscription_price,
+			subscription_price
 		} = this.props.vehicle;
-		const costBreakdown = [
-			{ name: '', price: subscription_price },
-		]; // @TODO: get real cost breakdown
+		const costBreakdown = [{ name: "", price: subscription_price }]; // @TODO: get real cost breakdown
 		const imageUrl = objImages[0].image_url;
 		return (
 			<div styleName="container">
 				<div styleName="left">
 					<div styleName="reserve-nav">
-						<button
-							onClick={this.props.history.goBack}
-							styleName="back-arrow"
-						>
+						<button onClick={this.props.history.goBack} styleName="back-arrow">
 							<img src={backArrow} alt="Back" />
 						</button>
 						<p>{this.props.pageTitle}</p>
@@ -69,10 +59,7 @@ class ReserveCheckoutFrame extends React.Component {
 										vehicleStatus={vehicle_status}
 									/>
 								</div>
-								<VehicleCostBreakdown
-									data={costBreakdown}
-									removeBorderBottom
-								/>
+								<VehicleCostBreakdown data={costBreakdown} removeBorderBottom />
 							</div>
 						</div>
 					</Tile>
@@ -83,9 +70,7 @@ class ReserveCheckoutFrame extends React.Component {
 						getUserLocation={this.props.getUserLocation}
 					/>
 				</div>
-				<div styleName="right">
-					{this.props.children}
-				</div>
+				<div styleName="right">{this.props.children}</div>
 			</div>
 		);
 	}
