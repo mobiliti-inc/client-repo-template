@@ -1,64 +1,77 @@
-@import "~variables";
+@import "../../styles/_variables.scss";
 
 $ring-diameter: 30px;
 $medium-ring-diameter: 22px;
 $small-ring-diameter: 18px;
 
 .loading-ring {
-  display: inline-block;
-  position: relative;
+	display: inline-block;
+	position: relative;
 	width: $small-ring-diameter;
 	height: $small-ring-diameter;
+
 	@media (min-width: $mobile-width) {
 		width: $medium-ring-diameter;
 		height: $medium-ring-diameter;
 	}
+
 	@media (min-width: $tablet-width) {
 		width: $ring-diameter;
 		height: $ring-diameter;
 	}
 }
+
 .loading-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  border: 2px solid #fff;
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	border: 2px solid #fff;
 	width: $small-ring-diameter;
 	height: $small-ring-diameter;
+
 	@media (min-width: $mobile-width) {
 		border-width: 3px;
 		width: $medium-ring-diameter;
 		height: $medium-ring-diameter;
 	}
+
 	@media (min-width: $tablet-width) {
 		border-width: 4px;
 		width: $ring-diameter;
 		height: $ring-diameter;
 	}
-  border-radius: 50%;
-  animation: loading-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+
+	border-radius: 50%;
+	animation: loading-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: #fff transparent transparent transparent;
 }
+
 .loading-ring.black div {
 	border-color: #000 transparent transparent transparent;
 }
+
 .loading-ring.blue div {
 	border-color: $darker-blue transparent transparent transparent;
 }
+
 .loading-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+	animation-delay: -0.45s;
 }
+
 .loading-ring div:nth-child(2) {
-  animation-delay: -0.3s;
+	animation-delay: -0.3s;
 }
+
 .loading-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+	animation-delay: -0.15s;
 }
+
 @keyframes loading-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
 }

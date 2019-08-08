@@ -1,4 +1,4 @@
-@import "~variables";
+@import "../../styles/_variables.scss";
 
 .button {
   // Sample styles. These should be replaced.
@@ -18,10 +18,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   &:focus,
   &:active {
     outline: none;
   }
+
   &:active {
     box-shadow: 0 9px 14px 0 rgba(0, 0, 0, 0.12);
   }

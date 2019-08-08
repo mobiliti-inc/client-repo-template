@@ -1,83 +1,60 @@
-import React, { ReactNode, FC } from 'react';
-import CSSModules from 'react-css-modules';
+
+// import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+
+import * as React from 'react';
 
 import cx from 'classnames';
 
-import styles from './Button.scss';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-
-export const BUTTON_TYPES = {
-	STANDARD: 'standard',
-	WARNING: 'warning',
-	DANGER: 'danger',
-	WHITE: 'white',
-	PLAIN: 'plain'
-};
+// import styles from './Button.scss';
 
 type ButtonTypes = 'standard' | 'warning' | 'danger' | 'white' | 'plain';
 
+// const renderButtonText = () => showLoader ? <LoadingSpinner show /> : children;
+
 interface Props {
 	buttonType: ButtonTypes;
-	children: string | ReactNode;
 	onClick(): void;
-	className: string;
-	customStyles: string;
-	showLoader: boolean;
-	disabled: boolean;
-	icon: ReactNode;
-	ripple: boolean;
-	bordered: boolean;
-	inverted: boolean;
+	className?: string;
+	customStyles?: string;
+	showLoader?: boolean;
+	disabled?: boolean;
+	icon?: React.ReactNode;
+	ripple?: boolean;
+	bordered?: boolean;
+	inverted?: boolean;
+	children?: React.ReactNode | string;
+	buttonText?: string;
 }
 
-const Button: FC<Props> = (props) => {
-	// static defaultProps = {
-	// 	buttonType: BUTTON_TYPES.STANDARD,
-	// 	showLoader: false,
-	// 	disabled: false,
-	// 	className: '',
-	// 	customStyles: '',
-	// 	icon: null,
-	// 	ripple: false,
-	// 	bordered: false,
-	// 	inverted: false,
-	// }
+const Button: React.FC<Props> = (props) => {
 	const {
 		disabled,
 		onClick,
 		icon,
-		customStyles,
 		buttonType,
 		className,
 		showLoader,
 		ripple,
 		bordered,
 		inverted,
-		children
+		buttonText
+		// children,
 	} = props;
 
-	const getButtonTypeName = () => Object.values(BUTTON_TYPES).indexOf(buttonType) > -1 ? `button--${buttonType}` : 'button---standard';
-
-	const getClasses = () => {
-		const buttonTypeName = getButtonTypeName();
-		const classes = [buttonTypeName, className];
-		return cx({ 'button--disabled': showLoader || disabled, ripple, bordered, inverted }, classes);
-	};
-
-	const renderButtonText = () => showLoader ? <LoadingSpinner show /> : children;
+	const buttonTypeName = !!buttonType ? `button--${buttonType}` : 'button---standard';
 
 	return (
 		<button
-			styleName={getClasses()}
-			className={cx(customStyles, className)}
+			// styleName={getClasses()}
+			className={cx(className, buttonTypeName, { 'button--disabled': showLoader || disabled, ripple, bordered, inverted })}
 			onClick={onClick}
 			disabled={disabled}
 		>
 			{icon && icon}
-			{renderButtonText()}
+			{/* {renderButtonText()} */}
+			{buttonText && buttonText}
 		</button>
 	);
-
 };
 
-export default CSSModules(Button, styles, { allowMultiple: true });
+export default Button;

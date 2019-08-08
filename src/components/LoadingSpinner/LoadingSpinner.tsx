@@ -13,7 +13,7 @@ const LoadingSpinner: React.SFC<LoadingSpinnerProps> = ({ show, black, blue, par
 		{typeof show !== 'undefined' &&
 			show && (
 				<div
-					className={`loading-spinner ${parentClass}`}
+					className={styles['loading-spinner']`${parentClass}`}
 					styleName={`loading-ring ${black ? 'black' : ''} ${blue ? 'blue' : ''}`}
 				>
 					<div />
@@ -24,10 +24,4 @@ const LoadingSpinner: React.SFC<LoadingSpinnerProps> = ({ show, black, blue, par
 	</Fragment>
 );
 
-// LoadingSpinner.defaultProps = {
-// 	black: false,
-// 	blue: false,
-// 	parentClass: ''
-// };
-
-export default CSSModules(LoadingSpinner, styles, { allowMultiple: true });
+export default LoadingSpinner;
