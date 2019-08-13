@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { isUndefined } from 'util';
 import styles from './Dropdown.scss';
-import { chevronUp, chevronDown } from '../../assets/icons';
+import { chevronUp, chevronDown } from '../../assets';
 
 type DropdownProps = {
 	data: {

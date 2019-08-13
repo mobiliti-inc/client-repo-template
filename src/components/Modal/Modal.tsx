@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Button from '../Button/Button';
 import styles from './Modal.scss';
-import { iconClose } from '../../assets/icons';
+import { iconClose } from '../../assets';
 
 export const MODAL_OVERLAYS = {
 	GRAY: 'gray',

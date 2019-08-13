@@ -7,7 +7,7 @@ import {
 	iconEmail,
 	iconLocked,
 	pinnedPaper
-} from '../../assets/icons';
+} from '../../assets';
 
 export const ICON_TYPES = {
 	email: iconEmail,

@@ -5,7 +5,7 @@ import styles from './PaymentMethod.scss';
 import AddPaymentMethodForm from '../AddPaymentMethodForm/AddPaymentMethodForm';
 import Tile from '../Tile/Tile';
 import RadioSelector from '../RadioSelector/RadioSelector';
-import { iconAdd } from '../../assets/icons';
+import { iconAdd } from '../../assets';
 import handleAuthRequiredApiCall from '../../utils/handleAuthRequiredApiCall';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import Button, { BUTTON_TYPES } from '../Button/Button';

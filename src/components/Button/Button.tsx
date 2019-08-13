@@ -1,19 +1,19 @@
-
-// import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-
 import * as React from 'react';
+import CSSModules from 'react-css-modules';
 
 import cx from 'classnames';
 
-// import styles from './Button.scss';
+import { LoadingSpinner } from '../';
+
+import * as styles from './Button.scss';
 
 type ButtonTypes = 'standard' | 'warning' | 'danger' | 'white' | 'plain';
 
-// const renderButtonText = () => showLoader ? <LoadingSpinner show /> : children;
+type ButtonShapes = 'round' | 'square';
 
 interface Props {
-	buttonType: ButtonTypes;
-	onClick(): void;
+	buttonType?: ButtonTypes;
+	onClick?: React.MouseEventHandler<HTMLElement>;
 	className?: string;
 	customStyles?: string;
 	showLoader?: boolean;
@@ -22,8 +22,9 @@ interface Props {
 	ripple?: boolean;
 	bordered?: boolean;
 	inverted?: boolean;
-	children?: React.ReactNode | string;
+	children?: React.ReactNode;
 	buttonText?: string;
+	shape?: ButtonShapes;
 }
 
 const Button: React.FC<Props> = (props) => {
@@ -36,25 +37,26 @@ const Button: React.FC<Props> = (props) => {
 		showLoader,
 		ripple,
 		bordered,
+		children,
 		inverted,
-		buttonText
-		// children,
+		buttonText,
+		shape
 	} = props;
 
-	const buttonTypeName = !!buttonType ? `button--${buttonType}` : 'button---standard';
+	const buttonTypeName = !!buttonType ? `button--${buttonType}` : 'button--standard';
+	const buttonShape = !!shape ? `button--${shape}` : 'button--square';
+	const renderButtonContent = () => showLoader ? <LoadingSpinner show /> : (React.Children.count(children) > 0 ? children : buttonText);
 
 	return (
 		<button
-			// styleName={getClasses()}
-			className={cx(className, buttonTypeName, { 'button--disabled': showLoader || disabled, ripple, bordered, inverted })}
-			onClick={onClick}
+			styleName={cx(className, buttonTypeName, buttonShape, { 'button--disabled': showLoader || disabled, ripple, bordered, inverted })}
+			onClick={(event) => onClick && onClick(event)}
 			disabled={disabled}
 		>
 			{icon && icon}
-			{/* {renderButtonText()} */}
-			{buttonText && buttonText}
+			{renderButtonContent()}
 		</button>
 	);
 };
 
-export default Button;
+export default CSSModules(Button, styles, { allowMultiple: true });

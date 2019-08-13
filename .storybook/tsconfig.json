@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
 		"outDir": "build/lib",
-		"module": "commonjs",
-		"target": "es6",
+		"module": "es6",
+		"target": "es5",
 		"lib": ["es5", "es6", "es7", "es2017", "dom"],
 		"sourceMap": true,
 		"allowJs": false,
@@ -18,9 +18,9 @@
 		"suppressImplicitAnyIndexErrors": true,
 		"noUnusedLocals": true,
 		"declaration": true,
-		"allowSyntheticDefaultImports": true,
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
+		"emitDecoratorMetadata": true,
+		"esModuleInterop": true
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "build", "scripts"]

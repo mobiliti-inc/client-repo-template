@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import styles from './DropDownMenu.scss';
-import { chevronUpDark, chevronDownGrey } from '../../assets/icons';
+import { chevronUpDark, chevronDownGrey } from '../../assets';
 
 type DropDownMenuProps = {
 	leftContentIsSplitted?: boolean,

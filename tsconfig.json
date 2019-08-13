@@ -59,6 +59,8 @@
 
 		"forceConsistentCasingInFileNames": true,
 
-		"importHelpers": true
+		"importHelpers": true,
+
+		"allowSyntheticDefaultImports": true
 	}
 }

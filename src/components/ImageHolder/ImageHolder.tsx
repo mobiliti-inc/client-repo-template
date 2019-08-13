@@ -1,7 +1,7 @@
 import React, { Fragment, PureComponent } from "react";
 import classNames from "classnames";
 import styles from "./ImageHolder.scss";
-import { iconEdit } from "../../assets/icons/";
+import { iconEdit } from "../../assets";
 
 type ImageHolderProps = {
 	onUploadImageClick: (...args: any[]) => any,

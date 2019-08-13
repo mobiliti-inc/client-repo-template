@@ -1,7 +1,7 @@
 /* eslint react/no-array-index-key: 0 */
 import React from 'react';
 import styles from './Rating.scss';
-import { star, starFilled } from '../../assets/icons';
+import { star, starFilled } from '../../assets';
 
 type RatingProps = {
 	stars: number

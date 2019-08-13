@@ -1,5 +1,5 @@
 import React from 'react';
-import { iconInsurance } from '../../assets/icons';
+import { iconInsurance } from '../../assets';
 import Modal from '../Modal/Modal';
 import Dropdown from '../Dropdown/Dropdown';
 import styles from './AgeSelectModal.scss';

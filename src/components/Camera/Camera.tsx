@@ -1,166 +1,170 @@
-import React from 'react';
-import styles from './Camera.scss';
+import * as React from 'react';
+// import cx from 'classnames';
+const { useState, useRef, useEffect } = React;
+import * as styles from './Camera.scss';
+import { Button } from '../';
+import { CameraIcon } from '../../assets';
 
-type CameraProps = {
-	takePhoto: boolean,
-	height: number,
-	width: number,
-	onTakingPhoto: (...args: any[]) => any,
-	closeCamera: boolean,
-	onCameraAccessFail?: (...args: any[]) => any,
-	onCameraAccessSuccess?: (...args: any[]) => any
-};
+interface CameraProps {
+	takePhoto: boolean;
+	height: number;
+	width: number;
+	onTakingPhoto: (...args: any[]) => any;
+	closeCamera: boolean;
+	onCameraAccessFail(error: any): void;
+	onCameraAccessSuccess(): void;
+	sendFile(image: any): void;
+	showPhotoTaken?: boolean;
+	allowButton?: boolean;
+}
 
-type CameraState = {
-	photoTaken: boolean,
-	localStream: null,
-	wait: boolean
-};
+const Camera: React.FC<CameraProps> = (props) => {
+	const { closeCamera, takePhoto, onCameraAccessSuccess, onCameraAccessFail,
+		allowButton
+	} = props;
 
-class Camera extends React.PureComponent<CameraProps, CameraState> {
-	constructor(props) {
-		super(props);
-		this.videoStream = React.createRef();
-		this.canvas = React.createRef();
-		this.state = {
-			photoTaken: false,
-			localStream: null,
-			wait: false
-		};
-		this.constraints = {
-			video: true
-		};
-		this.timer = () => { };
-	}
+	let videoStream: any = useRef(null);
+	// let canvas: any = useRef(null);
 
-	componentWillMount() {
-		if (this.hasGetUserMedia()) {
-			this.initiateStream();
+	const constraints = {
+		video: true
+	};
+
+	// let timer: any = () => { };
+
+	const [photoTaken, setPhotoTaken] = useState(false);
+	const [localStream, setLocalStream] = useState<any>(null);
+	// const [wait, setWait] = useState(false);
+	// const [capturedImage, setCapturedImage] = useState<string | null>(null);
+
+	const handleError = (error: any) => {
+		onCameraAccessFail(error);
+	};
+
+	console.log(videoStream.current, "|||||||||||||");
+
+	const gotStream = (stream: any) => {
+		if (videoStream.current) {
+			videoStream.current.srcObject = stream;
+			setLocalStream(stream);
+			onCameraAccessSuccess();
+		}
+		// timer = setTimeout(() => setWait(true), 100);
+	};
+
+	const initiateStream = () => {
+		navigator.mediaDevices
+			.getUserMedia(constraints)
+			.then(stream => gotStream(stream))
+			.catch(handleError);
+	};
+
+	const hasGetUserMedia = () =>
+		!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+
+	const stopTracks = () => {
+		if (localStream) {
+			const tracks = localStream.getTracks();
+			videoStream.current.srcObject = null;
+			tracks.forEach((track: any) => {
+				track.stop();
+			});
+		}
+	};
+
+	// const captureImage = () => {
+	// 	setPhotoTaken(true);
+	// 	const context = canvas.current.getContext('2d');
+	// 	context.imageSmoothingEnabled = false;
+	// 	context.height = height;
+	// 	context.width = width;
+	// 	context.drawImage(videoStream.current, 0, 0, 680, 360);
+	// 	const image = canvas.current.toDataURL('image/jpeg', 0.5);
+	// 	canvas.current.toBlob(sendFile);
+	// 	stopTracks();
+	// 	setCapturedImage(image);
+	// 	return onTakingPhoto(image);
+	// };
+
+	const retake = () => {
+		setPhotoTaken(false);
+		// setWait(false);
+		initiateStream();
+	};
+
+	useEffect(() => {
+		if (photoTaken) {
+			stopTracks();
+		}
+		if (takePhoto) {
+			if (photoTaken && !closeCamera) {
+				retake();
+			}
+		}
+		// if (!photoTaken || !takePhoto) {
+		// 	captureImage();
+		// }
+	}, [closeCamera, takePhoto]);
+
+	useEffect(() => {
+		if (hasGetUserMedia()) {
+			initiateStream();
 		} else {
 			const error = {
 				error: 'Unable to access user media'
 			};
-			this.props.onCameraAccessFail(error);
+			onCameraAccessFail(error);
 		}
-	}
+	}, []);
 
-	componentDidUpdate(prevProps) {
-		if (this.props.closeCamera !== prevProps.closeCamera && !this.state.photoTaken) {
-			this.stopTracks();
-		}
-		if (this.props.takePhoto !== prevProps.takePhoto && this.props.takePhoto) {
-			if (this.state.photoTaken && !this.props.closeCamera) {
-				this.retake();
-			}
-		}
-		if (
-			this.props.takePhoto !== prevProps.takePhoto &&
-			(!this.state.photoTaken || !this.props.takePhoto)
-		) {
-			this.captureImage();
-		}
-	}
+	// This is supposed to be equivalent to componentWillUnmount
+	// useEffect(() => {
+	// 	clearTimeout(timer);
+	// 	stopTracks();
+	// });
 
-	componentWillUnmount = () => {
-		clearTimeout(this.timer);
-		this.stopTracks();
-	}
+	// const renderMarkers = () => {
+	// 	if (videoStream.current) {
+	// 		return (
+	// 			<div className={photoTaken ? styles.hide : styles['markers-ctn']}>
+	// 				<div className={styles.top}>
+	// 					<div className={cx(styles.markers, styles['top-left'])} />
+	// 					<div className={cx(styles.markers, styles['top-right'])} />
+	// 				</div>
+	// 				<div className={styles.bottom}>
+	// 					<div className={cx(styles.markers, styles['bottom-left'])} />
+	// 					<div className={cx(styles.markers, styles['bottom-right'])} />
+	// 				</div>
+	// 			</div>
+	// 		);
+	// 	}
+	// 	return <div />;
+	// };
 
-	gotStream = stream => {
-		if (this.videoStream.current) {
-			this.videoStream.current.srcObject = stream;
-			this.setState({
-				localStream: stream
-			});
-			this.props.onCameraAccessSuccess();
-		}
-		this.timer = setTimeout(() => this.setState({ wait: true }), 100);
-	}
+	// console.log("capturedImage", capturedImage);
 
-	initiateStream = () => {
-		navigator.mediaDevices
-			.getUserMedia(this.constraints)
-			.then(stream => this.gotStream(stream))
-			.catch(this.handleError);
-	}
+	return (
+		<>
+			{/* <canvas
+				ref={canvas}
+				className={photoTaken ? styles.canvas : styles.hide}
+				width={width}
+				height={height}
+			/> */}
+			<video
+				ref={videoStream}
+				autoPlay
+				width="680"
+				height="360"
+				className={styles.video}
+			/>
+			{allowButton && <Button shape="round" className={styles.button}><img src={CameraIcon} alt="" /></Button>}
+			{/* <track kind="captions" /> */}
+			{/* </video> */}
+			{/* {wait && renderMarkers()} */}
+			{/* {showPhotoTaken && !!capturedImage && <img src={capturedImage} alt="" />} */}
+		</>
+	);
+};
 
-	hasGetUserMedia = () =>
-		!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
-	handleError = error => {
-		this.props.onCameraAccessFail(error);
-	}
-
-	captureImage = () => {
-		this.setState({
-			photoTaken: true
-		});
-		const context = this.canvas.current.getContext('2d');
-		context.imageSmoothingEnabled = false;
-		context.height = this.props.height;
-		context.width = this.props.width;
-		context.drawImage(this.videoStream.current, 0, 0, this.props.width, this.props.height);
-		const image = this.canvas.current.toDataURL('image/jpeg', 0.5);
-		this.stopTracks();
-		return this.props.onTakingPhoto(image);
-	}
-
-	stopTracks = () => {
-		const { localStream } = this.state;
-		if (localStream) {
-			const tracks = this.state.localStream.getTracks();
-			this.videoStream.current.srcObject = null;
-			tracks.forEach(track => {
-				track.stop();
-			});
-		}
-	}
-
-	retake = () => {
-		this.setState({
-			photoTaken: false,
-			wait: false
-		});
-		this.initiateStream();
-	}
-
-	renderMarkers = () => {
-		if (this.videoStream.current) {
-			return (
-				<div styleName={this.state.photoTaken ? 'hide' : 'markers-ctn'}>
-					<div styleName="top">
-						<div styleName="markers top-left" />
-						<div styleName="markers top-right" />
-					</div>
-					<div styleName="bottom">
-						<div styleName="markers bottom-left" />
-						<div styleName="markers bottom-right" />
-					</div>
-				</div>
-			);
-		}
-		return <div />;
-	}
-
-	render() {
-		return (
-			<React.Fragment>
-				<canvas
-					ref={this.canvas}
-					styleName={this.state.photoTaken ? 'canvas' : 'hide'}
-					width={this.props.width}
-					height={this.props.height}
-				/>
-				<video
-					ref={this.videoStream}
-					autoPlay
-					styleName={this.state.photoTaken ? 'hide' : 'video'}
-				>
-					<track kind="captions" />
-				</video>
-				{this.state.wait && this.renderMarkers()}
-			</React.Fragment>
-		);
-	}
-}
-
-export default CSSModules(Camera, styles, { allowMultiple: true });
+export default Camera;

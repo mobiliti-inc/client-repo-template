@@ -7,7 +7,7 @@ import appStoreBadge from "../../assets/icons/app-store.svg";
 import googleStoreBadge from "../../assets/icons/google-play.svg";
 import backArrowImage from "../../assets/icons/icon_Arrow-Left.svg";
 import imgSignupBackground from "../../assets/images/img_SignIn-Background.png";
-import { iconClose } from "../../assets/icons";
+import { iconClose } from "../../assets";
 import Link from "../Link/Link";
 
 type AuthFrameProps = {

@@ -6,7 +6,7 @@ import 'react-dates/initialize';
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import styles from './CustomDatePicker.scss';
-import { directionArrow } from '../../assets/icons';
+import { directionArrow } from '../../assets';
 
 type CustomDatePickerProps = {
 	placeholder?: string,

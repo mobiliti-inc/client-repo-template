@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { iconClose } from '../../assets/icons';
+import { iconClose } from '../../assets';
 import styles from './Alert.scss';
 
 type AlertProps = {

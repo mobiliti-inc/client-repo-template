@@ -1,4 +1,4 @@
-import { backArrow } from "../../assets/icons";
+import { backArrow } from "../../assets";
 import styles from "./ReserveCheckoutFrame.scss";
 import Tile from "../Tile/Tile";
 import VehicleTitle from "../VehicleTitle/VehicleTitle";

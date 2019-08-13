@@ -1,5 +1,5 @@
 import Modal from '../Modal';
-import { iconInsurance } from '../../../assets/icons';
+import { iconInsurance } from '../../../assets';
 
 describe('Modal', () => {
 	it('renders', () => {

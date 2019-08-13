@@ -1,20 +1,22 @@
 import React, { Fragment } from 'react';
-import styles from './LoadingSpinner.scss';
+import cx from 'classnames';
+import CSSModules from 'react-css-modules';
 
-type LoadingSpinnerProps = {
-	show: boolean,
-	black?: boolean,
-	blue?: boolean,
-	parentClass?: string
-};
+import * as styles from './LoadingSpinner.scss';
 
-const LoadingSpinner: React.SFC<LoadingSpinnerProps> = ({ show, black, blue, parentClass }) => (
+interface LoadingSpinnerProps {
+	show: boolean;
+	black?: boolean;
+	blue?: boolean;
+	className?: string;
+}
+
+const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ show, black, blue, className }) => (
 	<Fragment>
 		{typeof show !== 'undefined' &&
 			show && (
 				<div
-					className={styles['loading-spinner']`${parentClass}`}
-					styleName={`loading-ring ${black ? 'black' : ''} ${blue ? 'blue' : ''}`}
+					styleName={cx(className, 'loading-ring', { black, blue })}
 				>
 					<div />
 					<div />
@@ -24,4 +26,4 @@ const LoadingSpinner: React.SFC<LoadingSpinnerProps> = ({ show, black, blue, par
 	</Fragment>
 );
 
-export default LoadingSpinner;
+export default CSSModules(LoadingSpinner, styles, { allowMultiple: true });

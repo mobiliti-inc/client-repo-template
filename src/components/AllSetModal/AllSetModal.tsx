@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { iconCloseWhite } from '../../assets/icons';
+import { iconCloseWhite } from '../../assets';
 import styles from './AllSetModal.scss';
 
 type AllSetModalProps = {

@@ -6,6 +6,8 @@ interface CssExports {
   'button--danger': string;
   'button--disabled': string;
   'button--plain': string;
+  'button--round': string;
+  'button--square': string;
   'button--standard': string;
   'button--warning': string;
   'button--white': string;
