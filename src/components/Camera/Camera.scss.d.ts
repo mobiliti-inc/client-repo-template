@@ -6,8 +6,8 @@ interface CssExports {
   'bottom-right': string;
   'button': string;
   'canvas': string;
+  'container': string;
   'fades-in-out': string;
-  'hello': string;
   'hide': string;
   'markers': string;
   'markers-ctn': string;

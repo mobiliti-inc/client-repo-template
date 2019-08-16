@@ -1,5 +1,6 @@
 import * as React from 'react';
-// import cx from 'classnames';
+import cx from 'classnames';
+import CSSModules from 'react-css-modules';
 const { useState, useRef, useEffect } = React;
 import * as styles from './Camera.scss';
 import { Button } from '../';
@@ -9,39 +10,40 @@ interface CameraProps {
 	takePhoto: boolean;
 	height: number;
 	width: number;
-	onTakingPhoto: (...args: any[]) => any;
+	onTakingPhoto?: (...args: any[]) => any;
 	closeCamera: boolean;
 	onCameraAccessFail(error: any): void;
 	onCameraAccessSuccess(): void;
-	sendFile(image: any): void;
-	showPhotoTaken?: boolean;
 	allowButton?: boolean;
+	showMarkers?: boolean;
 }
 
 const Camera: React.FC<CameraProps> = (props) => {
-	const { closeCamera, takePhoto, onCameraAccessSuccess, onCameraAccessFail,
-		allowButton
+	const {
+		closeCamera,
+		takePhoto,
+		onCameraAccessSuccess,
+		onCameraAccessFail,
+		allowButton,
+		onTakingPhoto,
+		showMarkers,
+		width,
+		height
 	} = props;
 
 	let videoStream: any = useRef(null);
-	// let canvas: any = useRef(null);
+	let canvas: any = useRef(null);
 
 	const constraints = {
 		video: true
 	};
 
-	// let timer: any = () => { };
-
 	const [photoTaken, setPhotoTaken] = useState(false);
 	const [localStream, setLocalStream] = useState<any>(null);
-	// const [wait, setWait] = useState(false);
-	// const [capturedImage, setCapturedImage] = useState<string | null>(null);
 
 	const handleError = (error: any) => {
 		onCameraAccessFail(error);
 	};
-
-	console.log(videoStream.current, "|||||||||||||");
 
 	const gotStream = (stream: any) => {
 		if (videoStream.current) {
@@ -49,7 +51,6 @@ const Camera: React.FC<CameraProps> = (props) => {
 			setLocalStream(stream);
 			onCameraAccessSuccess();
 		}
-		// timer = setTimeout(() => setWait(true), 100);
 	};
 
 	const initiateStream = () => {
@@ -72,23 +73,20 @@ const Camera: React.FC<CameraProps> = (props) => {
 		}
 	};
 
-	// const captureImage = () => {
-	// 	setPhotoTaken(true);
-	// 	const context = canvas.current.getContext('2d');
-	// 	context.imageSmoothingEnabled = false;
-	// 	context.height = height;
-	// 	context.width = width;
-	// 	context.drawImage(videoStream.current, 0, 0, 680, 360);
-	// 	const image = canvas.current.toDataURL('image/jpeg', 0.5);
-	// 	canvas.current.toBlob(sendFile);
-	// 	stopTracks();
-	// 	setCapturedImage(image);
-	// 	return onTakingPhoto(image);
-	// };
+	const captureImage = () => {
+		setPhotoTaken(true);
+		const context = canvas.current.getContext('2d');
+		context.imageSmoothingEnabled = false;
+		context.height = height;
+		context.width = width;
+		context.drawImage(videoStream.current, 0, 0, 300, 150);
+		const image = canvas.current.toDataURL('image/jpeg', 0.5);
+		stopTracks();
+		return onTakingPhoto && onTakingPhoto(image);
+	};
 
 	const retake = () => {
 		setPhotoTaken(false);
-		// setWait(false);
 		initiateStream();
 	};
 
@@ -101,9 +99,6 @@ const Camera: React.FC<CameraProps> = (props) => {
 				retake();
 			}
 		}
-		// if (!photoTaken || !takePhoto) {
-		// 	captureImage();
-		// }
 	}, [closeCamera, takePhoto]);
 
 	useEffect(() => {
@@ -117,54 +112,48 @@ const Camera: React.FC<CameraProps> = (props) => {
 		}
 	}, []);
 
-	// This is supposed to be equivalent to componentWillUnmount
-	// useEffect(() => {
-	// 	clearTimeout(timer);
-	// 	stopTracks();
-	// });
-
-	// const renderMarkers = () => {
-	// 	if (videoStream.current) {
-	// 		return (
-	// 			<div className={photoTaken ? styles.hide : styles['markers-ctn']}>
-	// 				<div className={styles.top}>
-	// 					<div className={cx(styles.markers, styles['top-left'])} />
-	// 					<div className={cx(styles.markers, styles['top-right'])} />
-	// 				</div>
-	// 				<div className={styles.bottom}>
-	// 					<div className={cx(styles.markers, styles['bottom-left'])} />
-	// 					<div className={cx(styles.markers, styles['bottom-right'])} />
-	// 				</div>
-	// 			</div>
-	// 		);
-	// 	}
-	// 	return <div />;
-	// };
-
-	// console.log("capturedImage", capturedImage);
+	const renderMarkers = () => {
+		if (videoStream.current) {
+			return (
+				<div styleName={photoTaken ? 'hide' : 'markers-ctn'}>
+					<div styleName={'top'}>
+						<div styleName={cx('markers', 'top-left')} />
+						<div styleName={cx('markers', 'top-right')} />
+					</div>
+					<div styleName={'bottom'}>
+						<div styleName={cx('markers', 'bottom-left')} />
+						<div styleName={cx('markers', 'bottom-right')} />
+					</div>
+				</div>
+			);
+		}
+		return <div />;
+	};
 
 	return (
-		<>
-			{/* <canvas
+		<div styleName="container">
+			<canvas
 				ref={canvas}
-				className={photoTaken ? styles.canvas : styles.hide}
-				width={width}
-				height={height}
-			/> */}
+				styleName={photoTaken ? 'canvas' : 'hide'}
+				style={{ width: `${width}px`, height: `${height}px` }}
+			/>
 			<video
 				ref={videoStream}
 				autoPlay
-				width="680"
-				height="360"
-				className={styles.video}
+				styleName='video'
+				style={{ width: `${width}px`, height: `${height}px` }}
 			/>
-			{allowButton && <Button shape="round" className={styles.button}><img src={CameraIcon} alt="" /></Button>}
-			{/* <track kind="captions" /> */}
-			{/* </video> */}
-			{/* {wait && renderMarkers()} */}
-			{/* {showPhotoTaken && !!capturedImage && <img src={capturedImage} alt="" />} */}
-		</>
+			{allowButton && !photoTaken && (
+				<div styleName="button">
+					<Button shape="round" ripple onClick={() => captureImage()}><img src={CameraIcon} alt="camera" /></Button>
+				</div>
+			)}
+			{showMarkers && renderMarkers()}
+		</div>
 	);
 };
 
-export default Camera;
+export default CSSModules(Camera, styles, { allowMultiple: true });
+
+// TODO: Adjust camera markers to fit on camera
+// TODO: Support picture retaking

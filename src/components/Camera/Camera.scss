@@ -1,9 +1,9 @@
 @import "../../styles/_variables.scss";
 
-.hello {
-  color: red;
-
-  background: red;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hide {
@@ -11,32 +11,13 @@
 }
 
 .canvas {
-  height: 100%;
-  width: 100%;
-  display: block;
+  display: flex;
 
-  @media (max-width: $mobile-width) {}
+  // @media (max-width: $mobile-width) {}
 }
 
 .video {
-  width: 100%;
-
-  @media (max-width: $mobile-width) {
-    position: absolute;
-    top: 30%;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
-
-  @media (max-width: $half-mobile-width) {
-    position: absolute;
-    height: 31%;
-    top: 35%;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
+  padding: 0;
 }
 
 .markers-ctn {
@@ -120,5 +101,16 @@
 
 .button {
   display: flex;
-  padding: 0;
+  justify-content: center;
+  position: relative;
+
+  button {
+    padding: 0;
+    position: absolute;
+    top: -60px;
+  }
+
+  img {
+    width: 35px;
+  }
 }

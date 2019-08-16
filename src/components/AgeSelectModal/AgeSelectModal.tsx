@@ -1,9 +1,10 @@
 import React from 'react';
-import { iconInsurance } from '../../assets';
-import Modal from '../Modal/Modal';
-import Dropdown from '../Dropdown/Dropdown';
+import CSSModules from 'react-css-modules';
+
+// import { iconInsurance } from '../../assets';
+import { Modal, Dropdown, Button } from '../';
+
 import styles from './AgeSelectModal.scss';
-import Button from '../Button/Button';
 
 let ages = [
 	{
