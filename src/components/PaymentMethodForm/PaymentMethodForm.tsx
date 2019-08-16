@@ -1,11 +1,12 @@
 import * as React from 'react';
 import CSSModules from 'react-css-modules';
+// @ts-ignore
 import { card } from 'creditcards';
 
 import { cardExpiryDateFormatter } from '../../utils';
 import { Button, TextInput } from '..';
 
-import * as styles from './AddPaymentMethodForm.scss';
+import * as styles from './PaymentMethodForm.scss';
 
 interface PaymentMethodFormProps {
 	onFormValidCheck: (...args: any[]) => any;
