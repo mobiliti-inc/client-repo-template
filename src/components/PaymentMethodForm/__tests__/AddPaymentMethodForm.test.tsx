@@ -1,4 +1,4 @@
-import AddPaymentMethodForm from '../AddPaymentMethodForm';
+import AddPaymentMethodForm from '../PaymentMethodForm';
 
 
 describe('AddPaymentMethodForm', () => {

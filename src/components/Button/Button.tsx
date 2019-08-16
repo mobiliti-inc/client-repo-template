@@ -7,6 +7,14 @@ import { LoadingSpinner } from '../';
 
 import * as styles from './Button.scss';
 
+export const BUTTON_TYPES = {
+	STANDARD: 'standard',
+	WARNING: 'warning',
+	DANGER: 'danger',
+	WHITE: 'white',
+	PLAIN: 'plain'
+};
+
 type ButtonTypes = 'standard' | 'warning' | 'danger' | 'white' | 'plain';
 
 type ButtonShapes = 'round' | 'square';

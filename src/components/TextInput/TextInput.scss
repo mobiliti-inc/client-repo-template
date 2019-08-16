@@ -1,4 +1,5 @@
-@import "~variables";
+@import "../../styles/_variables.scss";
+
 .input-group {
   position: relative;
   display: flex;
@@ -15,19 +16,23 @@
   border-bottom: 1px solid rgba(29, 49, 85, 0.2);
   text-transform: capitalize;
   font-family: $hanken-sans;
+
   &:focus {
     outline: none;
     border-bottom: 3px solid $blue;
   }
+
   &::-webkit-input-placeholder {
     color: $darker-blue;
     opacity: 0.6;
   }
+
   &:placeholder-shown+.input-label {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-40px);
   }
+
   &.error {
     border-bottom: 3px solid $fast-car-red;
   }
@@ -74,9 +79,11 @@
 .dark {
   color: $black;
   border-color: $black;
+
   &::placeholder {
     color: $black;
   }
+
   label {
     color: $black;
   }
@@ -104,6 +111,7 @@
   background-color: transparent;
   text-transform: capitalize;
   cursor: pointer;
+
   &:active,
   &:focus {
     outline: none;

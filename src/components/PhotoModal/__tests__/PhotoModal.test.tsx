@@ -1,4 +1,4 @@
-import AddPhotoModal from '../AddPhotoModal';
+import AddPhotoModal from '../PhotoModal';
 
 describe('AddPhotoModal', () => {
 	it('renders', () => {

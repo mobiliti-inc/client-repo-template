@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-did-update-set-state */
 import styles from './PaymentMethod.scss';
-import AddPaymentMethodForm from '../AddPaymentMethodForm/AddPaymentMethodForm';
+import AddPaymentMethodForm from '../PaymentMethodForm/AddPaymentMethodForm';
 import Tile from '../Tile/Tile';
 import RadioSelector from '../RadioSelector/RadioSelector';
 import { iconAdd } from '../../assets';

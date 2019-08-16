@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import DialogModal from '../../components/Modal/DialogModal/DialogModal';
 import PhotoRecBox from '../../components/PhotoRecBox/PhotoRecBox';
-import TakePhotoModal from '../../components/AddLicenseModal/TakePhotoModal';
+import TakePhotoModal from '../photoModal/TakePhotoModal';
 import { iconCamera } from '../../assets';
 
 type PhotoCaptureProps = {
