@@ -5,6 +5,7 @@ import Camera from "./Camera/Camera";
 import AddPhotoModal from "./PhotoModal/PhotoModal";
 import TextInput from "./TextInput/TextInput";
 import PaymentMethodForm from "./PaymentMethodForm/PaymentMethodForm";
+import Modal from "./Modal/Modal";
 
 export {
 	Button,
@@ -13,5 +14,6 @@ export {
 	Camera,
 	AddPhotoModal,
 	TextInput,
-	PaymentMethodForm
+	PaymentMethodForm,
+	Modal
 };
