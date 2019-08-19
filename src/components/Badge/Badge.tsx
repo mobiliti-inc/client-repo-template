@@ -1,26 +1,27 @@
-import React from 'react';
-import styles from './Badge.scss';
-import StatusMessages from '../../constants/vehicleStatusCodes';
+import * as React from 'react';
+import CSSModules from 'react-css-modules';
 
-type BadgeProps = {
-	status: number
+import { StatusMessages } from '../../utils';
+import * as styles from './Badge.scss';
+
+interface BadgeProps {
+	status: number;
 };
 
-class Badge extends React.PureComponent<BadgeProps, {}> {
-	renderStatusMessage = status => {
+const Badge: React.FC<BadgeProps> = (props) => {
+	const { status } = props;
+
+	const renderStatusMessage = (status: number) => {
 		const message = StatusMessages[status];
 		return message;
 	};
 
-	render() {
-		const { status } = this.props;
-		if (typeof status !== 'number') return null;
-		const styleName = status === 1 ? 'available' : 'unavailable';
-		const comingSoon = status === 3 ? 'coming-soon' : '';
-		return (
-			<div styleName={`${styleName} ${comingSoon}`}>{this.renderStatusMessage(status)}</div>
-		);
-	}
+	if (typeof status !== 'number') return null;
+	const styleName = status === 1 ? 'available' : 'unavailable';
+	const comingSoon = status === 3 ? 'coming-soon' : '';
+	return (
+		<div styleName={`${styleName} ${comingSoon}`}>{renderStatusMessage(status)}</div>
+	);
 }
 
 export default CSSModules(Badge, styles, { allowMultiple: true });

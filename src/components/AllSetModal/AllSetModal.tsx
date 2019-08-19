@@ -1,24 +1,26 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import { iconCloseWhite } from '../../assets';
-import styles from './AllSetModal.scss';
+import cx from 'classnames';
+import CSSModules from 'react-css-modules';
+// change based on fontawesome
+// import { iconCloseWhite } from '../../assets';
+import * as styles from './AllSetModal.scss';
 
-type AllSetModalProps = {
-	modalIsVisible?: boolean,
-	headerText?: string,
-	bodyText?: string,
-	buttonText?: string,
-	customButton?: React.ReactNode,
-	buttonTo?: string,
-	showCloseModal?: boolean,
-	bordered?: boolean,
-	customStyles?: string,
-	onClose?: (...args: any[]) => any,
-	showButton?: boolean
+interface AllSetModalProps {
+	modalIsVisible?: boolean;
+	headerText?: string;
+	bodyText?: string;
+	buttonText?: string;
+	customButton?: React.ReactNode;
+	buttonTo?: string;
+	showCloseModal?: boolean;
+	bordered?: boolean;
+	customStyles?: string;
+	onClose?: (...args: any[]) => any;
+	showButton?: boolean;
 };
 
-const AllSetModal: React.SFC<AllSetModalProps> = props => {
+const AllSetModal: React.FC<AllSetModalProps> = (props) => {
 	const {
 		modalIsVisible,
 		headerText,
@@ -38,8 +40,9 @@ const AllSetModal: React.SFC<AllSetModalProps> = props => {
 	return (
 		<div styleName={`modal modal-${modalVisibilityClass}`}>
 			<div styleName="modal-box">
-				<div styleName={classNames('modal-container', { 'modal-container--bordered': bordered })} className={customStyles}>
-					{showCloseModal && <img src={iconCloseWhite} alt="Close" role="presentation" styleName="modal-icon-close" onClick={onClose} />}
+				<div styleName={cx('modal-container', { 'modal-container--bordered': bordered })} className={customStyles}>
+					{/* {showCloseModal && <img src={iconCloseWhite} alt="Close" role="presentation" styleName="modal-icon-close" onClick={onClose} />} */}
+					{showCloseModal && <span styleName="modal-icon-close" onClick={onClose}>X</span>}
 					<div styleName="modal-main-content">
 						<h2 styleName="content-header">{headerText || 'One Last Step!'}</h2>
 
@@ -56,19 +59,5 @@ const AllSetModal: React.SFC<AllSetModalProps> = props => {
 		</div>
 	);
 };
-
-// AllSetModal.defaultProps = {
-// 	modalIsVisible: false,
-// 	headerText: '',
-// 	bodyText: '',
-// 	buttonText: '',
-// 	customButton: null,
-// 	buttonTo: '',
-// 	showCloseModal: false,
-// 	bordered: false,
-// 	customStyles: '',
-// 	onClose: () => {},
-// 	showButton: true
-// };
 
 export default CSSModules(AllSetModal, styles, { allowMultiple: true });

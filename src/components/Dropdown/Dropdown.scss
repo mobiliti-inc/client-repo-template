@@ -1,4 +1,4 @@
-@import "../../../styles/_variables.scss";
+@import "../../styles/_variables.scss";
 
 .dropdown {
   cursor: pointer;
@@ -22,39 +22,48 @@
   right: 0;
   top: 100px;
   width: 100%;
+
   @media (min-width: $mobile-width) {
     width: 500px;
     position: absolute;
     top: 0;
   }
+
   &.visible {
     max-height: 500px;
     opacity: 1;
     overflow: scroll;
     z-index: 101;
   }
+
   &.modal {
     top: 98px;
     max-height: 470px;
     overflow: hidden;
+
     @media (min-width: $mobile-width) {
       width: 100%;
     }
+
     @media (min-width: $laptop-width) {
       width: 100%;
       top: 7px;
     }
+
     @media (max-width: $half-mobile-width) {
       overflow: scroll;
       max-height: 300px;
     }
+
     @media (max-width: $mobile-width) {
       top: 233px;
     }
   }
+
   ul {
     margin: 0;
     padding: 0 40px;
+
     @media (min-width: $tablet-width) {
       min-width: 200px;
     }
@@ -69,12 +78,15 @@
   padding: 20px 40px 0 40px;
   color: #000;
   display: flex;
-  & > * {
+
+  &>* {
     flex: 1;
   }
+
   span {
     flex-basis: 88%;
   }
+
   img {
     flex-grow: 0;
     margin-left: auto;
@@ -91,22 +103,29 @@
   margin: 0 10px 0 0;
   font-family: $futura;
   font-weight: bold;
+
   &:focus {
     outline: none;
   }
+
   font-size: 24px;
+
   @media (min-width: $mobile-width) {
     font-size: 30px;
   }
+
   @media (min-width: $tablet-width) {
     font-size: 40px;
   }
 }
+
 .dropdown.scroll .dropdown-selected {
   font-size: 18px;
+
   @media (min-width: $mobile-width) {
     font-size: 30px;
   }
+
   @media (min-width: $tablet-width) {
     font-size: 40px;
   }
@@ -122,9 +141,11 @@
   user-select: none;
   font-weight: 500;
   font-family: $futura;
+
   &:last-child {
     border-bottom: none;
   }
+
   &.selected {
     color: $blue;
   }
@@ -146,11 +167,13 @@
   right: 8px;
   top: 9px;
   height: 7px;
+
   @media (min-width: $mobile-width) {
     right: 10px;
     top: 12px;
     height: auto;
   }
+
   @media (min-width: $tablet-width) {
     top: 19px;
   }
@@ -167,12 +190,14 @@
       top: 12px;
     }
   }
+
   @media (min-width: $desktop-width) {
     .chevron-down {
       top: 19px;
     }
   }
 }
+
 .modal-dropdown-list {
   position: relative;
   bottom: 75px;

@@ -1,156 +1,149 @@
-import React from 'react';
-import classNames from 'classnames';
+import * as React from 'react';
+import cx from 'classnames';
+import CSSModules from 'react-css-modules';
+
 import { isUndefined } from 'util';
-import styles from './Dropdown.scss';
-import { chevronUp, chevronDown } from '../../assets';
+import * as styles from './DropDown.scss';
+// Will be replaced by ones from fontawesome
+// import { chevronUp, chevronDown } from '../../assets';
 
-type DropdownProps = {
-	data: {
-		value: string,
-		current?: boolean
-	}[],
-	onChange: (...args: any[]) => any,
-	scrolling: boolean,
-	modal?: boolean,
-	header?: string | React.ReactNode,
-	customOptionsList?: React.ReactNode,
-	dropdownSelectedClass?: string,
-	dropdownParentClass?: string,
-	dropDownMenuTitleClass?: string,
-	customSelected?: React.ReactNode
+type Data = {
+	value: string,
+	current?: boolean
 };
 
-type DropdownState = {
-	dropdown: boolean
-};
+interface DropdownProps {
+	data: any;
+	onChange: (...args: any[]) => any;
+	scrolling: boolean;
+	modal?: boolean;
+	header?: string | React.ReactNode;
+	customOptionsList?: React.ReactNode;
+	dropdownSelectedClass?: string;
+	dropdownParentClass?: string;
+	dropDownMenuTitleClass?: string;
+	dropdownOptionsClass?: string;
+	customSelected?: React.ReactNode;
+}
 
-class Dropdown extends React.PureComponent<DropdownProps, DropdownState> {
-	constructor(props) {
-		super(props);
-		this.node = React.createRef();
-	}
+const Dropdown: React.FC<DropdownProps> = (props) => {
+	let node: any = React.useRef(null);
 
-	state = {
-		dropdown: false
+	const [dropdown, setDropdown] = React.useState<boolean>(false);
+
+	const {
+		onChange,
+		dropdownOptionsClass,
+		data,
+		header,
+		modal,
+		dropdownSelectedClass,
+		dropdownParentClass,
+		customOptionsList,
+		dropDownMenuTitleClass,
+		customSelected,
+		scrolling
+	} = props;
+
+	const handleClick = (e: any) => {
+		if (node.current.contains(e.target)) {
+			return;
+		}
+		setDropdown(false);
 	};
 
-	componentDidMount = () => {
-		document.addEventListener('mousedown', this.handleClick, false);
-	}
+	React.useEffect(() => {
+		document.addEventListener('mousedown', handleClick, false);
+	}, []);
 
-	componentWillUnmount = () => {
-		document.removeEventListener('mousedown', this.handleClick, false);
-	}
+	// TODO: Replace with a hooks implementation
+	// componentWillUnmount = () => {
+	// 	document.removeEventListener('mousedown', this.handleClick, false);
+	// }
 
-	getSelectedValue = locations => {
-		const { customOptionsList, customSelected } = this.props;
-		let selectedItem = false;
+	const getSelectedValue = (locations: [Data]) => {
+		let selectedItem: any = false;
 		if ((customOptionsList && customSelected) || customSelected) {
 			selectedItem = { value: customSelected };
 		} else {
-			selectedItem = locations.find(loc => loc.current);
+			selectedItem = locations.find((loc: Data) => loc.current);
 		}
 		return selectedItem;
-	}
+	};
 
-	handleClick = e => {
-		if (this.node.current.contains(e.target)) {
-			return;
-		}
-		this.setState({
-			dropdown: false
-		});
-	}
+	const showDropdown = () => {
+		setDropdown(!dropdown);
+	};
 
-	showDropdown = () => {
-		this.setState({
-			dropdown: !this.state.dropdown
-		});
-	}
+	const hideDropdown = (event: any) => {
+		event.preventDefault();
+		setDropdown(false);
+	};
 
-	hideDropdown = e => {
-		e.preventDefault();
-		this.setState({
-			dropdown: false
-		});
-	}
+	const handleChange = (event: any) => {
+		const value = event.target.getAttribute('value');
+		onChange(value);
+	};
 
-	handleChange = e => {
-		const value = e.target.getAttribute('value');
-		this.props.onChange(value);
-	}
-
-	renderItems = options =>
-		options.map(option => {
-			const { modal, dropdownOptionsClass } = this.props;
-			const modalDropdownClass = classNames('dropdown-option', { 'modal-option': modal });
+	const renderItems = (options: [Data]) =>
+		options.map((option: Data) => {
+			// const modalDropdownClass = cx('dropdown-option', { 'modal-option': modal });
 			const defaultModalClass = option.current ? 'dropdown-option selected' : 'dropdown-option';
 			return (
 				<li
 					styleName={defaultModalClass}
 					className={`${defaultModalClass}${dropdownOptionsClass}`}
 					key={option.value}
-					onClick={this.handleChange}
-					onKeyDown={this.handleChange}
+					onClick={(event: any) => handleChange(event)}
+					onKeyDown={handleChange}
 					value={option.value}
 				>
 					{option.value}
 				</li>
 			);
-		})
+		});
 
-	render() {
-		const {
-			data,
-			header,
-			modal,
-			dropdownSelectedClass,
-			dropdownParentClass,
-			customOptionsList,
-			dropDownMenuTitleClass,
-			customSelected
-		} = this.props;
+	const selectedValue = getSelectedValue(data);
 
-		const selectedValue = this.getSelectedValue(data);
+	if (isUndefined(selectedValue)) {
+		return null;
+	}
 
-		if (isUndefined(selectedValue)) {
-			return null;
-		}
+	const dropdownClass = cx('dropdown-menu', { visible: dropdown, modal });
 
-		const dropdownClass = classNames('dropdown-menu', { visible: this.state.dropdown, modal });
+	const modalDropdownClass = modal ? 'modal-dropdown-list' : '';
 
-		const modalDropdownClass = modal ? 'modal-dropdown-list' : '';
-
-		return (
-			<div styleName={`dropdown ${this.props.scrolling ? 'scroll' : ''}`} ref={this.node}>
-				<p
-					styleName="dropdown-selected"
-					className={`dropdown-selected ${dropdownSelectedClass}`}
-					onClick={this.showDropdown}
-					onKeyDown={this.showDropdown}
-				>
-					{selectedValue.value}&nbsp;&nbsp;<img
+	return (
+		<div styleName={`dropdown ${scrolling ? 'scroll' : ''}`} ref={node}>
+			<p
+				styleName="dropdown-selected"
+				className={`dropdown-selected ${dropdownSelectedClass}`}
+				onClick={showDropdown}
+				onKeyDown={showDropdown}
+			>
+				{selectedValue.value}&nbsp;&nbsp; ^
+					{/* <img
 						styleName={classNames('chevron-down', { 'modal-chevron-down': modal })}
 						src={chevronDown}
 						alt="chevron-down"
-					/>
-				</p>
-				<div styleName={dropdownClass} onClick={this.hideDropdown} className={`${dropdownClass} ${dropdownParentClass}`}>
-					<h3 styleName="dropdown-menu-title" className={`dropdown-menu-title ${dropDownMenuTitleClass}`}>
-						<span>{header}</span>
-						<img src={chevronUp} alt="chevron-up" />
+					/> */}
+			</p>
+			<div styleName={dropdownClass} onClick={(event: any) => hideDropdown(event)} className={`${dropdownClass} ${dropdownParentClass}`}>
+				<h3 styleName="dropdown-menu-title" className={`dropdown-menu-title ${dropDownMenuTitleClass}`}>
+					<span>{header}</span>
+					{/* <img src={chevronUp} alt="chevron-up" /> */}
+					v
 					</h3>
-					{customOptionsList ? (
-						<div key={customSelected} styleName={!this.state.dropdown ? 'hide' : modalDropdownClass}>
-							{customOptionsList}
-						</div>
-					) : (
-							<ul styleName={!this.state.dropdown ? 'hide' : modalDropdownClass}>{this.renderItems(data)}</ul>
-						)}
-				</div>
+				{customOptionsList ? (
+					<div styleName={!dropdown ? 'hide' : modalDropdownClass}>
+						{customOptionsList}
+					</div>
+				) : (
+						<ul styleName={!dropdown ? 'hide' : modalDropdownClass}>{renderItems(data)}</ul>
+					)}
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 export default CSSModules(Dropdown, styles, { allowMultiple: true });

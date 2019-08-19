@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import CSSModules from 'react-css-modules';
 // import { iconClose } from '../../assets';
-import styles from './Alert.scss';
+import * as styles from './Alert.scss';
 
 interface AlertProps {
 	show: boolean;
@@ -19,6 +19,7 @@ const Alert: React.FC<AlertProps> = (props) => {
 			{closable && (
 				<div styleName="icon" onClick={onClose} role="presentation">
 					{/* <img styleName="icon--close" src={iconClose} alt="Close" /> */}
+					X
 				</div>
 			)}
 			{title && <span styleName="title">{title}</span>}
@@ -27,13 +28,5 @@ const Alert: React.FC<AlertProps> = (props) => {
 		</div>
 	);
 };
-
-// Alert.defaultProps = {
-// 	title: '',
-// 	subTitle: '',
-// 	children: null,
-// 	closable: true,
-// 	onClose: () => {}
-// };
 
 export default CSSModules(Alert, styles, { allowMultiple: true });

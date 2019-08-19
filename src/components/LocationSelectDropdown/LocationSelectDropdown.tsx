@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './LocationSelectDropdown.scss';
-import Dropdown from '../Dropdown/Dropdown';
+import Dropdown from '../DropDown/DropDown';
 import { MarketModel } from '../../models';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
