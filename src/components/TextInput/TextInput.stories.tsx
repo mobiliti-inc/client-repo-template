@@ -4,13 +4,13 @@ import * as React from 'react';
 import { TextInput } from '../';
 
 storiesOf('TextInput', module)
-	.add('default', () => (<TextInput type={text('type', 'text')}
+	.add('default', () => (<div style={{ width: "300px" }}><TextInput type={text('type', 'text')}
 		onChange={() => { }}
 		id="text"
 		value={text('value', '')}
 		placeholder={text('value', '')}
 		disabled={boolean('disabled', false)}
 		isValid={boolean('isValid', false)}
-		dark={boolean('dark', false)} />
+		dark={boolean('dark', false)} /></div>
 	)
 	);

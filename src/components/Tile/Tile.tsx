@@ -1,16 +1,18 @@
 import React from 'react';
-import classNames from 'classnames';
-import styles from './Tile.scss';
+import cx from 'classnames';
+import CSSModules from 'react-css-modules'
 
-type TileProps = {
-	className?: string
+import * as styles from './Tile.scss';
+
+interface TileProps {
+	className?: string;
 };
 
-class Tile extends React.PureComponent<TileProps, {}> {
-	render() {
-		const classes = classNames('bare-tile', this.props.className);
-		return <div styleName={classes}>{this.props.children}</div>;
-	}
+const Tile: React.FC<TileProps> = (props) => {
+	const { className, children } = props;
+	const classes = cx('bare-tile', className);
+	return <div styleName={classes}>{children}</div>;
+
 }
 
 export default CSSModules(Tile, styles, { allowMultiple: true });

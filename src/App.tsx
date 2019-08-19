@@ -1,14 +1,10 @@
-import React from 'react';
-
-import { Button } from './components';
+import * as React from 'react';
 
 class App extends React.PureComponent {
 	render() {
 		return (
 			<div>
-				<Button onClick={() => { }}>
-					Text Button
-					</Button>
+				Coming soon ....
 			</div>
 		);
 	}

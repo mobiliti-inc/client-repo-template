@@ -1,4 +1,4 @@
-@import "../../../styles/_variables.scss";
+@import "../../styles/_variables.scss";
 /* Customize the label (the container) */
 
 .container {
@@ -7,9 +7,9 @@
   padding-left: 35px;
   cursor: pointer;
   user-select: none;
-	height: 21px;
-	font-size: 12px;
-	line-height: 17px;
+  height: 21px;
+  font-size: 12px;
+  line-height: 17px;
 }
 
 /* Hide the browser's default checkbox */
@@ -32,6 +32,7 @@
   border: 1px solid $taupe;
   border-radius: 1px;
   transition: all .2s linear;
+
   &:focus {
     outline: none;
   }
@@ -93,11 +94,11 @@
 /* Style the Checkmark */
 
 .container .fakebox:after {
-	left: 6px;
-	top: 2px;
-	width: 5px;
-	height: 10px;
-	border: solid white;
-	border-width: 0 2px 2px 0;
-	transform: rotate(45deg);
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }

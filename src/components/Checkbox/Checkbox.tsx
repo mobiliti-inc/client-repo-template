@@ -1,28 +1,36 @@
-import classNames from "classnames";
-import styles from "./Checkbox.scss";
-type CheckboxProps = {
-	onChange: (...args: any[]) => any,
-	checked: boolean,
-	validationLabel?: string,
-	componentLabel?: React.ReactNode,
-	label?: string,
-	valid?: boolean
-};
-class Checkbox extends React.PureComponent<{}, {}> {
-	render() {
-		const checkboxClasses = classNames("container", { error: !this.props.valid });
-		return (
-			<label styleName={checkboxClasses}>
-				{this.props.componentLabel || this.props.label}
-				<input
-					type="checkbox"
-					checked={this.props.checked}
-					onChange={this.props.onChange}
-				/>
-				<div styleName="validation-label">{this.props.validationLabel}</div>
-				<span styleName="fakebox" />
-			</label>
-		);
-	}
+import * as React from 'react';
+import CSSModules from 'react-css-modules'
+import cx from "classnames";
+
+import * as styles from "./Checkbox.scss";
+
+interface CheckboxProps {
+	onChange: (...args: any[]) => any;
+	checked: boolean;
+	validationLabel?: string;
+	componentLabel?: React.ReactNode;
+	label?: string;
+	valid?: boolean;
 }
+
+const Checkbox: React.FC<CheckboxProps> = (props) => {
+	const { validationLabel, valid, label, componentLabel, checked, onChange } = props
+
+	const checkboxClasses = cx("container", { error: !valid });
+
+	return (
+		<label styleName={checkboxClasses}>
+			{componentLabel || label}
+			<input
+				type="checkbox"
+				checked={checked}
+				onChange={onChange}
+			/>
+			<div styleName="validation-label">{validationLabel}</div>
+			<span styleName="fakebox" />
+		</label>
+	);
+}
+
+
 export default CSSModules(Checkbox, styles, { allowMultiple: true });

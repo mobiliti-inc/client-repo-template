@@ -10,6 +10,9 @@ import DropDown from "./DropDown/DropDown";
 import Alert from "./Alert/Alert";
 import AllSetModal from "./AllSetModal/AllSetModal";
 import Badge from "./Badge/Badge";
+import Checkbox from "./Checkbox/Checkbox";
+import Tile from "./Tile/Tile";
+import ProgressEllipsis from "./ProgressEllipsis/ProgressEllipsis";
 
 export {
 	Button,
@@ -23,5 +26,8 @@ export {
 	DropDown,
 	Alert,
 	AllSetModal,
-	Badge
+	Badge,
+	Checkbox,
+	Tile,
+	ProgressEllipsis
 };
