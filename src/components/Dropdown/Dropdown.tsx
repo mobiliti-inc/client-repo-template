@@ -3,7 +3,7 @@ import cx from 'classnames';
 import CSSModules from 'react-css-modules';
 
 import { isUndefined } from 'util';
-import * as styles from './DropDown.scss';
+import * as styles from './Dropdown.scss';
 // Will be replaced by ones from fontawesome
 // import { chevronUp, chevronDown } from '../../assets';
 

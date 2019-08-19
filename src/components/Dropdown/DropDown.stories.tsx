@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import { boolean } from '@storybook/addon-knobs';
 import * as React from 'react';
-import { DropDown } from '..';
+import { Dropdown } from '../';
 
 let ages = [
 	{
@@ -28,5 +28,5 @@ let ages = [
 
 storiesOf('DropDown', module)
 	.add('default', () =>
-	<DropDown modal={boolean('modal', false)} data={ages} onChange={() => {}} scrolling={boolean('scrolling', true)} />
+		<Dropdown modal={boolean('modal', false)} data={ages} onChange={() => { }} scrolling={boolean('scrolling', true)} />
 	);

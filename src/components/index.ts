@@ -6,7 +6,7 @@ import AddPhotoModal from "./PhotoModal/PhotoModal";
 import TextInput from "./TextInput/TextInput";
 import PaymentMethodForm from "./PaymentMethodForm/PaymentMethodForm";
 import Modal from "./Modal/Modal";
-import DropDown from "./DropDown/DropDown";
+import Dropdown from "./Dropdown/Dropdown";
 import Alert from "./Alert/Alert";
 import AllSetModal from "./AllSetModal/AllSetModal";
 import Badge from "./Badge/Badge";
@@ -23,7 +23,7 @@ export {
 	TextInput,
 	PaymentMethodForm,
 	Modal,
-	DropDown,
+	Dropdown,
 	Alert,
 	AllSetModal,
 	Badge,
