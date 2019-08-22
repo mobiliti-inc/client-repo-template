@@ -2,19 +2,19 @@
 
 exports[`AllSetModal renders 1`] = `
 <div
-  className="AllSetModal__modal--3EoAx AllSetModal__modal-hide--nPfZT"
+  className="modal modal-hide"
 >
   <div
-    className="AllSetModal__modal-box--2uZKt"
+    className="modal-box"
   >
     <div
-      className="AllSetModal__modal-container--26HoC"
+      className="modal-container"
     >
       <div
-        className="AllSetModal__modal-main-content--16NGA"
+        className="modal-main-content"
       >
         <h2
-          className="AllSetModal__content-header--2bui1"
+          className="content-header"
         >
           One Last Step!
         </h2>

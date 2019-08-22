@@ -1,11 +1,10 @@
 import * as React from 'react';
-import CSSModules from 'react-css-modules';
 
 import cx from 'classnames';
 
 import { LoadingSpinner } from '../';
 
-import * as styles from './Button.scss';
+import './Button.scss';
 
 export const BUTTON_TYPES = {
 	STANDARD: 'standard',
@@ -67,4 +66,4 @@ const Button: React.FC<Props> = (props) => {
 	);
 };
 
-export default CSSModules(Button, styles, { allowMultiple: true });
+export default Button;
