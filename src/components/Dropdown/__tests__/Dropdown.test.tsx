@@ -1,5 +1,6 @@
-import Dropdown from '../DropDown';
+import React from 'react';
 
+import { Dropdown } from '../../';
 
 describe('Dropdown', () => {
 	it('renders', () => {
@@ -7,6 +8,7 @@ describe('Dropdown', () => {
 			{ value: 'Austin, TX', current: true },
 			{ value: 'Philadelphia, PA', current: false }
 		];
+
 		const subject = shallow(<Dropdown
 			scrolling
 			data={locations}

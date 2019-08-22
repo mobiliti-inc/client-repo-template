@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules';
 const { useState, useRef, useEffect } = React;
 import * as styles from './Camera.scss';
 import { Button } from '../';
-import { CameraIcon } from '../../assets';
+// import { CameraIcon } from '../../assets';
 
 interface CameraProps {
 	takePhoto: boolean;
@@ -145,7 +145,8 @@ const Camera: React.FC<CameraProps> = (props) => {
 			/>
 			{allowButton && !photoTaken && (
 				<div styleName="button">
-					<Button shape="round" ripple onClick={() => captureImage()}><img src={CameraIcon} alt="camera" /></Button>
+					{/* <img src={CameraIcon} alt="camera" /> */}
+					<Button shape="round" ripple onClick={() => captureImage()}>[]</Button>
 				</div>
 			)}
 			{showMarkers && renderMarkers()}

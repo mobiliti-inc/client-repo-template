@@ -1,3 +1,5 @@
+import React from 'react';
+
 import ProgressEllipsis from '../ProgressEllipsis';
 import { matchSnapshot } from '../../../../testUtils/matchSnapshot';
 

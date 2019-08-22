@@ -1,3 +1,5 @@
+import React from 'react';
+
 import TextInput, { INPUT_TYPES } from '../TextInput';
 
 describe('TextInput', () => {

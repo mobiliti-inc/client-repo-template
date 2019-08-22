@@ -1,11 +1,12 @@
+import React from 'react';
+
 import Modal from '../Modal';
-import { iconInsurance } from '../../../assets';
 
 describe('Modal', () => {
 	it('renders', () => {
 		const subject = shallow(
 			<Modal
-				icon={iconInsurance}
+				icon={<span>></span>}
 				visible
 				title="Insurance is included in each car's monthly subscription price."
 				subTitle="Enter your age so we can give you an accurate price."

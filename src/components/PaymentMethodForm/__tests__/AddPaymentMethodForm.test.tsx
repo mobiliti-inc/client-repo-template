@@ -1,5 +1,6 @@
-import AddPaymentMethodForm from '../PaymentMethodForm';
+import React from 'react';
 
+import AddPaymentMethodForm from '../PaymentMethodForm';
 
 describe('AddPaymentMethodForm', () => {
 	const initialProps = {

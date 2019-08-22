@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AllSetModal renders 1`] = `
+<div
+  className="AllSetModal__modal--3EoAx AllSetModal__modal-hide--nPfZT"
+>
+  <div
+    className="AllSetModal__modal-box--2uZKt"
+  >
+    <div
+      className="AllSetModal__modal-container--26HoC"
+    >
+      <div
+        className="AllSetModal__modal-main-content--16NGA"
+      >
+        <h2
+          className="AllSetModal__content-header--2bui1"
+        >
+          One Last Step!
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,3 +1,4 @@
-const CameraIcon = require("./icons/camera.svg") as string;
+// const CameraIcon = require("./icons/camera.svg") as string;
 
-export { CameraIcon };
+// export { CameraIcon };
+// We are replacing these icons with SVG

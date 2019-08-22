@@ -1,15 +1,16 @@
+import React from 'react';
+
 import DialogModal from '../DialogModal';
-import PhotoRecBox from '../../../PhotoRecBox/PhotoRecBox';
 
 describe('DialogModal', () => {
 	it('renders', () => {
 		const tree = shallow(
 			<DialogModal
 				modalTitle="test headline"
-				blueButtonClick={() => {}}
-				whiteButtonClick={() => {}}
+				blueButtonClick={() => { }}
+				whiteButtonClick={() => { }}
 				modalIsVisible
-				closeModal={() => {}}
+				closeModal={() => { }}
 				whiteButtonText="test"
 				blueButtonText="message test"
 				isBlueButtoDisabled
@@ -22,15 +23,15 @@ describe('DialogModal', () => {
 		const tree = shallow(
 			<DialogModal
 				modalTitle="test headline"
-				blueButtonClick={() => {}}
-				whiteButtonClick={() => {}}
+				blueButtonClick={() => { }}
+				whiteButtonClick={() => { }}
 				modalIsVisible
-				closeModal={() => {}}
+				closeModal={() => { }}
 				whiteButtonText="test"
 				blueButtonText="message test"
 				isBlueButtoDisabled={false}
 			>
-				<PhotoRecBox boxIcon="test icon" onBoxClick={() => {}} />
+				<div />
 			</DialogModal>
 		);
 		matchSnapshot(tree);

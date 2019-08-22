@@ -1,8 +1,10 @@
-import Button from '../Button';
+import React from 'react';
+
+import { Button } from '../../';
 
 describe('Button', () => {
 	it('contains the correct text', () => {
-		const subject = shallow(<Button onClick={() => {}}>Hello world!</Button>);
+		const subject = shallow(<Button onClick={() => { }}>Hello world!</Button>);
 		expect(subject.text()).toEqual('Hello world!');
 	});
 	it('emits correct action upon click', () => {
