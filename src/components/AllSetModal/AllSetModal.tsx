@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
-// import CSSModules from 'react-css-modules';
-// change based on fontawesome
-// import { iconCloseWhite } from '../../assets';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from "@fortawesome/pro-light-svg-icons";
+
 import './AllSetModal.scss';
 
 interface AllSetModalProps {
@@ -41,8 +41,7 @@ const AllSetModal: React.FC<AllSetModalProps> = (props) => {
 		<div styleName={`modal modal-${modalVisibilityClass}`}>
 			<div styleName="modal-box">
 				<div styleName={cx('modal-container', { 'modal-container--bordered': bordered })} className={customStyles}>
-					{/* {showCloseModal && <img src={iconCloseWhite} alt="Close" role="presentation" styleName="modal-icon-close" onClick={onClose} />} */}
-					{showCloseModal && <span styleName="modal-icon-close" onClick={onClose}>X</span>}
+					{showCloseModal && <div styleName="modal-icon-close" onClick={onClose}><FontAwesomeIcon icon={faTimes} /></div>}
 					<div styleName="modal-main-content">
 						<h2 styleName="content-header">{headerText || 'One Last Step!'}</h2>
 

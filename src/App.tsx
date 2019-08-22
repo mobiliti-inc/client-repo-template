@@ -7,7 +7,7 @@ class App extends React.PureComponent {
 		return (
 			<div>
 				Coming soon ....
-				<AllSetModal modalIsVisible />
+				<AllSetModal modalIsVisible showCloseModal />
 			</div>
 		);
 	}
