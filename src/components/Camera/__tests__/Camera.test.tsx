@@ -1,4 +1,7 @@
 import React from 'react';
+import { shallow } from 'enzyme';
+
+import { matchSnapshot } from '../../../../testUtils/matchSnapshot';
 
 import Camera from '../Camera';
 
@@ -26,6 +29,6 @@ describe('Camera', () => {
 			/>);
 		matchSnapshot(subject);
 		expect(subject.html()).toContain(
-			'<canvas width="500" height="300" class="hide"></canvas><video autoplay="" class="video"><track kind="captions"/></video>');
+			'<div class="container"><canvas style="width:500px;height:300px" class="hide"></canvas><video autoplay="" class="video" style="width:500px;height:300px"></video></div>');
 	});
 });

@@ -1,7 +1,9 @@
 import React from 'react';
 
-import ProgressEllipsis from '../ProgressEllipsis';
 import { matchSnapshot } from '../../../../testUtils/matchSnapshot';
+import { shallow } from 'enzyme';
+
+import ProgressEllipsis from '../ProgressEllipsis';
 
 describe('ProgressEllipsis', () => {
 	it('renders name step correctly', () => {

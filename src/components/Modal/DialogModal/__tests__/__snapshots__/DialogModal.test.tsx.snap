@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DialogModal renders 1`] = `
+<t
+  className=""
+  footer={null}
+  header={
+    <t
+      onClose={[Function]}
+    />
+  }
+  onClose={[Function]}
+  open={true}
+>
+  <div
+    className="title"
+  >
+    test headline
+  </div>
+</t>
+`;
+
+exports[`DialogModal renders with children 1`] = `
+<t
+  className=""
+  footer={null}
+  header={
+    <t
+      onClose={[Function]}
+    />
+  }
+  onClose={[Function]}
+  open={true}
+>
+  <div
+    className="title"
+  >
+    test headline
+  </div>
+  <div />
+</t>
+`;

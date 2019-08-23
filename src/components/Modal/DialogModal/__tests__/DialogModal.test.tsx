@@ -1,4 +1,7 @@
 import React from 'react';
+import { shallow } from 'enzyme';
+
+import { matchSnapshot } from '../../../../../testUtils/matchSnapshot';
 
 import DialogModal from '../DialogModal';
 
@@ -13,7 +16,7 @@ describe('DialogModal', () => {
 				closeModal={() => { }}
 				whiteButtonText="test"
 				blueButtonText="message test"
-				isBlueButtoDisabled
+				isBlueButtonDisabled
 			/>
 		);
 		matchSnapshot(tree);
@@ -29,7 +32,7 @@ describe('DialogModal', () => {
 				closeModal={() => { }}
 				whiteButtonText="test"
 				blueButtonText="message test"
-				isBlueButtoDisabled={false}
+				isBlueButtonDisabled={false}
 			>
 				<div />
 			</DialogModal>

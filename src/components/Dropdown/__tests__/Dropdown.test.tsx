@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import { Dropdown } from '../../';
 
 describe('Dropdown', () => {
@@ -15,7 +16,7 @@ describe('Dropdown', () => {
 			onChange={() => { }}
 			header="Select a Location"
 		/>);
-		expect(subject.text()).toContain('Select a LocationAustin, TXPhiladelphia, PA');
+		expect(subject.text()).toContain('Philadelphia, PA');
 		expect(subject.text()).toContain('Austin, TX');
 	});
 });

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Camera renders 1`] = `
+<div
+  className="container"
+>
+  <canvas
+    className="hide"
+    style={
+      Object {
+        "height": "300px",
+        "width": "500px",
+      }
+    }
+  />
+  <video
+    autoPlay={true}
+    className="video"
+    style={
+      Object {
+        "height": "300px",
+        "width": "500px",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Camera renders video element so one can take photo  1`] = `
+<div
+  className="container"
+>
+  <canvas
+    className="hide"
+    style={
+      Object {
+        "height": "300px",
+        "width": "500px",
+      }
+    }
+  />
+  <video
+    autoPlay={true}
+    className="video"
+    style={
+      Object {
+        "height": "300px",
+        "width": "500px",
+      }
+    }
+  />
+</div>
+`;

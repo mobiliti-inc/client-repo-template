@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput renders 1`] = `
+<Fragment>
+  <div
+    className="input-group"
+  >
+    <input
+      className="input-text input-base"
+      id="test-input"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`TextInput renders the text input with a checkmark at end when input field is valid and inputDidChange is true 1`] = `
+<Fragment>
+  <div
+    className="input-group"
+  >
+    <input
+      className="input-text input-base"
+      id="test-input"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <label
+      className="input-label"
+      htmlFor="test-input"
+    >
+      Text
+    </label>
+    <label
+      className="checkmark-label"
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`TextInput renders the text input with a label when focused by setting a value 1`] = `
+<Fragment>
+  <div
+    className="input-group"
+  >
+    <input
+      className="input-text input-base"
+      id="test-input"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <label
+      className="input-label"
+      htmlFor="test-input"
+    >
+      Text
+    </label>
+  </div>
+</Fragment>
+`;

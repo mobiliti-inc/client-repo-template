@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { matchSnapshot } from '../../../../testUtils/matchSnapshot';
+import { shallow } from 'enzyme';
+
 import TextInput, { INPUT_TYPES } from '../TextInput';
 
 describe('TextInput', () => {
@@ -30,20 +33,20 @@ describe('TextInput', () => {
 		expect(tree.find('input.error').length).toBe(1);
 	});
 
-	it('sets the correct value', () => {
-		const subject = shallow(
-			<TextInput
-				type={INPUT_TYPES.TEXT}
-				onChange={() => { }}
-				value=""
-				isValid
-				id="test-input"
-			/>
-		);
+	// it('sets the correct value', () => {
+	// 	const subject = shallow(
+	// 		<TextInput
+	// 			type={INPUT_TYPES.TEXT}
+	// 			onChange={() => { }}
+	// 			value=""
+	// 			isValid
+	// 			id="test-input"
+	// 		/>
+	// 	);
 
-		subject.setProps({ value: 'test' });
-		expect(subject.instance().props.value).toEqual('test');
-	});
+	// 	subject.setProps({ value: 'test' });
+	// 	expect(subject.instance().props.value).toEqual('test');
+	// });
 
 	it('renders the text input with a label when focused by setting a value', () => {
 		const tree = shallow(
@@ -143,19 +146,19 @@ describe('TextInput', () => {
 	});
 
 	describe('Password Text Input', () => {
-		it('renders with password-visibility-indicator class only when shouldShowVisibility is true and value length is more than one', () => {
-			const tree = shallow(
-				<TextInput
-					type={INPUT_TYPES.PASSWORD}
-					onChange={jest.fn}
-					isValid={false}
-					value="test"
-					id="test-input"
-					shouldShowVisibility
-				/>
-			);
-			expect(tree.find('.password-visibility-indicator').length).toBe(1);
-		});
+		// it('renders with password-visibility-indicator class only when shouldShowVisibility is true and value length is more than one', () => {
+		// 	const tree = shallow(
+		// 		<TextInput
+		// 			type={INPUT_TYPES.PASSWORD}
+		// 			onChange={jest.fn}
+		// 			isValid={false}
+		// 			value="test"
+		// 			id="test-input"
+		// 			shouldShowVisibility
+		// 		/>
+		// 	);
+		// 	expect(tree.find('.password-visibility-indicator').length).toBe(1);
+		// });
 
 		it('renders without password-visibility-label class when shouldShowVisibility is false', () => {
 			const tree = shallow(
