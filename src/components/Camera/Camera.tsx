@@ -8,6 +8,9 @@ import './Camera.scss';
 
 const { useState, useRef, useEffect } = React;
 
+/*  TODO: Adjust camera markers to fit on camera
+	TODO: Support picture retaking */
+
 interface CameraProps {
 	takePhoto: boolean;
 	height: number;
@@ -157,6 +160,3 @@ const Camera: React.FC<CameraProps> = (props) => {
 };
 
 export default Camera;
-
-// TODO: Adjust camera markers to fit on camera
-// TODO: Support picture retaking
