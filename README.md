@@ -1,2 +1,2 @@
-# core-admin-ui
-Core Admin UI
+# CORE Admin UI
+[![Quality Gate Status](https://sonarqube.carsales.mobiliti.com/api/project_badges/measure?project=core-api&metric=alert_status)](https://sonarqube.carsales.mobiliti.com/dashboard?id=core-api) [![Coverage](https://sonarqube.carsales.mobiliti.com/api/project_badges/measure?project=core-api&metric=coverage)](https://sonarqube.carsales.mobiliti.com/dashboard?id=core-api) [![Security Rating](https://sonarqube.carsales.mobiliti.com/api/project_badges/measure?project=core-api&metric=security_rating)](https://sonarqube.carsales.mobiliti.com/dashboard?id=core-api)

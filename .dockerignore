@@ -67,3 +67,6 @@ storybook-static/
 # docker
 Dockerfile
 .dockerignore
+
+# SonarQube
+.scannerwork/

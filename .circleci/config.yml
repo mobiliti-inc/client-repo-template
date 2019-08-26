@@ -15,6 +15,30 @@ jobs:
       - run:
           name: Run tests
           command: npm test
+  analyse:
+    docker:
+      - image: circleci/node:8.12.0
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Install SonarQube
+          command: |
+            sudo apt update
+            sudo apt install -y wget unzip
+            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.0.0.1744-linux.zip
+            unzip sonar-scanner-cli-4.0.0.1744-linux.zip -d ~/sonar-scanner
+            chmod +x ~/sonar-scanner/sonar-scanner-4.0.0.1744-linux/bin/sonar-scanner
+      - run:
+          name: Run SonarQube
+          command: |
+            ~/sonar-scanner/sonar-scanner-4.0.0.1744-linux/bin/sonar-scanner \
+              -Dsonar.projectKey=core-admin-ui \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=$SONAR_HOST_URL \
+              -Dsonar.login=$SONAR_LOGIN_KEY
   update-static-image:
     executor: aws-eks/python3
     parameters:
@@ -67,13 +91,16 @@ workflows:
   branch:
     jobs:
       - unit-tests
+      - analyse:
+          requires:
+            - unit-tests
       - aws-ecr/build_and_push_image:
           name: build-image-staging
           context: AWS Keys Prod
           repo: core-admin-ui
           tag: test
           requires:
-            - unit-tests
+            - analyse
           filters:
             branches:
               only: develop
@@ -83,7 +110,7 @@ workflows:
           repo: core-admin-ui
           tag: ${CIRCLE_TAG}
           requires:
-            - unit-tests
+            - analyse
           filters:
             tags:
               only: /^v.*/
