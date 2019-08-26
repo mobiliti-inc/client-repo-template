@@ -18,9 +18,9 @@ jobs:
 
 orbs:
   aws-ecr: circleci/aws-ecr@3.1.0
+  aws-eks: circleci/aws-eks@0.2.2
 
 workflows:
-  version: 2
   branch:
     jobs:
       - unit-tests
@@ -31,9 +31,9 @@ workflows:
           tag: test
           requires:
             - unit-tests
-          filters:
-            branches:
-              only: develop
+          # filters:
+          #   branches:
+          #     only: develop
       - aws-ecr/build_and_push_image:
           name: build-image-master
           context: AWS Keys Prod
@@ -44,3 +44,17 @@ workflows:
           filters:
             branches:
               only: master
+      - aws-eks/update-container-image:
+          name: deploy-admin-ui-staging
+          cluster-name: core-staging-cluster
+          # container-image-updates: 'admin-ui=nginx:1.9.1'
+          post-steps:
+            - kubernetes/delete-resource:
+                resource-names: admin-ui
+                resource-types: deployment
+                wait: true
+          record: true
+          resource-name: deployment/admin-ui
+          # filters:
+          #   branches:
+          #     only: develop
