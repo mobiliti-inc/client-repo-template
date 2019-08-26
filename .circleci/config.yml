@@ -19,6 +19,7 @@ jobs:
 orbs:
   aws-ecr: circleci/aws-ecr@3.1.0
   aws-eks: circleci/aws-eks@0.2.2
+  kubernetes: circleci/kubernetes@0.3.0
 
 workflows:
   branch:
@@ -44,17 +45,20 @@ workflows:
           filters:
             branches:
               only: master
-      - aws-eks/update-container-image:
+      - kubernetes/delete-resource:
           name: deploy-admin-ui-staging
-          cluster-name: core-staging-cluster
-          container-image-updates: 'admin-ui=273325000860.dkr.ecr.ap-southeast-2.amazonaws.com/core-admin-ui:test'
-          post-steps:
-            - kubernetes/delete-resource:
-                resource-names: admin-ui
-                resource-types: deployment
-                wait: true
-          record: true
-          resource-name: deployment/admin-ui
+          label-selector: app=admin-ui
+          resource-types: replicaset
+          wait: true
           # filters:
           #   branches:
           #     only: develop
+      - aws-eks/update-container-image:
+          name: deploy-admin-ui-production
+          cluster-name: core-production-cluster
+          container-image-updates: 'admin-ui=273325000860.dkr.ecr.ap-southeast-2.amazonaws.com/core-admin-ui:latest'
+          record: true
+          resource-name: deployment/admin-ui
+          filters:
+            branches:
+              only: master
