@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import { boolean } from '@storybook/addon-knobs';
 import * as React from 'react';
-import { Dropdown } from '../';
+import { Dropdown } from '..';
 
 let ages = [
 	{

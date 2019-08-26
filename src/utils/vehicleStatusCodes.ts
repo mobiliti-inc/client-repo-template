@@ -1,4 +1,4 @@
-export default {
+export default <any>{
 	1: "Available",
 	2: "Out on Subscription",
 	3: "Coming Soon"

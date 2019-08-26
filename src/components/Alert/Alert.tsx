@@ -1,8 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
-import CSSModules from 'react-css-modules';
-// import { iconClose } from '../../assets';
-import * as styles from './Alert.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from "@fortawesome/pro-light-svg-icons";
+
+import './Alert.scss';
 
 interface AlertProps {
 	show: boolean;
@@ -18,8 +19,7 @@ const Alert: React.FC<AlertProps> = (props) => {
 		<div styleName={cx('container', { 'container--hide': !show, 'container--closable': closable })}>
 			{closable && (
 				<div styleName="icon" onClick={onClose} role="presentation">
-					{/* <img styleName="icon--close" src={iconClose} alt="Close" /> */}
-					X
+					<div styleName="icon--close"><FontAwesomeIcon icon={faTimes} /></div>
 				</div>
 			)}
 			{title && <span styleName="title">{title}</span>}
@@ -29,4 +29,4 @@ const Alert: React.FC<AlertProps> = (props) => {
 	);
 };
 
-export default CSSModules(Alert, styles, { allowMultiple: true });
+export default Alert;

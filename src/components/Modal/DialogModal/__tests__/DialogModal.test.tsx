@@ -1,18 +1,22 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import { matchSnapshot } from '../../../../../testUtils/matchSnapshot';
+
 import DialogModal from '../DialogModal';
-import PhotoRecBox from '../../../PhotoRecBox/PhotoRecBox';
 
 describe('DialogModal', () => {
 	it('renders', () => {
 		const tree = shallow(
 			<DialogModal
 				modalTitle="test headline"
-				blueButtonClick={() => {}}
-				whiteButtonClick={() => {}}
+				blueButtonClick={() => { }}
+				whiteButtonClick={() => { }}
 				modalIsVisible
-				closeModal={() => {}}
+				closeModal={() => { }}
 				whiteButtonText="test"
 				blueButtonText="message test"
-				isBlueButtoDisabled
+				isBlueButtonDisabled
 			/>
 		);
 		matchSnapshot(tree);
@@ -22,15 +26,15 @@ describe('DialogModal', () => {
 		const tree = shallow(
 			<DialogModal
 				modalTitle="test headline"
-				blueButtonClick={() => {}}
-				whiteButtonClick={() => {}}
+				blueButtonClick={() => { }}
+				whiteButtonClick={() => { }}
 				modalIsVisible
-				closeModal={() => {}}
+				closeModal={() => { }}
 				whiteButtonText="test"
 				blueButtonText="message test"
-				isBlueButtoDisabled={false}
+				isBlueButtonDisabled={false}
 			>
-				<PhotoRecBox boxIcon="test icon" onBoxClick={() => {}} />
+				<div />
 			</DialogModal>
 		);
 		matchSnapshot(tree);

@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 import cx from 'classnames';
-import CSSModules from 'react-css-modules';
 
-import * as styles from './LoadingSpinner.scss';
+import './LoadingSpinner.scss';
 
 interface LoadingSpinnerProps {
 	show: boolean;
@@ -26,4 +25,4 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ show, black, blue, clas
 	</Fragment>
 );
 
-export default CSSModules(LoadingSpinner, styles, { allowMultiple: true });
+export default LoadingSpinner;

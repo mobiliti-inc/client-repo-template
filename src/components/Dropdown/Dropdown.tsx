@@ -1,11 +1,10 @@
 import * as React from 'react';
 import cx from 'classnames';
-import CSSModules from 'react-css-modules';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp, faChevronDown } from "@fortawesome/pro-light-svg-icons";
 
 import { isUndefined } from 'util';
-import * as styles from './Dropdown.scss';
-// Will be replaced by ones from fontawesome
-// import { chevronUp, chevronDown } from '../../assets';
+import './Dropdown.scss';
 
 type Data = {
 	value: string,
@@ -121,19 +120,14 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 				onClick={showDropdown}
 				onKeyDown={showDropdown}
 			>
-				{selectedValue.value}&nbsp;&nbsp; ^
-					{/* <img
-						styleName={classNames('chevron-down', { 'modal-chevron-down': modal })}
-						src={chevronDown}
-						alt="chevron-down"
-					/> */}
+				{selectedValue.value}&nbsp;&nbsp;
+				<span styleName={cx('chevron-down', { 'modal-chevron-down': modal })}><FontAwesomeIcon icon={faChevronDown} /></span>
 			</p>
 			<div styleName={dropdownClass} onClick={(event: any) => hideDropdown(event)} className={`${dropdownClass} ${dropdownParentClass}`}>
 				<h3 styleName="dropdown-menu-title" className={`dropdown-menu-title ${dropDownMenuTitleClass}`}>
 					<span>{header}</span>
-					{/* <img src={chevronUp} alt="chevron-up" /> */}
-					v
-					</h3>
+					<FontAwesomeIcon icon={faChevronUp} />
+				</h3>
 				{customOptionsList ? (
 					<div styleName={!dropdown ? 'hide' : modalDropdownClass}>
 						{customOptionsList}
@@ -146,4 +140,4 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 	);
 };
 
-export default CSSModules(Dropdown, styles, { allowMultiple: true });
+export default Dropdown;
