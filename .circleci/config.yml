@@ -16,24 +16,6 @@ jobs:
       - run:
           name: Run tests
           command: npm test
-    
-  deploy-staging:
-    docker:
-      - image: circleci/node:8.12.0
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-    
-  deploy-prod:
-    docker:
-      - image: circleci/node:8.12.0
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
 
 orbs:
   aws-ecr: circleci/aws-ecr@3.1.0
