@@ -47,7 +47,7 @@ workflows:
       - aws-eks/update-container-image:
           name: deploy-admin-ui-staging
           cluster-name: core-staging-cluster
-          # container-image-updates: 'admin-ui=nginx:1.9.1'
+          container-image-updates: 'admin-ui=273325000860.dkr.ecr.ap-southeast-2.amazonaws.com/core-admin-ui:test'
           post-steps:
             - kubernetes/delete-resource:
                 resource-names: admin-ui
