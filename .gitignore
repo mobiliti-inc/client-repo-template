@@ -63,3 +63,6 @@ typings/
 # Storybook build folders
 storybook-static/
 .storybook/build/
+
+# SonarQube
+.scannerwork/
