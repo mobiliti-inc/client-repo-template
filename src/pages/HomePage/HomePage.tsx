@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { AllSetModal } from './components';
+import { AllSetModal } from '../../components';
 
-class App extends React.PureComponent {
+class HomePage extends React.PureComponent {
 	render() {
 		return (
 			<div>
@@ -13,4 +13,4 @@ class App extends React.PureComponent {
 	}
 }
 
-export default App;
+export default HomePage;
