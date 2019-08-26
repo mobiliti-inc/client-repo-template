@@ -15,11 +15,30 @@ jobs:
       - run:
           name: Run tests
           command: npm test
+  deploy-staging:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      resource-name:
+        description: |
+          Name of the resource to update
+        type: string
+    steps:
+      - kubernetes/install
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
+      - run:
+          command: |
+            kubectl get all -l app=<< parameters.resource-name >>
+          name: Delete Replica Set
 
 orbs:
   aws-ecr: circleci/aws-ecr@3.1.0
   aws-eks: circleci/aws-eks@0.2.2
-  kubernetes: circleci/kubernetes@1.0.0
+  kubernetes: circleci/kubernetes@0.3.0
 
 workflows:
   branch:
@@ -45,20 +64,25 @@ workflows:
           filters:
             branches:
               only: master
-      - kubernetes/delete-resource:
+      - deploy-staging:
           name: deploy-admin-ui-staging
-          label-selector: app=admin-ui
-          resource-types: replicaset
-          wait: true
-          # filters:
-          #   branches:
-          #     only: develop
-      - aws-eks/update-container-image:
-          name: deploy-admin-ui-production
-          cluster-name: core-production-cluster
-          container-image-updates: 'admin-ui=273325000860.dkr.ecr.ap-southeast-2.amazonaws.com/core-admin-ui:latest'
-          record: true
-          resource-name: deployment/admin-ui
-          filters:
-            branches:
-              only: master
+          context: AWS Keys Prod
+          cluster-name: core-staging-cluster
+          resource-name: admin-ui
+      # - kubernetes/delete-resource:
+      #     name: deploy-admin-ui-staging
+      #     label-selector: app=admin-ui
+      #     resource-types: replicaset
+      #     wait: true
+      #     filters:
+      #       branches:
+      #         only: develop
+      # - aws-eks/update-container-image:
+      #     name: deploy-admin-ui-production
+      #     cluster-name: core-production-cluster
+      #     container-image-updates: 'admin-ui=273325000860.dkr.ecr.ap-southeast-2.amazonaws.com/core-admin-ui:latest'
+      #     record: true
+      #     resource-name: deployment/admin-ui
+      #     filters:
+      #       branches:
+      #         only: master
