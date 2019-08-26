@@ -2,9 +2,8 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
 jobs:
-
   unit-tests:
     docker:
       - image: circleci/node:8.12.0
@@ -16,58 +15,110 @@ jobs:
       - run:
           name: Run tests
           command: npm test
-    
-  deploy-staging:
-    docker:
-      - image: circleci/node:8.12.0
+  update-static-image:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      resource-name:
+        description: |
+          Name of the resource to update
+        type: string
     steps:
-      - checkout
+      - kubernetes/install
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
       - run:
-          name: Install dependencies
-          command: npm install
-    
-  deploy-prod:
-    docker:
-      - image: circleci/node:8.12.0
+          command: |
+            kubectl delete rs -l app=<< parameters.resource-name >>
+          name: Delete Replica Set
+  update-tagged-image:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+      resource-name:
+        description: |
+          Name of the resource to update
+        type: string
+      image:
+        description: |
+          Image URL of new image
+        type: string
     steps:
-      - checkout
+      - kubernetes/install
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
       - run:
-          name: Install dependencies
-          command: npm install
+          command: |
+            kubectl set image deployment/<< parameters.resource-name >> << parameters.resource-name >>=<< parameters.image >>
+          name: Delete Replica Set
 
+orbs:
+  aws-ecr: circleci/aws-ecr@3.1.0
+  kubernetes: circleci/kubernetes@0.3.0
+  aws-eks: circleci/aws-eks@0.2.2
 
 workflows:
-  version: 2
-
-  pr-tests:
+  branch:
     jobs:
-      - unit-tests:
-          filters:
-            branches:
-              only: /pull\/.*/
-
-  test-and-deploy-staging:
-    jobs:
-      - unit-tests:
-          filters:
-            branches:
-              only: develop
-      - deploy-staging:
+      - unit-tests
+      - aws-ecr/build_and_push_image:
+          name: build-image-staging
+          context: AWS Keys Prod
+          repo: core-admin-ui
+          tag: test
           requires:
             - unit-tests
           filters:
             branches:
               only: develop
-
-  test-and-deploy-prod:
-    jobs:
-      - unit-tests:
-          filters:
-            branches:
-              only: master
-      - deploy-prod:
+      - aws-ecr/build_and_push_image:
+          name: build-image-production
+          context: AWS Keys Prod
+          repo: core-admin-ui
+          tag: ${CIRCLE_TAG}
           requires:
             - unit-tests
           filters:
+            tags:
+              only: /^v.*/
             branches:
-              only: master
+              ignore: /.*/
+      - update-static-image:
+          name: deploy-admin-ui-staging
+          context: AWS Keys Prod
+          cluster-name: core-staging-cluster
+          resource-name: admin-ui
+          requires:
+            - build-image-staging
+          filters:
+            branches:
+              only: develop
+      - update-static-image:
+          name: deploy-storybook-staging
+          context: AWS Keys Prod
+          cluster-name: core-staging-cluster
+          resource-name: storybook
+          requires:
+            - build-image-staging
+          filters:
+            branches:
+              only: develop
+      - update-tagged-image:
+          name: deploy-admin-ui-production
+          context: AWS Keys Prod
+          cluster-name: core-production-cluster
+          resource-name: admin-ui
+          image: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/core-admin-ui:${CIRCLE_TAG}"
+          requires:
+            - build-image-production
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
