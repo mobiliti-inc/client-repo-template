@@ -1,10 +1,12 @@
 import * as React from 'react';
 import cx from 'classnames';
-import CSSModules from 'react-css-modules';
-const { useState, useRef, useEffect } = React;
-import * as styles from './Camera.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera } from "@fortawesome/pro-light-svg-icons";
+
 import { Button } from '../';
-import { CameraIcon } from '../../assets';
+import './Camera.scss';
+
+const { useState, useRef, useEffect } = React;
 
 interface CameraProps {
 	takePhoto: boolean;
@@ -145,7 +147,8 @@ const Camera: React.FC<CameraProps> = (props) => {
 			/>
 			{allowButton && !photoTaken && (
 				<div styleName="button">
-					<Button shape="round" ripple onClick={() => captureImage()}><img src={CameraIcon} alt="camera" /></Button>
+					<FontAwesomeIcon icon={faCamera} />
+					<Button shape="round" ripple onClick={() => captureImage()}>[]</Button>
 				</div>
 			)}
 			{showMarkers && renderMarkers()}
@@ -153,7 +156,7 @@ const Camera: React.FC<CameraProps> = (props) => {
 	);
 };
 
-export default CSSModules(Camera, styles, { allowMultiple: true });
+export default Camera;
 
 // TODO: Adjust camera markers to fit on camera
 // TODO: Support picture retaking

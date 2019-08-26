@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AllSetModal renders 1`] = `
+<div
+  className="modal modal-hide"
+>
+  <div
+    className="modal-box"
+  >
+    <div
+      className="modal-container"
+    >
+      <div
+        className="modal-main-content"
+      >
+        <h2
+          className="content-header"
+        >
+          One Last Step!
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+`;

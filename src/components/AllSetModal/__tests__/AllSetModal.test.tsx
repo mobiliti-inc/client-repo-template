@@ -1,3 +1,7 @@
+import React from 'react';
+import { matchSnapshot } from '../../../../testUtils/matchSnapshot';
+import { shallow } from 'enzyme';
+
 import AllSetModal from '../AllSetModal';
 
 describe('AllSetModal', () => {
@@ -14,12 +18,12 @@ describe('AllSetModal', () => {
 
 	it('should render close button just in case needed', () => {
 		const tree = shallow(<AllSetModal />);
-		expect(tree.find('img')).toHaveLength(0);
+		expect(tree.find('FontAwesomeIcon')).toHaveLength(0);
 		tree.setProps({ showCloseModal: true });
-		expect(tree.find('img')).toHaveLength(1);
+		expect(tree.find('FontAwesomeIcon')).toHaveLength(1);
 	});
 
-	it('should be able to bve hidden and show(toggled)', () => {
+	it('should be able to be hidden and show(toggled)', () => {
 		const tree = shallow(<AllSetModal />);
 		expect(tree.find('.modal-hide')).toHaveLength(1);
 		expect(tree.find('.modal-visible')).toHaveLength(0);

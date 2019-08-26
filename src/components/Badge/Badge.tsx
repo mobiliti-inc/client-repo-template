@@ -1,17 +1,16 @@
 import * as React from 'react';
-import CSSModules from 'react-css-modules';
 
 import { StatusMessages } from '../../utils';
-import * as styles from './Badge.scss';
+import './Badge.scss';
 
 interface BadgeProps {
 	status: number;
-};
+}
 
 const Badge: React.FC<BadgeProps> = (props) => {
 	const { status } = props;
 
-	const renderStatusMessage = (status: number) => {
+	const renderStatusMessage = (status: any) => {
 		const message = StatusMessages[status];
 		return message;
 	};
@@ -22,6 +21,6 @@ const Badge: React.FC<BadgeProps> = (props) => {
 	return (
 		<div styleName={`${styleName} ${comingSoon}`}>{renderStatusMessage(status)}</div>
 	);
-}
+};
 
-export default CSSModules(Badge, styles, { allowMultiple: true });
+export default Badge;

@@ -1,11 +1,10 @@
 import React from 'react';
-import CSSModules from 'react-css-modules';
 // @ts-ignore
 import Modal, { EasyModalHeader } from 'easy-modal-react';
 
 import { Button } from '../../';
 
-import * as styles from './DialogModal.scss';
+import './DialogModal.scss';
 
 interface DialogModalProps {
 	blueButtonClick?: (...args: any[]) => any;
@@ -66,4 +65,4 @@ const DialogModal: React.FC<DialogModalProps> = props => {
 	);
 };
 
-export default CSSModules(DialogModal, styles, { allowMultiple: true });
+export default DialogModal;

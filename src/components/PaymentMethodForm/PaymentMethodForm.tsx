@@ -1,12 +1,11 @@
 import * as React from 'react';
-import CSSModules from 'react-css-modules';
 // @ts-ignore
 import { card } from 'creditcards';
 
 import { cardExpiryDateFormatter } from '../../utils';
 import { Button, TextInput } from '..';
 
-import * as styles from './PaymentMethodForm.scss';
+import './PaymentMethodForm.scss';
 
 interface PaymentMethodFormProps {
 	onFormValidCheck: (...args: any[]) => any;
@@ -175,4 +174,4 @@ const PaymentMethodForm: React.FC<PaymentMethodFormProps> = (props) => {
 	);
 };
 
-export default CSSModules(PaymentMethodForm, styles, { allowMultiple: true });
+export default PaymentMethodForm;

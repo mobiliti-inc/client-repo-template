@@ -1,8 +1,7 @@
 import * as React from 'react';
 import cx from 'classnames';
-import CSSModules from 'react-css-modules';
 
-import * as styles from './TextInput.scss';
+import './TextInput.scss';
 
 export const INPUT_TYPES = {
 	PASSWORD: 'password',
@@ -98,4 +97,4 @@ const TextInput: React.FC<TextInputProps> = (props) => {
 	);
 };
 
-export default CSSModules(TextInput, styles, { allowMultiple: true });
+export default TextInput;

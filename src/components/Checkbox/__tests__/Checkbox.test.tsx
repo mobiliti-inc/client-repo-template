@@ -1,10 +1,13 @@
-import Checkbox from '../Checkbox';
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import { Checkbox } from '../../';
 
 describe('Checkbox', () => {
 	it('contains the correct text label', () => {
 		const subject = shallow(
 			<Checkbox
-				onChange={() => {}}
+				onChange={() => { }}
 				checked={false}
 				label="Hello world!"
 			/>);

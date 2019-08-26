@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddPaymentMethodForm renders 1`] = `
+<div
+  className="form-container"
+>
+  <TextInput
+    id="cardNumber"
+    isValid={true}
+    label="Card Number"
+    name="cardNumber"
+    onBlur={[Function]}
+    onChange={[Function]}
+    placeholder="Card Number"
+    type="text"
+    value=""
+  />
+  <div
+    className="column-2"
+  >
+    <TextInput
+      id="cardExpirationDate"
+      isValid={true}
+      label="Expiration"
+      name="cardExpirationDate"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Expiration"
+      type="text"
+      value=""
+    />
+    <TextInput
+      id="zip"
+      isValid={true}
+      label="Zip"
+      name="zip"
+      onChange={[Function]}
+      placeholder="Zip"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="column-2"
+  >
+    <TextInput
+      id="cvv"
+      isValid={true}
+      label="CVV"
+      name="cvv"
+      onChange={[Function]}
+      placeholder="CVV"
+      type="text"
+      value=""
+    />
+  </div>
+  <div />
+  <div
+    className="column-2 btn-container"
+  >
+    <div
+      className="btn-disabled"
+    >
+      <Button
+        bordered={true}
+        disabled={true}
+        onClick={[Function]}
+        showLoader={false}
+      >
+        Save
+      </Button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AddPaymentMethodForm renders without onFormValidCheck function 1`] = `
+<div
+  className="form-container"
+>
+  <TextInput
+    id="cardNumber"
+    isValid={true}
+    label="Card Number"
+    name="cardNumber"
+    onBlur={[Function]}
+    onChange={[Function]}
+    placeholder="Card Number"
+    type="text"
+    value=""
+  />
+  <div
+    className="column-2"
+  >
+    <TextInput
+      id="cardExpirationDate"
+      isValid={true}
+      label="Expiration"
+      name="cardExpirationDate"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Expiration"
+      type="text"
+      value=""
+    />
+    <TextInput
+      id="zip"
+      isValid={true}
+      label="Zip"
+      name="zip"
+      onChange={[Function]}
+      placeholder="Zip"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="column-2"
+  >
+    <TextInput
+      id="cvv"
+      isValid={true}
+      label="CVV"
+      name="cvv"
+      onChange={[Function]}
+      placeholder="CVV"
+      type="text"
+      value=""
+    />
+  </div>
+  <div />
+  <div
+    className="column-2 btn-container"
+  >
+    <div
+      className="btn-disabled"
+    >
+      <Button
+        bordered={true}
+        disabled={true}
+        onClick={[Function]}
+        showLoader={false}
+      >
+        Save
+      </Button>
+    </div>
+    <Button
+      bordered={true}
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      Cancel
+    </Button>
+  </div>
+</div>
+`;

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
-import CSSModules from 'react-css-modules';
-// change based on fontawesome
-// import { iconCloseWhite } from '../../assets';
-import * as styles from './AllSetModal.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from "@fortawesome/pro-light-svg-icons";
+
+import './AllSetModal.scss';
 
 interface AllSetModalProps {
 	modalIsVisible?: boolean;
@@ -18,7 +18,7 @@ interface AllSetModalProps {
 	customStyles?: string;
 	onClose?: (...args: any[]) => any;
 	showButton?: boolean;
-};
+}
 
 const AllSetModal: React.FC<AllSetModalProps> = (props) => {
 	const {
@@ -41,12 +41,11 @@ const AllSetModal: React.FC<AllSetModalProps> = (props) => {
 		<div styleName={`modal modal-${modalVisibilityClass}`}>
 			<div styleName="modal-box">
 				<div styleName={cx('modal-container', { 'modal-container--bordered': bordered })} className={customStyles}>
-					{/* {showCloseModal && <img src={iconCloseWhite} alt="Close" role="presentation" styleName="modal-icon-close" onClick={onClose} />} */}
-					{showCloseModal && <span styleName="modal-icon-close" onClick={onClose}>X</span>}
+					{showCloseModal && <div styleName="modal-icon-close" onClick={onClose}><FontAwesomeIcon icon={faTimes} /></div>}
 					<div styleName="modal-main-content">
 						<h2 styleName="content-header">{headerText || 'One Last Step!'}</h2>
 
-						<p styleName="content-description">{bodyText || ''}</p>
+						{bodyText && <p styleName="content-description">{bodyText}</p>}
 						{showButton &&
 							(customButton || (
 								<Link styleName="browse-button" to={buttonTo || '/vehicles'}>
@@ -60,4 +59,4 @@ const AllSetModal: React.FC<AllSetModalProps> = (props) => {
 	);
 };
 
-export default CSSModules(AllSetModal, styles, { allowMultiple: true });
+export default AllSetModal;

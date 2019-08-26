@@ -1,7 +1,6 @@
 import * as React from "react";
-import CSSModules from "react-css-modules"
 
-import * as styles from "./ProgressEllipsis.scss";
+import "./ProgressEllipsis.scss";
 
 interface ProgressEllipsisProps {
 	step: string;
@@ -40,4 +39,4 @@ const ProgressEllipsis: React.FC<ProgressEllipsisProps> = (props) => {
 	}
 };
 
-export default CSSModules(ProgressEllipsis, styles);
+export default ProgressEllipsis;

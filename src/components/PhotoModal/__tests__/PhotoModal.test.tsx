@@ -1,3 +1,8 @@
+import React from 'react';
+
+import { matchSnapshot } from '../../../../testUtils/matchSnapshot';
+import { shallow } from 'enzyme';
+
 import AddPhotoModal from '../PhotoModal';
 
 describe('AddPhotoModal', () => {
