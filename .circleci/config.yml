@@ -25,10 +25,7 @@ workflows:
 
   pr-tests:
     jobs:
-      - unit-tests:
-          filters:
-            branches:
-              only: /pull\/.*/
+      - unit-tests
       - aws-ecr/build_and_push_image:
           name: build-image-staging
           context: AWS Keys Prod
