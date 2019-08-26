@@ -69,6 +69,8 @@ workflows:
           context: AWS Keys Prod
           cluster-name: core-staging-cluster
           resource-name: admin-ui
+          requires:
+            - build-image-staging
       # - kubernetes/delete-resource:
       #     name: deploy-admin-ui-staging
       #     label-selector: app=admin-ui
