@@ -98,6 +98,16 @@ workflows:
           filters:
             branches:
               only: develop
+      - update-static-image:
+          name: deploy-storybook-staging
+          context: AWS Keys Prod
+          cluster-name: core-staging-cluster
+          resource-name: storybook
+          requires:
+            - build-image-staging
+          filters:
+            branches:
+              only: develop
       - update-tagged-image:
           name: deploy-admin-ui-production
           context: AWS Keys Prod
