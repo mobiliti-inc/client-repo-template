@@ -2,9 +2,8 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
 jobs:
-
   unit-tests:
     docker:
       - image: circleci/node:8.12.0
