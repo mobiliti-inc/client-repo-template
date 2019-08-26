@@ -22,8 +22,7 @@ orbs:
 
 workflows:
   version: 2
-
-  pr-tests:
+  branch:
     jobs:
       - unit-tests
       - aws-ecr/build_and_push_image:
