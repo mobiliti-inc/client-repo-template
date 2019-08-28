@@ -1,7 +1,11 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const autoprefixer = require("autoprefixer");
 const pxToRem = require("postcss-pxtorem");
+
+const { API_ENDPOINTS } = require("./api");
+
 module.exports = {
 	// webpack will take the files from ./src/index
 	entry: "./src/index",
@@ -80,6 +84,11 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: "./src/index.html"
+		}),
+		new webpack.DefinePlugin({
+			"process.env": {
+				api_url: JSON.stringify(API_ENDPOINTS.MOCK_API)
+			}
 		})
 	]
 };
