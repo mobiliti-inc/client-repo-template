@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $white;
+    &__name {
+        display: flex;
+        font-family: $body-font;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.3em;
+        line-height: 36px;
+    }
+}

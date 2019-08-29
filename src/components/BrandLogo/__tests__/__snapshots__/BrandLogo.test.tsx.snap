@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrandLogo renders 1`] = `
+<div
+  className="brand"
+>
+  <img
+    alt="Brand Logo"
+    src="test-file-stub"
+  />
+  <span
+    className="brand__name"
+  >
+    carsales.com
+  </span>
+</div>
+`;
+
+exports[`BrandLogo renders with brand Name 1`] = `
+<div
+  className="brand"
+>
+  <img
+    alt="Brand Logo"
+    src="test-file-stub"
+  />
+  <span
+    className="brand__name"
+  >
+    Mobiliti.com
+  </span>
+</div>
+`;
+
+exports[`BrandLogo renders with logo 1`] = `
+<div
+  className="brand"
+>
+  <img
+    alt="Brand Logo"
+    src="logo.png"
+  />
+  <span
+    className="brand__name"
+  >
+    carsales.com
+  </span>
+</div>
+`;
+
+exports[`BrandLogo renders with style 1`] = `
+<div
+  className="brand"
+  style={
+    Object {
+      "background": "red",
+    }
+  }
+>
+  <img
+    alt="Brand Logo"
+    src="test-file-stub"
+  />
+  <span
+    className="brand__name"
+  >
+    carsales.com
+  </span>
+</div>
+`;
