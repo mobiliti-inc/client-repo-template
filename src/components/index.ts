@@ -13,6 +13,8 @@ import Badge from "./Badge/Badge";
 import Checkbox from "./Checkbox/Checkbox";
 import Tile from "./Tile/Tile";
 import ProgressEllipsis from "./ProgressEllipsis/ProgressEllipsis";
+import SideMenu from "./SideMenu/SideMenu";
+import BrandLogo from './BrandLogo/BrandLogo';
 
 export {
 	Button,
@@ -29,5 +31,7 @@ export {
 	Badge,
 	Checkbox,
 	Tile,
-	ProgressEllipsis
+	ProgressEllipsis,
+	SideMenu,
+	BrandLogo
 };

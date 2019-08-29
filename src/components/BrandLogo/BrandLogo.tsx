@@ -13,7 +13,7 @@ type customStyle = {
 interface IProps {
 	style?: customStyle;
 	logo?: string;
-	brandName?: string | ReactNode;
+	brandName?: ReactNode;
 }
 
 const BrandLogo: FC<IProps> = ({ style, logo, brandName }) => (

@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+
+.side-menu {
+    display: flex;
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 0.01%, rgba(255, 255, 255, 0.25) 85.42%), linear-gradient(0deg, rgba(73, 150, 174, 0.8), rgba(73, 150, 174, 0.8)), radial-gradient(450.00px at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 10em;
+    min-height: 100vh;
+    color: $white;
+    justify-content: center;
+    padding: 24px 0;
+    transition: transform .5s;
+
+
+    @media (max-width: $mobile-width) {
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        transform:  translate(-1000px)
+	}
+}
+
+.visible {
+    transform:  translate(0)
+}

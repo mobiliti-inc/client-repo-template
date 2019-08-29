@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrandLogo renders 1`] = `
+<div
+  className="side-menu"
+/>
+`;
+
+exports[`BrandLogo renders with children 1`] = `
+<div
+  className="side-menu"
+>
+  text
+</div>
+`;
+
+exports[`BrandLogo renders with style 1`] = `
+<div
+  className="side-menu"
+  style={
+    Object {
+      "background": "red",
+    }
+  }
+/>
+`;
+
+exports[`BrandLogo renders with visible 1`] = `
+<div
+  className="side-menu visible"
+/>
+`;
