@@ -34,7 +34,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
-    "@invisionapp/dsm-storybook": "0.0.93",
+    "@invisionapp/dsm-storybook": "0.0.97",
     "@storybook/addon-actions": "^5.1.10",
     "@storybook/addon-console": "^1.2.1",
     "@storybook/addon-info": "^5.1.10",
@@ -91,7 +91,7 @@
   },
   "scripts": {
     "bundle": "webpack",
-    "test": "ENV=test jest -u --no-cache",
+    "test": "ENV=test jest -u --no-cache --coverage",
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
     "check-types": "tsc",
