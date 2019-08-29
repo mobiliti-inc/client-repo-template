@@ -1,0 +1,18 @@
+@import '~variables';
+
+
+html {
+    @include fluid-type($min_width, $max_width, $min_font, $max_font);
+  }
+
+
+body {
+	font-family: $body-font;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+

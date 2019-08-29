@@ -33,6 +33,12 @@ $shadow-color: $black;
 $box-shadow--standard: 2px 1px 10px rgb(211, 211, 211);
 $box-shadow--active: 1px 0px 10px rgb(211, 211, 211);
 
+
+$min_width: 320px;
+$max_width: 1200px;
+$min_font: 14px;
+$max_font: 24px;
+
 @mixin large-headline {
 	font-family: $headline-font;
 	font-weight: bold;
@@ -209,3 +215,26 @@ $box-shadow--active: 1px 0px 10px rgb(211, 211, 211);
 		height: 0;
 	}
 }
+
+@function strip-unit($value) {
+	@return $value / ($value * 0 + 1);
+  }
+
+  @mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+	$u1: unit($min-vw);
+	$u2: unit($max-vw);
+	$u3: unit($min-font-size);
+	$u4: unit($max-font-size);
+
+	@if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+	  & {
+		font-size: $min-font-size;
+		@media screen and (min-width: $min-vw) {
+		  font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+		}
+		@media screen and (min-width: $max-vw) {
+		  font-size: $max-font-size;
+		}
+	  }
+	}
+  }
