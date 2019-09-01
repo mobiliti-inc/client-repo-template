@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlainDropDown drops down when clicked 1`] = `
+<PlainDropDown
+  isSplitted={true}
+  showContent={false}
+  updateShowContent={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+>
+  <div
+    className="dropdown-menu"
+  >
+    <div
+      className="dropdown-menu__top dropdown-menu__top-open dropdown-menu__top-open--divider"
+      onClick={[Function]}
+      role="presentation"
+    />
+    <div
+      className="dropdown-menu__bottom"
+    />
+  </div>
+</PlainDropDown>
+`;
+
+exports[`PlainDropDown renders with content not shown 1`] = `
+<div
+  className="dropdown-menu"
+>
+  <div
+    className="dropdown-menu__top dropdown-menu__top-close"
+    onClick={[Function]}
+    role="presentation"
+  />
+  <div
+    className="dropdown-menu__bottom"
+  />
+</div>
+`;
+
+exports[`PlainDropDown renders with content shown 1`] = `
+<div
+  className="dropdown-menu"
+>
+  <div
+    className="dropdown-menu__top dropdown-menu__top-open"
+    onClick={[Function]}
+    role="presentation"
+  />
+  <div
+    className="dropdown-menu__bottom"
+  />
+</div>
+`;
+
+exports[`PlainDropDown renders with horizontal line between top and bottom content 1`] = `
+<div
+  className="dropdown-menu"
+>
+  <div
+    className="dropdown-menu__top dropdown-menu__top-open dropdown-menu__top-open--divider"
+    onClick={[Function]}
+    role="presentation"
+  />
+  <div
+    className="dropdown-menu__bottom"
+  />
+</div>
+`;

@@ -1,0 +1,51 @@
+@import '../../styles/variables';
+
+.dropdown-menu {
+    color: $white;
+    font-family: $futura;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    cursor: pointer;
+    text-transform: capitalize;
+    &__top {
+        display: grid;
+        border-bottom: 1px solid transparent;
+        transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.5s ease-in-out;
+
+        &-open {
+            display: grid;
+            &+.dropdown-menu__bottom {
+                visibility: visible;
+                opacity: 1;
+                height: 100px;
+            }
+            &--divider {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.123);
+            }
+        }
+
+        &-close {
+            display: grid;
+            &+.dropdown-menu__bottom {
+                visibility: hidden;
+                opacity: 0;
+                height: 0;
+            }
+        }
+    }
+
+    &__bottom {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        transition: all 0.5s ease-in-out;
+        -webkit-transition: all 0.5s ease-in-out;
+    }
+}
+
+
+
+
