@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuItem renders 1`] = `
+<div
+  className="menu-item"
+  onClick={[MockFunction]}
+  role="presentation"
+  style={Object {}}
+>
+  <div
+    className="menu-item__left"
+  >
+    <img
+      alt="Menu Item Icon"
+      src="chevron.png"
+    />
+    <span
+      className="menu-item__left__text"
+    >
+      DashBoard
+    </span>
+  </div>
+  <span
+    className=""
+  />
+</div>
+`;
+
+exports[`MenuItem renders with right icon 1`] = `
+<div
+  className="menu-item"
+  onClick={[MockFunction]}
+  role="presentation"
+  style={Object {}}
+>
+  <div
+    className="menu-item__left"
+  >
+    <img
+      alt="Menu Item Icon"
+      src="chevron.png"
+    />
+    <span
+      className="menu-item__left__text"
+    >
+      DashBoard
+    </span>
+  </div>
+  <div
+    className="menu-item__right"
+  >
+    <img
+      alt="Icon down"
+      className="downIcon"
+      src="test-file-stub"
+    />
+  </div>
+  <span
+    className=""
+  />
+</div>
+`;
+
+exports[`MenuItem renders with up icon shown 1`] = `
+<div
+  className="menu-item"
+  onClick={[MockFunction]}
+  role="presentation"
+  style={Object {}}
+>
+  <div
+    className="menu-item__left"
+  >
+    <img
+      alt="Menu Item Icon"
+      src="chevron.png"
+    />
+    <span
+      className="menu-item__left__text"
+    >
+      DashBoard
+    </span>
+  </div>
+  <div
+    className="menu-item__right"
+  >
+    <img
+      alt="Icon up"
+      className="upIcon"
+      src="test-file-stub"
+    />
+  </div>
+  <span
+    className=""
+  />
+</div>
+`;

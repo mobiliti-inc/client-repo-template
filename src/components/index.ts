@@ -15,6 +15,8 @@ import Tile from "./Tile/Tile";
 import ProgressEllipsis from "./ProgressEllipsis/ProgressEllipsis";
 import SideMenu from "./SideMenu/SideMenu";
 import BrandLogo from './BrandLogo/BrandLogo';
+import PlainDropDown from './PlainDropDown/PlainDropDown';
+import MenuItem from './MenuItem/MenuItem';
 
 export {
 	Button,
@@ -33,5 +35,7 @@ export {
 	Tile,
 	ProgressEllipsis,
 	SideMenu,
-	BrandLogo
+	BrandLogo,
+	PlainDropDown,
+	MenuItem
 };
