@@ -42,7 +42,7 @@ export const apiAction = ({
 	return {
 		type: API,
 		payload: {
-			url: !!url && !url.match(urlRegex) ? api_url + url : url,
+			url: !!url && !url.match(urlRegex) && api_url ? api_url + url : url,
 			method,
 			data,
 			accessToken,
