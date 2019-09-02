@@ -1,24 +1,27 @@
 import { FETCH_ALL_DEALERS, API_START, API_END } from "../actions/types";
 
-const initialState = {};
+export const initialState = {};
 
 const dealerReducer = (state = initialState, action: any) => {
-	const { type, data } = action;
+	const { type, data, payload } = action;
+
 	switch (type) {
 		case FETCH_ALL_DEALERS:
 			return {
 				...data
 			};
+
 		case API_START:
-			if (action.payload === FETCH_ALL_DEALERS) {
+			if (payload === FETCH_ALL_DEALERS) {
 				return {
 					...state,
 					isLoadingData: true
 				};
 			}
 			break;
+
 		case API_END:
-			if (action.payload === FETCH_ALL_DEALERS) {
+			if (payload === FETCH_ALL_DEALERS) {
 				return {
 					...state,
 					isLoadingData: false
