@@ -66,3 +66,7 @@ storybook-static/
 
 # SonarQube
 .scannerwork/
+
+# Build folders
+dist/
+build/
