@@ -39,7 +39,7 @@
 
   - Dependencies
 
-    - [react-redux](https://github.com/reduxjs/react-redux) - react bindings for Recux
+    - [react-redux](https://github.com/reduxjs/react-redux) - react bindings for Redux
 
   - Development enhancements
 
@@ -114,17 +114,35 @@
 - The application will be built in React adhering to the standards of the [React/JSX + TypeScript Style Guide](https://github.com/palantir/tslint-react) with a few exceptions:
 
   ```
-  "rules": {
-       "react/prefer-stateless-function": 0,
-       "react/jsx-indent": ["error", "tab"],
-       "react/jsx-indent-props": ["error", "tab"],
-       "react/jsx-no-undef": ["2", { "allowGlobals": true }],
-       "indent": ["error", "tab"],
-       "comma-dangle": 0,
-       "no-tabs": 0,
-       "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-       "function-paren-newline": 0
-   },
+  rules: {
+    "no-var-keyword": true,
+    "no-parameter-reassignment": true,
+    "typedef": false,
+    "readonly-keyword": false,
+    "readonly-array": false,
+    "no-let": false,
+    "no-array-mutation": true,
+    "no-use-before-declare": true,
+    "radix": true,
+    "switch-default": true,
+    "triple-equals": [true, "allow-undefined-check", "allow-null-check"],
+    "eofline": false,
+    "indent": [true, "tabs"],
+    "max-line-length": [true, 250],
+    "no-trailing-whitespace": true,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "never",
+        "singleline": "never"
+      }
+    ],
+    "jsdoc-format": true,
+    "no-consecutive-blank-lines": [true],
+    "semicolon": [true, "always"],
+    "object-literal-sort-keys": false,
+    "no-empty": [true, "allow-empty-functions"]
+  }
   ```
 
 ## Code Compatibility
@@ -133,7 +151,7 @@
 
   - [babel-preset-react](https://babeljs.io/docs/en/babel-preset-react.html)
 
-    - Turn jsx into javascript the browser can understand
+    - Turn tsx into javascript the browser can understand
 
   - [babel-preset-stage-3](https://babeljs.io/docs/en/babel-preset-stage-3.html)
 
@@ -143,16 +161,11 @@
 
 - [React CSS Modules](https://github.com/gajus/react-css-modules)
 - [SASS Loader](https://github.com/webpack-contrib/sass-loader)
-- [Normalize.css](http://nicolasgallagher.com/about-normalize-css/)
 - [Autoprefixer](https://github.com/postcss/autoprefixer) - Automatically add browser prefixes to css styles to improve legacy compatibility and support new features.
 
 ## Bundler
 
 - [Webpack](https://webpack.js.org/concepts/) will be used to bundle, minify, uglify, all assets.
-
-## Error Logging
-
-- Error logging will be done through [Sentry.io](https://docs.sentry.io/)
 
 ## Version Control
 
@@ -177,7 +190,7 @@
 
 ## Middleware
 
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+- We use a custom middleware that resides in `./src/utils/apiMiddleware.ts`
 
   - For asynchronous Action Creators
   - Used in conjunction with [Axios](https://github.com/axios/axios) for API calls

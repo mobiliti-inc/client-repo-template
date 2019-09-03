@@ -1,0 +1,3 @@
+echo '\nrunning unit tests ...\n'
+npm run test
+git add .

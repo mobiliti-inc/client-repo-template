@@ -13,11 +13,11 @@ Project structure and coding standard, please review it seriously.
 - node >= 8.9.0
 - TypeScript >= 3.0
 - React >= 16.8.0
-- Storybook
+- StoryBook
 - React Router
 - Jest (js unit testing)
 - Enzyme (React unit testing)
-- eslint
+- TsLint
 - CSS Modules
 - SCSS
 - Webpack
@@ -48,7 +48,7 @@ sh ./setup.sh
 
 `npm start` or `yarn start`
 
-When the app is run in development mode. Open <http://localhost:3000> to view it in the browser. The page will reload if you make edits.
+When the app is run in development mode. Open <http://0.0.0.0:80> to view it in the browser. The page will reload if you make edits.
 
 ### Building the app
 
