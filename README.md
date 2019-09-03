@@ -1,11 +1,18 @@
 # core-admin-ui
 
-Core admin UI app
+## 🚗 Getting Started
 
-## Technologies
+```note
+These instructions will get you a copy of the project up and running on
+your local machine for development and testing purposes. And including
+Project structure and coding standard, please review it seriously.
+```
 
-- React
-- TypeScript
+## 🔨 Prerequisites
+
+- node >= 8.9.0
+- TypeScript >= 3.0
+- React >= 16.8.0
 - Storybook
 - React Router
 - Jest (js unit testing)
@@ -15,21 +22,49 @@ Core admin UI app
 - SCSS
 - Webpack
 
-## Scripts
+## 🔧 Development Tools
 
-### Installation
+- [VS Code](https://code.visualstudio.com/)
+- [Chrome](https://www.google.com/chrome/)
+- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en-US)
+- [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en-US)
+- [Node](https://nodejs.org/en/)
 
-_Please note this is intended to run on Node 10.x_
+## 💨 Running the Project
+
+### Using a Script
 
 ```bash
 sh ./setup.sh
 ```
 
-### JS/React Testing
+### Manually
+
+**Install the packages**
+
+`npm install` or `yarn install`
+
+**Start the application**
+
+`npm start` or `yarn start`
+
+When the app is run in development mode. Open <http://localhost:3000> to view it in the browser. The page will reload if you make edits.
+
+## ⚖️ JS/React Testing
+
+```note
+When you run tests, coverage will be generated automatically too.
+```
 
 `npm test`
 
-### Linting
+### Watch mode
+
+Watch mode allows to run tests as you make changes to project files
+
+`npm test -w`
+
+## 🔭 Linting
 
 `npm run lint`
 
@@ -44,6 +79,6 @@ The test command is written to update snapshots automatically
 
 `npm test`
 
-## Coding Guidelines
+## 📒 Coding Guidelines
 
 [Coding Guidelines](/coding-guidelines.md)
