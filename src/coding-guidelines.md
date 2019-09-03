@@ -1,70 +1,191 @@
-# Aurora Web App Frontend Setup
+# Mobiliti Front End Development Guidelines
 
-## 🚗 Getting Started
+**A guide to making handsome front end code for Mobiliti.**
 
-```note
-These instructions will get you a copy of the project up and running on
-your local machine for development and testing purposes. And including
-Project structure and coding standard, please review it seriously.
-```
+## Technologies
 
-## 🔨 Prerequisites
+1. [View Layer](#view-layer)
+2. [Routing](#routing)
+3. [State Management](#state-management)
+4. [Testing Libraries](#testing)
+5. [Code Quality](#code-quality)
+6. [Code Compatibility](#code-compatibility)
+7. [Styling](#styling)
+8. [Bundler](#bundler)
+9. [Error Logging](#error-logging)
+10. [Version Control](#version-control)
+11. [Deployment](#deployment)
+12. [HTTP](#http)
+13. [Middleware](#middleware)
 
-- node >= 8.9.0
-- typescript >= 3.0
-- yarn >= 1.14.0 or npm >= 6.7.0
-- git >= 2.10.1
+## View Layer
 
-## 🔧 Development Tools
+- [React](https://reactjs.org/docs/getting-started.html)
 
-- [VS Code](https://code.visualstudio.com/)
-- [Chrome](https://www.google.com/chrome/)
-- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en-US)
-- [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en-US)
-- [Node](https://nodejs.org/en/)
+  - "A Javascript library for building user interfaces"
 
-## 💻 Running Project
+## Routing
 
-### `npm install` or `yarn install`
+- Routing will be handled by [React Router](https://reacttraining.com/react-router/)
 
-Install the packages
+## State Management
 
-### `npm start` or `yarn start`
+- [Redux](https://redux.js.org/)
 
-Runs the app in the development mode.Open <http://localhost:3000> to view it in the browser.
+  - Management of application state will be handled on a case-by-case basis
 
-The page will reload if you make edits. You will also see any lint errors in the console.
+    - Component Specific state will be handled in [component level state](https://reactjs.org/docs/faq-state.html)
+    - Global state and api call results will be handled by [Redux](https://redux.js.org/)
 
-### `npm test` or `yarn test`
+  - Dependencies
 
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    - [react-redux](https://github.com/reduxjs/react-redux) - react bindings for Recux
 
-### `npm run build` or `yarn build`
+  - Development enhancements
 
-Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
+    - [Redux Devtools](https://github.com/reduxjs/redux-devtools)
 
-The build is minified and the filenames include the hashes. Your app is ready to be deployed!
+      - Allows you to view, rewind, and fast forward actions and resultant state
+      - Use in conjunction with a Redux Devtools browser extension
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+        - [Redux Devtools for Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)
 
-### `npm run mock` or `yarn build`
+  - Redux action types should be passed around as constants and not strings
 
-Run mock server and please access `http://localhost:3031` to test api if it's ready.
+    - Plain strings greatly increase likelihood for human error
+    - Example action type:
 
-### `npm run tslint` or `yarn tslint`
+      > const USER_FETCH_SUCCESS = "USER_FETCH_SUCCESS"
 
-Auto fix tslint errors.
+    - Good:
 
-## 🏯 Project Architecture
+      > dispatch({ type: USER_FETCH_SUCCESS, data: {...} })
+
+    - Bad:
+
+      > dispatch({ type: "USER_FETCH_SUCCESS", data: {...} })
+
+## Testing
+
+- All tests will be run in a pre-commit hook and run again in Circle CI upon creation of a Pull Request
+
+### Component Testing
+
+- #### Unit Testing
+
+  - Test functionality of individual pieces of logic
+  - [Jest](http://jestjs.io/docs/en/getting-started)
+
+- #### React Component Testing
+
+  - Compare component structure to expected structure
+  - [Enzyme](https://github.com/airbnb/enzyme)
+
+- #### Snapshot Testing
+
+  - Runs a headless browser to produce rendered output and tests for changes in visual appearance by comparing snapshot images
+  - [Jest Snapshot Testing](https://jestjs.io/docs/en/snapshot-testing)
+
+### Redux Testing
+
+> [Testing Redux](https://redux.js.org/recipes/writing-tests)
+
+> - Testing Action Creators
+
+>   - Action creators should be tested to ensure that the correct action creator is called, and the correct action is returned
+>   - Async Action Creator tests will use [Fetch Mock](https://github.com/wheresrhys/fetch-mock) to mock API responses
+>   - The Redux store should also be mocked using [Redux Mock Store](https://github.com/dmitry-zaets/redux-mock-store)
+
+> - Testing Reducers
+
+>   - Reducers should be tested to ensure they are returning the correct state based on the action applied
+
+> - Testing connected components
+
+>   - [Enzyme](https://github.com/airbnb/enzyme)
+
+>     - [Enzyme Adapter for React 16](https://github.com/airbnb/enzyme)
+
+>   - If you need to test the component without the redux store then you can export undecorated component in addition to connected component
+
+## Code Quality
+
+- [TsLint](https://palantir.github.io/tslint/) will be run in a pre-commit hook.
+- The application will be built in React adhering to the standards of the [React/JSX + TypeScript Style Guide](https://github.com/palantir/tslint-react) with a few exceptions:
+
+  ```
+  "rules": {
+       "react/prefer-stateless-function": 0,
+       "react/jsx-indent": ["error", "tab"],
+       "react/jsx-indent-props": ["error", "tab"],
+       "react/jsx-no-undef": ["2", { "allowGlobals": true }],
+       "indent": ["error", "tab"],
+       "comma-dangle": 0,
+       "no-tabs": 0,
+       "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+       "function-paren-newline": 0
+   },
+  ```
+
+## Code Compatibility
+
+- [Babel](https://babeljs.io/docs/en)
+
+  - [babel-preset-react](https://babeljs.io/docs/en/babel-preset-react.html)
+
+    - Turn jsx into javascript the browser can understand
+
+  - [babel-preset-stage-3](https://babeljs.io/docs/en/babel-preset-stage-3.html)
+
+    - Add features from ES2016 & ES2017
+
+## Styling
+
+- [React CSS Modules](https://github.com/gajus/react-css-modules)
+- [SASS Loader](https://github.com/webpack-contrib/sass-loader)
+- [Normalize.css](http://nicolasgallagher.com/about-normalize-css/)
+- [Autoprefixer](https://github.com/postcss/autoprefixer) - Automatically add browser prefixes to css styles to improve legacy compatibility and support new features.
+
+## Bundler
+
+- [Webpack](https://webpack.js.org/concepts/) will be used to bundle, minify, uglify, all assets.
+
+## Error Logging
+
+- Error logging will be done through [Sentry.io](https://docs.sentry.io/)
+
+## Version Control
+
+- Github will be used with [Github Forking](https://gist.github.com/Chaser324/ce0505fbed06b947d962)
+
+## Deployment
+
+- A continuous integration approach will be taken. For this, we will utilize [Circle CI](https://circleci.com/docs/2.0/)
+
+## HTTP
+
+- HTTP Library:
+
+  - [Axios](https://github.com/axios/axios)
+
+    - Promise-based
+    - Lots of activity on github
+
+      - recently closed issues, stars, follows, etc
+
+    - Ability to cancel requests
+
+## Middleware
+
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+
+  - For asynchronous Action Creators
+  - Used in conjunction with [Axios](https://github.com/axios/axios) for API calls
 
 ### Structure
 
 ```typescript
 .
-├── mock/                         # Mock data service
-│   ├── db.js                     # Mock data DB
-│   └── routes.json               # Mock data API route config
-│   └── ...
 ├── public/                       # Static files（including css, images, fonts, index.html e.g）
 │   ├── images/                   # Public image resources
 │   ├── css/                      # Public css resources
@@ -74,402 +195,35 @@ Auto fix tslint errors.
 ├── src/
 │   ├── components/               # Global react components
 │   │   └── ...
-│   ├── i18n/                     # i18n multi language config
-│   │   └── ...
-│   ├── models/                   # Dva models
-│   │   └── ...
-│   ├── middleware/               # Redux middleware
+│   ├── assets/                   # Global react assets
 │   │   └── ...
 │   ├── store/                    # Redux store config
 │   │   └── ...
 │   ├── pages/                    # All pages view
 │   │   └── ...
-│   ├── routes/                   # App router config
-│   │   └── ...
-│   ├── locales/                  # App i18n multi language config
+│   ├── router/                   # App routing
+│   │   └── router.tsx
+│   ├── reducers/                 # App reducers
 │   │   └── ...
 │   ├── services/                 # API request services
 │   │   └── ...
-│   ├── style/                    # Global CSS style
+│   ├── styles/                    # Global CSS style
 │   │   └── ...
 │   ├── utils/                    # Global utils
 │   │   └── ...
-│   ├── App.css                   # App component CSS style
+│   ├── App.scss                   # App component CSS style
 │   ├── App.tsx                   # App root component
 │   ├── App.test.tsx              # App jest test case
-│   ├── env.ts                    # App env config
 │   ├── index.tsx                 # React entry file
 │   ├── logo.svg                  # App logo
-│   ├── Page.tsx                  # Global pages route
 │   │
-├── build/                        # The production static files
+├── dist/                        # The production static files
 ├── .gitignore                    # Git ignore config（Do not tamper with the configuration!!!）
 ├── .editorconfig                 # VS Code editor config（Do not tamper with the configuration!!!）
 ├── Dockerfile                    # Docker deploy config（Do not tamper with the configuration!!!）
-├── config-overrides.js           # Webpack default settings override config
-├── eslint.json                   # eslint rules config（Do not tamper with the configuration!!!）
+├── .npmrc                        # Storage of keys for packages
+├── tslint.json                   # tslint rules config（Do not tamper with the configuration!!!）
 └── package.json                  # Build script and packages config（Do not tamper with the configuration!!!）
-└── yarn.lock                     # Yarn lock file
-└── README.md                     # Project readme file
+└── package-lock.lock             # npm lock file
+└── README.md                     # Project README file
 ```
-
-### Tech stack
-
-[`React`](https://github.com/facebook/react) [`Create React App`](https://facebook.github.io/create-react-app/docs/getting-started) [`React Router`](https://github.com/ReactTraining/react-router) [`Redux`](https://github.com/reduxjs/redux) [`Flux`](https://facebook.github.io/flux/) [`Jest`](https://github.com/facebook/jest) [`React Hot Loader`](https://github.com/gaearon/react-hot-loader) [`React Loadable`](https://github.com/jamiebuilds/react-loadable) [`Webpack`](https://github.com/webpack/webpack) [`Babel`](https://github.com/babel/babel) [`enzyme`](https://github.com/airbnb/enzyme) [`draft-js`](https://draftjs.org/) [`Dva`](https://dvajs.com)
-
-### Structure Details
-
-We use [react redux typescript guide](https://github.com/piotrwitek/react-redux-typescript-guide) as our coding standard, please review this guide before coding.
-
-#### Components
-
-For components folder, we will have global common components, and only global components can be put in it and make sure this folder don't have redundant code and files.
-
-It may look like:
-
-```typescript
-├── components/                            # All pages view
-│   ├── Header/                            # App Header components
-│   │   ├── Header.module.css              # Header component css style module
-│   │   └── Header.tsx                     # Header component
-│   ├── SideBar/                           # App SideBar components
-│   │   ├── SideBar.module.css             # SideBar component css style module
-│   │   └── SideBar.tsx                    # SideBar component
-│   ├── Footer/                            # App Footer components
-│   │   ├── Footer.module.css              # Footer component css style module
-│   │   └── Footer.tsx                     # Footer component
-│   ├── index.tsx                          # All components will be exported on index file for other modules importing
-│   └── ...
-├── ...
-```
-
-#### Models
-
-Data flow with dva ![Data flow with dva](https://zos.alipayobjects.com/rmsportal/PPrerEAKbIoDZYr.png)
-
-Structure with dva ![Structure with dva](https://cdn.yuque.com/yuque/0/2018/png/103904/1528436195004-cd3800f2-f13d-40ba-bb1f-4efba99cfe0d.png)
-
-```typescript
-// App Model
-import { addTodoAPI } from '../services/'
-
-const initialState = {
-  todo: [],
-}
-
-export default {
-  state: [],
-  namespace: 'todo',
-  effects: {
-    *addToDo({ payload: todo }, { put, call }) {
-      yield call(addTodoAPI, todo);
-      yield put({ type: 'add', payload: todo });
-    },
-  },
-  reducers: {
-    add(state, { payload: todo }) {
-      return state.concat(todo);
-    },
-  },
-  subscriptions: {
-    setup({ dispatch, history }) {
-      history.listen(({ pathname }) => {
-        if (pathname === '/todo') {
-          dispatch({
-            type: 'todo/list',
-          });
-        }
-      });
-    },
-  },
-}
-```
-
-Dva model was made up of five parts which include `state`, `namespace`, `effects`, `reducers` and `subscriptions`;
-
-##### namespace
-
-Model's namespace need to use upper camel case and make sure the namespace is unique on the whole app
-
-##### state
-
-App initial state
-
-##### effect
-
-Effect is a generator function which includes `put`, `call` and `select` functions.
-
-`put` for action triggering.
-
-```javascript
-yield put({ type: 'todo/add', payload: 'Learn Dva' });
-```
-
-`call` async, with Promise supporting.
-
-```javascript
-const result = yield call(fetch, '/todo');
-```
-
-`select` for extract data from state.
-
-```javascript
-const todo = yield select(state => state.todo);
-```
-
-##### reducer
-
-Reducer is a function, which takes a state and a action, output a state: (state, action) => state.
-
-Reducers specify how the application's state changes in response to actions sent to the store. Remember that actions only describe what happened, but don't describe how the application's state changes.
-
-##### subscription
-
-subscriptions will subscribe to data source, and dispatch according to different actions. Data source can be current time, server's websocket connection, keyboard event, changes in geolocation, changes in history router, etc, with format of ({ dispatch, history }) => unsubscribe.
-
-Global models folder structure may look like:
-
-```typescript
-├── models/                          # Redux reducers
-│   ├── ToDoModel.ts                 # App todo model
-│   ├── index.ts                     # All models should be exported on index file
-│   └── ...
-├── ...
-```
-
-[More information about dva](https://github.com/dvajs/dva-knowledgemap/blob/master/README_en.md)
-
-#### Middleware
-
-It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer.
-
-```typescript
-├── middleware/                        # Redux middleware
-│   ├── ReduxSocketMiddleware.ts       # redux websocket middleware
-│   ├── index.ts                       # All middleware should be exported on index file
-│   └── ...
-├── ...
-```
-
-[More information about redux middleware](https://redux.js.org/advanced/middleware)
-
-#### Store
-
-The Store is the object that brings all reducers together. The store has the following responsibilities:
-
-- Holds application state;
-- Allows access to state via getState();
-- Allows state to be updated via dispatch(action);
-- Registers listeners via subscribe(listener);
-- Registers listeners via subscribe(listener);
-- Handles unregistering of listeners via the function returned by subscribe(listener).
-
-```note
-It's important to note that you'll only have a single store in a Redux application.
-When you want to split your data handling logic, you'll use reducer composition
-instead of many stores
-```
-
-[More information about redux store](https://redux.js.org/basics/store)
-
-#### Pages
-
-All pages of the whole App need to be put in there and make sure we have a pure coding environment, and every page needs to have its own state model(Dva model files). And pages folder will have some other sub folders, it may look like:
-
-```typescript
-├── pages/                             # All pages view
-│   ├── Dashboard/                     # Dashboard page folder
-│   │   ├── models/                    # Dva model files
-│   │   │   └── DashboardModel.ts      # Models in dashboard page
-│   │   ├── components/                # Components in dashboard page
-│   │   ├── Dashboard.module.css       # Dashboard page css style module
-│   │   └── Dashboard.tsx              # Dashboard page
-│   ├── Candidate/                     # Candidate page folder
-│   │   └── ...
-│   ├── JobTitle/                      # Job title page folder
-│   │   └── ...
-│   ├── index.js                       # All pages will be exported on index file for other modules importing
-│   └── ...
-├── ...
-```
-
-##### react-loadable
-
-A higher order component for loading components with promises. So we need to use react-loadable to load our component if it's necessary for lazy loading our component. And this way will make our component small pieces, especially in a big project, will improve our performance and experience. And also we need export our pages in pages/index.ts with react loadable. For example:
-
-```typescript
-/* example in index.ts */
-import * as React from 'react';
-import Loadable from 'react-loadable';
-
-import { Loading } from '../components';
-import { ExamplePage } from './Example';
-
-const Example = Loadable.Map({
-  loader: {
-    Example: () => import('./Example/Example'),
-  },
-  loading: Loading,
-  render(loaded: any, props: any) {
-    const Example = loaded.Example.default;
-    return <Example {...props} />;
-  },
-});
-```
-
-#### Routes
-
-The App routes and route config will be there, including auth routes and permission routes.
-
-```typescript
-├── routes/                             # All pages view
-│   ├── config.ts                       # Route config
-│   ├── index.ts                        # All routes will be configured there
-│   └── ...
-├── ...
-```
-
-#### Services
-
-All API services need to put in this folder, and the name of service should be the same with backend API. For example: we have candidate service and user service on the backend, so the front-end services should be CandidateService and UserService, we use upper camel case naming standard to name our service files. The code structure may look like:
-
-```typescript
-import { ApiUrl } from './config'
-
-export class ExampleService {
-
-  getList(params: object) {
-    return AxiosInstance.get(ApiUrl.url, params)
-  }
-
-  postItem(params: object) {
-    return AxiosInstance.post(ApiUrl.url, params)
-  }
-
-  patchItem(params: object) {
-    return AxiosInstance.patch(ApiUrl.url, params)
-  }
-
-  deleteItem(params: object) {
-    return AxiosInstance.delete(ApiUrl.url, params)
-  }
-}
-```
-
-```typescript
-├── services/                          # All services folder
-│   ├── CandidateService.ts            # Candidate service
-│   ├── UserService                    # User service
-│   ├── AxiosInstance.ts               # Axios library instance and AJAX config
-│   ├── config.ts                      # Backend api server config(including api url, host, socket config e.g)
-│   ├── index.ts                       # All services will be exported on index file
-│   └── ...
-├── ...
-```
-
-#### Styles
-
-We need to use css module as our styling standard
-
-A CSS Module is a CSS file in which all class names and animation names are scoped locally by default. All URLs (url(...)) and @imports are in module request format (./xxx and ../xxx means relative, xxx and xxx/yyy means in modules folder, i. e. in node_modules).
-
-CSS Modules compile to a low-level interchange format called ICSS or Interoperable CSS, but are written like normal CSS files:
-
-```typescript
-/* style.css */
-.example {
-  color: green;
-}
-```
-
-When importing the CSS Module from a JS Module, it exports an object with all mappings from local names to global names.
-
-```typescript
-import React from 'react'
-import ReactDOM from 'react-dom'
-import styles from './style.css'
-// import { className } from './style.css'
-
-ReactDOM.render(
-  <TodoApp className={styles.example} />,
-  document.getElementById('todo-example')
-)
-```
-
-[More information about CSS Modules](https://github.com/css-modules/css-modules)
-
-#### Utils
-
-We should put all util functions or constants in `utils/` folder.
-
-```typescript
-├── utils/                              # Util functions
-│   ├── constant.ts                     # Global constants
-│   ├── index.ts                        # All utils will be exported on index file
-│   └── ...
-├── ...
-```
-
-#### 🌲 Jest Test
-
-Jest test case structure
-
-```typescript
-├── components/                             # All pages view
-│   ├── SideBar/                            # App SideBar components
-│   │   ├── __test__                        # SideBar component jest test
-│   │   │   ├── __snapshots__               # Component test snapshot
-│   │   │   └── SideBar.test.ts             # SideBar jest test case
-│   │   ├── SideBar.module.css              # SideBar component css style module
-│   │   └── SideBar.ts                      # SideBar component
-│   └── ...
-├── ...
-```
-
-[Jest Test Framework](https://jestjs.io/)
-
-## Git Flow
-
-Branch Type | Naming Standard | Created From      | Merged Into        | Description
------------ | --------------- | ----------------- | ------------------ | ---------------------------------
-feature     | feature/*       | develop           | develop            | new features
-release     | release/*       | develop           | develop and master | new version release
-hotfix      | hotfix/*        | master or release | release or master  | fix issues from master or release
-
-- `master` The master branch stores the official release history
-
-- `develop` This branch will contain the complete history of the project, whereas master will contain an abridged version. Other developers should now clone the central repository and create a tracking branch for develop
-
-```git
-git checkout develop
-git push -u origin develop
-```
-
-- `feature/my-awesome-feature` Each new feature should reside in its own branch, which can be pushed to the central repository for backup/collaboration. But, instead of branching off of `master`, feature branches use `develop` as their parent branch. When a feature is complete, it gets merged back into `develop`. Features should never interact directly with `master`. Creating a feature branch:
-
-```git
-git checkout develop
-git checkout -b feature/add-todo
-```
-
-- `hotfix/fix-bug` Maintenance or "hotfix" branches are used to quickly patch production releases. Hotfix branches are a lot like `release` branches and feature branches except they're based on `master` instead of `develop`. This is the only branch that should fork directly off of `master`. As soon as the fix is complete, it should be merged into both `master` and `develop` (or the current release branch), and `master` should be tagged with an updated version number.
-
-```git
-git checkout release
-git checkout -b hotfix/fix-a-bug
-```
-
-- `release/0.0.1` Once develop has acquired enough features for a release (or a predetermined release date is approaching), you fork a release branch off of develop. Creating this branch starts the next release cycle, so no new features can be added after this point--only bug fixes, documentation generation, and other release-oriented tasks should go in this branch. Once it's ready to ship, the release branch gets merged into master and tagged with a version number. In addition, it should be merged back into develop, which may have progressed since the release was initiated.
-
-```git
-git checkout develop
-git checkout -b release/0.0.1
-```
-
-[More information about git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

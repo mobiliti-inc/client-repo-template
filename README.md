@@ -50,6 +50,14 @@ sh ./setup.sh
 
 When the app is run in development mode. Open <http://localhost:3000> to view it in the browser. The page will reload if you make edits.
 
+### Building the app
+
+Builds the app for production to the `dist` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
+
+`npm run build` or `yarn build`
+
+The build is minified and the filenames include hashes. Your app is ready to be deployed after a build!
+
 ## ⚖️ JS/React Testing
 
 ```note
